@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="106" height="42" viewBox="0 0 106 42">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff6b72"/>
+      <stop offset="1" stop-color="#ff0cba"/>
+    </linearGradient>
+  </defs>
+  <rect id="Charm_21-30" data-name="Charm 21-30" width="106" height="42" rx="7" fill="url(#linear-gradient)"/>
+</svg>

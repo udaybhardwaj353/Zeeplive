@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MicJoinedUsersTableViewCell" id="KGk-i7-Jjw" customClass="MicJoinedUsersTableViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVt-oy-FV6">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceHolderImageForCell" translatesAutoresizingMaskIntoConstraints="NO" id="1Ex-xt-xcd">
+                                <rect key="frame" x="25" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="86Z-AJ-85g"/>
+                                    <constraint firstAttribute="width" constant="50" id="XXQ-e9-Jqi"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;just looking wow ❣️🫰&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzv-Jr-tLW">
+                                <rect key="frame" x="0.0" y="50" width="100" height="100"/>
+                                <fontDescription key="fontDescription" name="SinhalaSangamMN-Bold" family="Sinhala Sangam MN" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nzv-Jr-tLW" firstAttribute="centerX" secondItem="1Ex-xt-xcd" secondAttribute="centerX" id="54S-XF-ugq"/>
+                            <constraint firstItem="Nzv-Jr-tLW" firstAttribute="top" secondItem="1Ex-xt-xcd" secondAttribute="bottom" id="IzC-2h-2E3"/>
+                            <constraint firstAttribute="bottom" secondItem="Nzv-Jr-tLW" secondAttribute="bottom" id="U3L-bT-jJu"/>
+                            <constraint firstItem="1Ex-xt-xcd" firstAttribute="centerX" secondItem="JVt-oy-FV6" secondAttribute="centerX" id="ezd-hX-Th7"/>
+                            <constraint firstItem="Nzv-Jr-tLW" firstAttribute="leading" secondItem="JVt-oy-FV6" secondAttribute="leading" id="lCs-43-IYo"/>
+                            <constraint firstAttribute="trailing" secondItem="Nzv-Jr-tLW" secondAttribute="trailing" id="sqB-1Q-mJQ"/>
+                            <constraint firstItem="1Ex-xt-xcd" firstAttribute="top" secondItem="JVt-oy-FV6" secondAttribute="top" id="vo1-37-26e"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="JVt-oy-FV6" secondAttribute="trailing" id="dJa-S5-KYx"/>
+                    <constraint firstItem="JVt-oy-FV6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="k3P-g6-CUa"/>
+                    <constraint firstItem="JVt-oy-FV6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="oGi-v7-mqY"/>
+                    <constraint firstAttribute="bottom" secondItem="JVt-oy-FV6" secondAttribute="bottom" id="t30-oP-xoq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="imgViewMicUserImage" destination="1Ex-xt-xcd" id="rkZ-zR-a4W"/>
+                <outlet property="lblMicUserName" destination="Nzv-Jr-tLW" id="MCt-nG-d4T"/>
+                <outlet property="viewMain" destination="JVt-oy-FV6" id="Seq-ao-GSf"/>
+            </connections>
+            <point key="canvasLocation" x="131" y="-11"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="UserPlaceHolderImageForCell" width="74" height="74"/>
+    </resources>
+</document>

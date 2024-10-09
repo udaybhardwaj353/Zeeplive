@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomAlertViewController" customModule="ZeepLive" customModuleProvider="target">
+            <connections>
+                <outlet property="btnBlockthisuserOutlet" destination="RQv-4t-rzC" id="DrJ-c5-7Hq"/>
+                <outlet property="btnEndagerPersonalSafetyOutlet" destination="6dn-oq-wia" id="ddS-Sm-SsB"/>
+                <outlet property="btnIllegalAvatarOutlet" destination="IcP-O5-K8i" id="ByQ-L9-myj"/>
+                <outlet property="btnIllegalOrViolenceOutlet" destination="PKr-Ag-FiP" id="B23-zo-WA8"/>
+                <outlet property="btnIllegalPosterOutlet" destination="LCQ-lL-Tx6" id="eLE-Ro-48E"/>
+                <outlet property="btnSexualContentOutlet" destination="0lb-ZY-YRu" id="j0S-oS-tMN"/>
+                <outlet property="textView" destination="EQw-qA-nHy" id="ktf-Cz-Jff"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewContent" destination="tcG-wd-ARH" id="5OO-q8-mPR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-wd-ARH">
+                    <rect key="frame" x="20" y="226" width="353" height="400"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8A-BZ-09U">
+                            <rect key="frame" x="10" y="10" width="333" height="22"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKr-Ag-FiP">
+                            <rect key="frame" x="10" y="52" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="NoN-G2-AG0"/>
+                                <constraint firstAttribute="width" constant="20" id="v0I-vJ-DyD"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnIllegalOrViolencePressed:" destination="-1" eventType="touchUpInside" id="5eH-yX-hRs"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Illegal or Violence" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3A5-c3-h0Q">
+                            <rect key="frame" x="45" y="52" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="1wf-ph-nF8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-ZY-YRu">
+                            <rect key="frame" x="10" y="92" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="iwp-K6-hE4"/>
+                                <constraint firstAttribute="height" constant="20" id="ooE-6n-bvj"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnSexualContentPressed:" destination="-1" eventType="touchUpInside" id="7pq-41-Fum"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sexual Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VkT-Qh-Cx8">
+                            <rect key="frame" x="45" y="92" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="A4B-Qd-nKF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dn-oq-wia">
+                            <rect key="frame" x="10" y="132" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="C46-la-1uW"/>
+                                <constraint firstAttribute="width" constant="20" id="Iwi-xv-atk"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnEndagerPersonalSafetyPressed:" destination="-1" eventType="touchUpInside" id="ed7-8X-vbm"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Endager Personal Safety" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcc-oh-GGh">
+                            <rect key="frame" x="45" y="132" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="zYz-pu-CM4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcP-O5-K8i">
+                            <rect key="frame" x="10" y="172" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="VqQ-In-MAK"/>
+                                <constraint firstAttribute="width" constant="20" id="n9t-BQ-9Xa"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnIllegalAvatarPressed:" destination="-1" eventType="touchUpInside" id="OvY-mv-5Ry"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pornography / Violence" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-wy-m23">
+                            <rect key="frame" x="45" y="172" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="pzx-jk-F5N"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCQ-lL-Tx6">
+                            <rect key="frame" x="10" y="212" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="PgP-mc-r6k"/>
+                                <constraint firstAttribute="width" constant="20" id="rXk-rL-epz"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnIllegalPosterPressed:" destination="-1" eventType="touchUpInside" id="Gu1-jx-7Nk"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defaming and Insulting Contents" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDo-Wa-P7D">
+                            <rect key="frame" x="45" y="212" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="YJ3-ZM-geI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQv-4t-rzC">
+                            <rect key="frame" x="10" y="252" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="0qJ-rP-7pO"/>
+                                <constraint firstAttribute="width" constant="20" id="86n-mg-Nei"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="ReportOptionSelect"/>
+                            <connections>
+                                <action selector="btnBlockthisuserPressed:" destination="-1" eventType="touchUpInside" id="W4j-Hi-W66"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block this user" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vP-yQ-RX3">
+                            <rect key="frame" x="45" y="252" width="293" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="uwY-HH-bOg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQw-qA-nHy">
+                            <rect key="frame" x="10" y="292" width="333" height="88"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="PKr-Ag-FiP" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="4zW-sm-xYY"/>
+                        <constraint firstItem="6vP-yQ-RX3" firstAttribute="top" secondItem="lDo-Wa-P7D" secondAttribute="bottom" constant="20" id="5VA-Nw-RcV"/>
+                        <constraint firstItem="VkT-Qh-Cx8" firstAttribute="top" secondItem="3A5-c3-h0Q" secondAttribute="bottom" constant="20" id="FeB-Kk-gUu"/>
+                        <constraint firstItem="Kcc-oh-GGh" firstAttribute="leading" secondItem="6dn-oq-wia" secondAttribute="trailing" constant="15" id="Gcp-hV-GkJ"/>
+                        <constraint firstAttribute="bottom" secondItem="EQw-qA-nHy" secondAttribute="bottom" constant="20" id="Gww-ol-po4"/>
+                        <constraint firstItem="EQw-qA-nHy" firstAttribute="top" secondItem="6vP-yQ-RX3" secondAttribute="bottom" constant="20" id="GyX-Ge-8Mx"/>
+                        <constraint firstItem="M3F-wy-m23" firstAttribute="leading" secondItem="IcP-O5-K8i" secondAttribute="trailing" constant="15" id="Je4-3v-fqg"/>
+                        <constraint firstAttribute="trailing" secondItem="Kcc-oh-GGh" secondAttribute="trailing" constant="15" id="NCl-Va-6rA"/>
+                        <constraint firstItem="lDo-Wa-P7D" firstAttribute="leading" secondItem="LCQ-lL-Tx6" secondAttribute="trailing" constant="15" id="PsS-fb-1sY"/>
+                        <constraint firstItem="3A5-c3-h0Q" firstAttribute="leading" secondItem="PKr-Ag-FiP" secondAttribute="trailing" constant="15" id="S3R-1u-adV"/>
+                        <constraint firstItem="IcP-O5-K8i" firstAttribute="top" secondItem="6dn-oq-wia" secondAttribute="bottom" constant="20" id="S4d-o7-o7t"/>
+                        <constraint firstItem="LCQ-lL-Tx6" firstAttribute="top" secondItem="IcP-O5-K8i" secondAttribute="bottom" constant="20" id="SP7-s8-eRo"/>
+                        <constraint firstItem="0lb-ZY-YRu" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="V5V-mz-v2v"/>
+                        <constraint firstAttribute="trailing" secondItem="lDo-Wa-P7D" secondAttribute="trailing" constant="15" id="W4R-69-P3f"/>
+                        <constraint firstItem="x8A-BZ-09U" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="XB1-95-BmY"/>
+                        <constraint firstAttribute="trailing" secondItem="6vP-yQ-RX3" secondAttribute="trailing" constant="15" id="Xlx-yb-IDa"/>
+                        <constraint firstItem="RQv-4t-rzC" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="YeK-D5-i1e"/>
+                        <constraint firstAttribute="height" constant="400" id="Zca-e4-kAh"/>
+                        <constraint firstItem="M3F-wy-m23" firstAttribute="top" secondItem="Kcc-oh-GGh" secondAttribute="bottom" constant="20" id="ZxN-BZ-UNC"/>
+                        <constraint firstAttribute="trailing" secondItem="x8A-BZ-09U" secondAttribute="trailing" constant="10" id="cji-eO-Fr8"/>
+                        <constraint firstItem="LCQ-lL-Tx6" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="dYX-Pu-nEZ"/>
+                        <constraint firstItem="3A5-c3-h0Q" firstAttribute="top" secondItem="x8A-BZ-09U" secondAttribute="bottom" constant="20" id="eKS-rN-vvd"/>
+                        <constraint firstItem="Kcc-oh-GGh" firstAttribute="top" secondItem="VkT-Qh-Cx8" secondAttribute="bottom" constant="20" id="eeC-au-T9A"/>
+                        <constraint firstItem="x8A-BZ-09U" firstAttribute="centerX" secondItem="tcG-wd-ARH" secondAttribute="centerX" id="f0y-L7-qJZ"/>
+                        <constraint firstItem="6vP-yQ-RX3" firstAttribute="leading" secondItem="RQv-4t-rzC" secondAttribute="trailing" constant="15" id="fLN-xT-8aG"/>
+                        <constraint firstItem="x8A-BZ-09U" firstAttribute="top" secondItem="tcG-wd-ARH" secondAttribute="top" constant="10" id="gDw-40-AnW"/>
+                        <constraint firstItem="VkT-Qh-Cx8" firstAttribute="leading" secondItem="0lb-ZY-YRu" secondAttribute="trailing" constant="15" id="iDq-ZW-nk5"/>
+                        <constraint firstAttribute="trailing" secondItem="EQw-qA-nHy" secondAttribute="trailing" constant="10" id="lgD-Gs-yc9"/>
+                        <constraint firstItem="RQv-4t-rzC" firstAttribute="top" secondItem="LCQ-lL-Tx6" secondAttribute="bottom" constant="20" id="mjD-yB-0T2"/>
+                        <constraint firstAttribute="trailing" secondItem="3A5-c3-h0Q" secondAttribute="trailing" constant="15" id="naH-ZZ-EBo"/>
+                        <constraint firstItem="lDo-Wa-P7D" firstAttribute="top" secondItem="M3F-wy-m23" secondAttribute="bottom" constant="20" id="of8-dd-0EH"/>
+                        <constraint firstItem="6dn-oq-wia" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="qio-S2-5vE"/>
+                        <constraint firstItem="0lb-ZY-YRu" firstAttribute="top" secondItem="PKr-Ag-FiP" secondAttribute="bottom" constant="20" id="qy9-Au-Cx1"/>
+                        <constraint firstAttribute="trailing" secondItem="M3F-wy-m23" secondAttribute="trailing" constant="15" id="r3Z-vL-83h"/>
+                        <constraint firstItem="PKr-Ag-FiP" firstAttribute="top" secondItem="x8A-BZ-09U" secondAttribute="bottom" constant="20" id="sQE-CH-gI7"/>
+                        <constraint firstAttribute="trailing" secondItem="VkT-Qh-Cx8" secondAttribute="trailing" constant="15" id="thM-rY-5mm"/>
+                        <constraint firstItem="6dn-oq-wia" firstAttribute="top" secondItem="0lb-ZY-YRu" secondAttribute="bottom" constant="20" id="twE-tR-4Mv"/>
+                        <constraint firstItem="IcP-O5-K8i" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="ucx-2j-Wd2"/>
+                        <constraint firstItem="EQw-qA-nHy" firstAttribute="leading" secondItem="tcG-wd-ARH" secondAttribute="leading" constant="10" id="zQ2-cT-QNh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemPurpleColor"/>
+            <constraints>
+                <constraint firstItem="tcG-wd-ARH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7Zc-m9-AHm"/>
+                <constraint firstItem="tcG-wd-ARH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="YKZ-fB-c0v"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tcG-wd-ARH" secondAttribute="trailing" constant="20" id="b6i-cz-DAz"/>
+                <constraint firstItem="tcG-wd-ARH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="dK7-ec-Mul"/>
+            </constraints>
+            <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ReportOptionSelect" width="64" height="64"/>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

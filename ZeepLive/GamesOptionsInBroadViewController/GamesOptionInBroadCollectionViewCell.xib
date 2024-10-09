@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GamesOptionInBroadCollectionViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXF-qJ-aUf">
+                        <rect key="frame" x="0.0" y="5" width="150" height="145"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 956" translatesAutoresizingMaskIntoConstraints="NO" id="Qz4-nN-O96">
+                                <rect key="frame" x="45" y="10" width="60" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="FSQ-Z7-kdW"/>
+                                    <constraint firstAttribute="width" constant="60" id="IDx-bR-UE7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL GAMES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ga5-2V-O2v">
+                                <rect key="frame" x="0.0" y="70" width="150" height="14.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ga5-2V-O2v" firstAttribute="centerX" secondItem="Qz4-nN-O96" secondAttribute="centerX" id="2Eg-Hm-QcD"/>
+                            <constraint firstItem="Qz4-nN-O96" firstAttribute="centerX" secondItem="QXF-qJ-aUf" secondAttribute="centerX" id="BJX-9C-3dJ"/>
+                            <constraint firstItem="Ga5-2V-O2v" firstAttribute="leading" secondItem="QXF-qJ-aUf" secondAttribute="leading" id="KFN-2p-U4a"/>
+                            <constraint firstAttribute="trailing" secondItem="Ga5-2V-O2v" secondAttribute="trailing" id="P0C-LZ-xRi"/>
+                            <constraint firstItem="Ga5-2V-O2v" firstAttribute="top" secondItem="Qz4-nN-O96" secondAttribute="bottom" id="ZyW-xA-1T8"/>
+                            <constraint firstItem="Qz4-nN-O96" firstAttribute="top" secondItem="QXF-qJ-aUf" secondAttribute="top" constant="10" id="tyh-oh-RsN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="QXF-qJ-aUf" secondAttribute="bottom" id="8qz-Og-VdT"/>
+                <constraint firstItem="QXF-qJ-aUf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="ADc-0D-ZSg"/>
+                <constraint firstItem="QXF-qJ-aUf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SIq-of-1zN"/>
+                <constraint firstAttribute="trailing" secondItem="QXF-qJ-aUf" secondAttribute="trailing" id="bGm-en-mp2"/>
+            </constraints>
+            <connections>
+                <outlet property="imgViewGame" destination="Qz4-nN-O96" id="Iay-Ct-1bZ"/>
+                <outlet property="lblGameName" destination="Ga5-2V-O2v" id="0Wk-Mh-38b"/>
+                <outlet property="viewMain" destination="QXF-qJ-aUf" id="SVz-e0-YqH"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Group 956" width="120" height="120"/>
+    </resources>
+</document>

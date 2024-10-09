@@ -1,0 +1,6 @@
+framework module Pods_ZeepLiveTests {
+  umbrella header "Pods-ZeepLiveTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

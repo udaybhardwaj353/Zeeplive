@@ -1,0 +1,6 @@
+framework module BDAlphaPlayer {
+  umbrella header "BDAlphaPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,26 @@
+<svg id="Group_855" data-name="Group 855" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.272" y1="0.057" x2="0.833" y2="0.89" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff61ad"/>
+      <stop offset="1" stop-color="#f9bdc6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.409" y1="0.964" x2="0.605" y2="-0.034" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f9c0c7"/>
+      <stop offset="0.19" stop-color="#f9bbc5"/>
+      <stop offset="0.4" stop-color="#faacc1"/>
+      <stop offset="0.63" stop-color="#fb95bb"/>
+      <stop offset="0.87" stop-color="#fd74b2"/>
+      <stop offset="1" stop-color="#ff61ad"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-0.044" y1="-0.023" x2="0.891" y2="0.877" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <circle id="Ellipse_110" data-name="Ellipse 110" cx="30" cy="30" r="30" fill="url(#linear-gradient)"/>
+  <g id="Group_782" data-name="Group 782" transform="translate(12 13.89)">
+    <rect id="Rectangle_229" data-name="Rectangle 229" width="18.135" height="11.37" rx="3.79" transform="translate(8.925)" fill="url(#linear-gradient-2)"/>
+    <rect id="Rectangle_230" data-name="Rectangle 230" width="36" height="26.52" rx="3.17" transform="translate(0 5.685)" fill="url(#linear-gradient-3)"/>
+    <circle id="Ellipse_112" data-name="Ellipse 112" cx="11.37" cy="11.37" r="11.37" transform="translate(5.955 7.575)" fill="#fff" opacity="0.26"/>
+    <circle id="Ellipse_113" data-name="Ellipse 113" cx="7.575" cy="7.575" r="7.575" transform="translate(9.75 11.37)" fill="#fdffff" opacity="0.76"/>
+    <circle id="Ellipse_114" data-name="Ellipse 114" cx="0.945" cy="0.945" r="0.945" transform="translate(13.53 22.74)" fill="#fdffff"/>
+    <rect id="Rectangle_231" data-name="Rectangle 231" width="1.89" height="3.795" rx="0.63" transform="translate(30.585 9.48)" fill="#fdffff"/>
+  </g>
+</svg>

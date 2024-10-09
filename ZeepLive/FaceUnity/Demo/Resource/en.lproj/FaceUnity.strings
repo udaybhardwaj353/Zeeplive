@@ -1,0 +1,110 @@
+/* 
+  FaceUnity.strings
+  XPYCamera
+
+  Created by 项林平 on 2021/6/15.
+  
+*/
+
+/// Modules
+"美肤" = "BeautyEffects";
+"美型" = "FaceShaping";
+"滤镜" = "Filter";
+"贴纸" = "Sticker";
+"美妆" = "Makeup";
+"美体" = "BodyShaping";
+"游戏" = "Game";
+"人像分割" = "PortraitSegmentation";
+
+/// Skin
+"磨皮" = "Buffing";
+"祛斑痘" = "Acne Removal";
+"美白" = "Skin Tone";
+"红润" = "Rosy";
+"清晰" = "Clarity";
+"锐化" = "Sharpen";
+"五官立体" = "Contouring";
+"亮眼" = "Brighen";
+"美牙" = "Whiten";
+"去黑眼圈" = "Dark Circles";
+"去法令纹" = "Laugh Line";
+"全局" = "Overall";
+"仅皮肤" = "Skin";
+"皮肤美白" = "Skin Tone";
+"全局" = "全 局";
+"仅皮肤" = "仅皮肤";
+"皮肤美白" = "皮肤美白";
+
+/// Shape
+"瘦脸" = "Lower Width";
+"v脸" = "V Shape";
+"窄脸" = "Upper Width";
+"短脸" = "Short Face";
+"小脸" = "Size Face";
+"瘦颧骨" = "Cheek";
+"瘦下颌骨" = "Jaw";
+"圆眼" = "Round";
+"大眼" = "Enlarge";
+"下巴" = "Chin Length";
+"额头" = "Hairline";
+"瘦鼻" = "Nose Size";
+"嘴型" = "Mouth Size";
+"嘴唇厚度" = "Thick Lips";
+"眼睛位置" = "Eye Position";
+"开眼角" = "Inner Corner";
+"眼睑下至" = "Eye Downturn";
+"眼距" = "Eye Distance";
+"眼睛角度" = "Eye Upturn";
+"长鼻" = "Nose Lift";
+"缩人中" = "Mouth Position";
+"微笑嘴角" = "Smile";
+"眉毛上下" = "Brow Position";
+"眉间距" = "Brow Distance";
+"眉毛粗细" = "Brow Thickness";
+
+/// Makeup
+"减龄"  = "Tender";
+"暖冬"  = "Warm";
+"红枫"  = "Maple";
+"Rose" = "Rose";
+"少女"  = "Girl";
+"紫韵"  = "Purple Rhyme";
+"厌世猫"  = "Ennui Cat";
+"人鱼"  = "Mermaid";
+"初秋"  = "Early Autumn";
+"千纸鹤"  = "Paper Crane";
+"超模"  = "Supermodel";
+"雏菊"  = "Daisy";
+"港风"  = "Hong Kong Style";
+"性感" =  "Sexy";
+"甜美" =  "Sweet";
+"邻家" =  "Girl Most Likely";
+"欧美" =  "Western";
+"妩媚" =  "Charming";
+
+/// Body
+"瘦身" = "Slim";
+"长腿" = "Long leg";
+"细腰" = "Thin waist";
+"美肩" = "Shoulder";
+"美臀" = "Buttock";
+"小头" = "Head";
+"瘦腿" = "Thin leg";
+
+/// Filter
+"origin" = "Origin";
+"ziran1" = "Nature1";
+"zhiganhui1" = "Texture grey1";
+"bailiang1" = "Bright1";
+"fennen1" = "Pink1";
+"lengsediao1"= "Cold tone1";
+
+"卸妆" = "Remove";
+"恢复" = "Recover";
+"取消" = "Cancel";
+"确定" = "Confirm";
+
+"该功能只支持在高端机上使用" = "%@ is only supported on high-performance mobile phones";
+"功能仅支持iPhoneXR及以上机型使用" = "%@ is only supported on iPhoneXR and above models";
+"功能仅支持iPhone11及以上机型使用" = "%@ is only supported on iPhone11 and above models";
+"是否将所有参数恢复到默认值" = "Whether to restore all parameters to default values";

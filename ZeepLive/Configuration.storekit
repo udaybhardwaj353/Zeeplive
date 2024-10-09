@@ -1,0 +1,160 @@
+{
+  "identifier" : "E37B59F1",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "6479290330",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : "3800 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.1800_second_plan",
+      "referenceName" : "ZeepLive 1800 Second Plan",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6479290122",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : " 400 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.225_second_plan",
+      "referenceName" : "ZeepLive 225 Second Plan",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "6479290210",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : "850 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.400_second_plan",
+      "referenceName" : "ZeepLive 400 Second Plan",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "49.99",
+      "familyShareable" : false,
+      "internalID" : "6479290235",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : "10000 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.4500_second_plan",
+      "referenceName" : "ZeepLive 4500 Second Plan",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "8.99",
+      "familyShareable" : false,
+      "internalID" : "6479290109",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : "1900 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.900_second_plan",
+      "referenceName" : "ZeepLive 900 Second Plan",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "6479290389",
+      "localizations" : [
+        {
+          "description" : "Get the Diamonds to use.",
+          "displayName" : "23000 Diamonds",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.zeeplive.in.9900_second_plan",
+      "referenceName" : "ZeepLive 9900 Second Plan",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6450838669",
+    "_developerTeamID" : "BP9597GTAQ",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 733989743.71212697,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

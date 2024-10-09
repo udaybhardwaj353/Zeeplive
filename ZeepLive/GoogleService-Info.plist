@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>720604246001-ii506pv17ona4m3dcf88uau1rkjl5q99.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.720604246001-ii506pv17ona4m3dcf88uau1rkjl5q99</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>720604246001-101b27cgfd1bqb8t08e5i7gdg3bqbqak.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDrMMAAZQEI9ujS2Qqct9ZJobDhANx4mbA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>720604246001</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.zeeplive.in</string>
+	<key>PROJECT_ID</key>
+	<string>zeeplive-dcacf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zeeplive-dcacf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:720604246001:ios:605f4ba60a1237973e9e50</string>
+	<key>DATABASE_URL</key>
+	<string>https://zeeplivechat-dcacf-6fe47.firebaseio.com</string>
+</dict>
+</plist>

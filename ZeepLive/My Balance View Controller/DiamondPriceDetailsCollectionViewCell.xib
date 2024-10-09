@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiamondPriceDetailsCollectionViewCell" id="gTV-IL-0wX" customClass="DiamondPriceDetailsCollectionViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lwl-cg-6Ax">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IO7-oj-MqM">
+                                <rect key="frame" x="39.666666666666657" y="25" width="71" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="vas-iv-Fky"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹199" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgi-Yf-j38">
+                                <rect key="frame" x="10" y="61" width="130" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="yWJ-9t-XU4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="Jok-La-TwV">
+                                <rect key="frame" x="7.6666666666666679" y="25" width="25.000000000000004" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="6hF-Sv-DbS"/>
+                                    <constraint firstAttribute="width" constant="25" id="cVd-fW-ydd"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Lgi-Yf-j38" firstAttribute="centerX" secondItem="Lwl-cg-6Ax" secondAttribute="centerX" id="5UJ-oG-hKZ"/>
+                            <constraint firstItem="IO7-oj-MqM" firstAttribute="centerX" secondItem="Lwl-cg-6Ax" secondAttribute="centerX" id="79b-2Y-hhI"/>
+                            <constraint firstItem="Lgi-Yf-j38" firstAttribute="top" secondItem="IO7-oj-MqM" secondAttribute="bottom" constant="15" id="7si-wl-gOg"/>
+                            <constraint firstItem="Jok-La-TwV" firstAttribute="top" secondItem="Lwl-cg-6Ax" secondAttribute="top" constant="25" id="KBO-Nq-iMD"/>
+                            <constraint firstItem="Lgi-Yf-j38" firstAttribute="leading" secondItem="Lwl-cg-6Ax" secondAttribute="leading" constant="10" id="f7X-fD-gNd"/>
+                            <constraint firstItem="IO7-oj-MqM" firstAttribute="top" secondItem="Lwl-cg-6Ax" secondAttribute="top" constant="25" id="gZh-3F-0ye"/>
+                            <constraint firstAttribute="trailing" secondItem="Lgi-Yf-j38" secondAttribute="trailing" constant="10" id="inr-g5-ame"/>
+                            <constraint firstItem="IO7-oj-MqM" firstAttribute="leading" secondItem="Jok-La-TwV" secondAttribute="trailing" constant="7" id="kEQ-WC-lQN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Lwl-cg-6Ax" secondAttribute="bottom" id="IYN-LY-9vq"/>
+                <constraint firstItem="Lwl-cg-6Ax" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Px7-yh-Bql"/>
+                <constraint firstAttribute="trailing" secondItem="Lwl-cg-6Ax" secondAttribute="trailing" id="SwJ-Lm-bHE"/>
+                <constraint firstItem="Lwl-cg-6Ax" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YHi-ZY-amI"/>
+            </constraints>
+            <connections>
+                <outlet property="imgView" destination="Jok-La-TwV" id="IwP-x8-fPo"/>
+                <outlet property="lblNoOfDiamonds" destination="IO7-oj-MqM" id="sM2-7B-Hic"/>
+                <outlet property="lblPrice" destination="Lgi-Yf-j38" id="Qik-4d-pbg"/>
+                <outlet property="viewMain" destination="Lwl-cg-6Ax" id="6ZW-3H-GwE"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Diamond" width="24" height="24"/>
+    </resources>
+</document>

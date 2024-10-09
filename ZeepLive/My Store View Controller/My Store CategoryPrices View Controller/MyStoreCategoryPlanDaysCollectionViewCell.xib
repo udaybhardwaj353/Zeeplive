@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MyStoreCategoryPlanDaysCollectionViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqk-pZ-JT2">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OptionSelected" translatesAutoresizingMaskIntoConstraints="NO" id="9hI-hV-kD9">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Days" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8S8-3K-iKN">
+                                <rect key="frame" x="52.333333333333329" y="20" width="55.333333333333329" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9hI-hV-kD9" firstAttribute="top" secondItem="bqk-pZ-JT2" secondAttribute="top" id="0eo-zC-Qj8"/>
+                            <constraint firstItem="8S8-3K-iKN" firstAttribute="centerX" secondItem="bqk-pZ-JT2" secondAttribute="centerX" id="8VE-bI-XRA"/>
+                            <constraint firstItem="9hI-hV-kD9" firstAttribute="leading" secondItem="bqk-pZ-JT2" secondAttribute="leading" id="RjM-tu-esi"/>
+                            <constraint firstAttribute="trailing" secondItem="9hI-hV-kD9" secondAttribute="trailing" id="fi3-Hm-f5D"/>
+                            <constraint firstAttribute="bottom" secondItem="9hI-hV-kD9" secondAttribute="bottom" id="g8o-fy-PTc"/>
+                            <constraint firstItem="8S8-3K-iKN" firstAttribute="centerY" secondItem="bqk-pZ-JT2" secondAttribute="centerY" id="vRv-8b-gpJ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="bqk-pZ-JT2" secondAttribute="bottom" id="2l6-Em-2iI"/>
+                <constraint firstItem="bqk-pZ-JT2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="R8s-tA-Y5Q"/>
+                <constraint firstItem="bqk-pZ-JT2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rvi-AG-Q25"/>
+                <constraint firstAttribute="trailing" secondItem="bqk-pZ-JT2" secondAttribute="trailing" id="wC8-Zy-64M"/>
+            </constraints>
+            <connections>
+                <outlet property="imgView" destination="9hI-hV-kD9" id="mcO-p3-1uR"/>
+                <outlet property="lblNoOfDays" destination="8S8-3K-iKN" id="511-ds-768"/>
+                <outlet property="viewMain" destination="bqk-pZ-JT2" id="A3e-8L-nY1"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="OptionSelected" width="405" height="155.82000732421875"/>
+    </resources>
+</document>
