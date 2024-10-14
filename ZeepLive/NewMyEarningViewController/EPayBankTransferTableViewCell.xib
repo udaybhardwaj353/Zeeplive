@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EPayBankTransferTableViewCell" id="KGk-i7-Jjw" customClass="EPayBankTransferTableViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xd2-F2-xDQ" customClass="UIButton">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V68-Gw-wnZ" customClass="UIButton">
+                                <rect key="frame" x="10" y="10" width="394" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Transfer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM4-9P-cHr">
+                                        <rect key="frame" x="10" y="0.0" width="120" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="C6c-R4-Zhl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Bind Your Bank Account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTf-Ad-krf">
+                                        <rect key="frame" x="10" y="26" width="218.66666666666666" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="fkV-f5-7qA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6u-Af-khg">
+                                        <rect key="frame" x="314" y="12.666666666666668" width="70" height="25.000000000000004"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="2zh-S7-zgw"/>
+                                            <constraint firstAttribute="width" constant="70" id="Sjb-ht-jVf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" red="0.87450980389999999" green="0.11031077490000001" blue="0.62292590530000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Bind">
+                                            <color key="titleColor" red="0.87632181190000003" green="0.11031077490000001" blue="0.62292590530000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnBindEPayBankTransferPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="U5V-x7-C5W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="lTf-Ad-krf" firstAttribute="top" secondItem="TM4-9P-cHr" secondAttribute="bottom" constant="5" id="34A-Df-OVb"/>
+                                    <constraint firstItem="w6u-Af-khg" firstAttribute="centerY" secondItem="V68-Gw-wnZ" secondAttribute="centerY" id="CRg-Eg-TTe"/>
+                                    <constraint firstItem="lTf-Ad-krf" firstAttribute="leading" secondItem="V68-Gw-wnZ" secondAttribute="leading" constant="10" id="Iog-US-n6G"/>
+                                    <constraint firstItem="TM4-9P-cHr" firstAttribute="top" secondItem="V68-Gw-wnZ" secondAttribute="top" id="NNc-YY-nGh"/>
+                                    <constraint firstAttribute="trailing" secondItem="w6u-Af-khg" secondAttribute="trailing" constant="10" id="Uc9-zx-mlJ"/>
+                                    <constraint firstItem="TM4-9P-cHr" firstAttribute="leading" secondItem="V68-Gw-wnZ" secondAttribute="leading" constant="10" id="vk8-fy-hZu"/>
+                                    <constraint firstAttribute="height" constant="50" id="ywQ-LL-boi"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="viewEPayBankTransferPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bvm-bY-EFh"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="V68-Gw-wnZ" firstAttribute="centerY" secondItem="Xd2-F2-xDQ" secondAttribute="centerY" id="18p-sY-A90"/>
+                            <constraint firstItem="V68-Gw-wnZ" firstAttribute="leading" secondItem="Xd2-F2-xDQ" secondAttribute="leading" constant="10" id="NSX-5t-cS5"/>
+                            <constraint firstAttribute="trailing" secondItem="V68-Gw-wnZ" secondAttribute="trailing" constant="10" id="zKW-ta-8fO"/>
+                        </constraints>
+                        <connections>
+                            <action selector="viewMainPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2ae-df-Nhg"/>
+                        </connections>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Xd2-F2-xDQ" secondAttribute="trailing" id="8he-tx-q59"/>
+                    <constraint firstItem="Xd2-F2-xDQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ueq-8X-mw6"/>
+                    <constraint firstAttribute="bottom" secondItem="Xd2-F2-xDQ" secondAttribute="bottom" id="cC3-Ur-3RZ"/>
+                    <constraint firstItem="Xd2-F2-xDQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xMt-sH-tIf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="btnBindEPayBankTransferOutlet" destination="w6u-Af-khg" id="byv-Hn-ivx"/>
+                <outlet property="viewEPayBankTransferOutlet" destination="V68-Gw-wnZ" id="g19-GL-aWr"/>
+                <outlet property="viewMainOutlet" destination="Xd2-F2-xDQ" id="xNk-QQ-2BS"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="-11.267605633802818"/>
+        </tableViewCell>
+    </objects>
+</document>

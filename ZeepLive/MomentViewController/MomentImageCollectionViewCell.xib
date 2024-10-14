@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MomentImageCollectionViewCell" id="gTV-IL-0wX" customClass="MomentImageCollectionViewCell" customModule="ZeepLive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FY6-h1-riK">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RIV-Nv-2Jw">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="RIV-Nv-2Jw" secondAttribute="bottom" id="4Eg-Dz-Fi4"/>
+                            <constraint firstAttribute="trailing" secondItem="RIV-Nv-2Jw" secondAttribute="trailing" id="EpT-cP-BPg"/>
+                            <constraint firstItem="RIV-Nv-2Jw" firstAttribute="leading" secondItem="FY6-h1-riK" secondAttribute="leading" id="QBS-Mt-jq1"/>
+                            <constraint firstItem="RIV-Nv-2Jw" firstAttribute="top" secondItem="FY6-h1-riK" secondAttribute="top" id="ovZ-XX-nKP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FY6-h1-riK" secondAttribute="trailing" id="3yh-bF-4wG"/>
+                <constraint firstItem="FY6-h1-riK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5RJ-ca-CD8"/>
+                <constraint firstItem="FY6-h1-riK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bb5-cv-Yyf"/>
+                <constraint firstAttribute="bottom" secondItem="FY6-h1-riK" secondAttribute="bottom" id="puB-KW-XTW"/>
+            </constraints>
+            <connections>
+                <outlet property="imgView" destination="RIV-Nv-2Jw" id="Wiw-8K-lX2"/>
+                <outlet property="viewMain" destination="FY6-h1-riK" id="8JX-RL-DHI"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+</document>

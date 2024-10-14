@@ -1,0 +1,252 @@
+PODS:
+  - Alamofire (5.9.1)
+  - AppAuth (1.7.5):
+    - AppAuth/Core (= 1.7.5)
+    - AppAuth/ExternalUserAgent (= 1.7.5)
+  - AppAuth/Core (1.7.5)
+  - AppAuth/ExternalUserAgent (1.7.5):
+    - AppAuth/Core
+  - AppCheckCore (11.0.0):
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - PromisesObjC (~> 2.4)
+  - BDAlphaPlayer (1.2.2)
+  - DropDown (2.3.13)
+  - Firebase/CoreOnly (11.1.0):
+    - FirebaseCore (= 11.1.0)
+  - Firebase/Crashlytics (11.1.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 11.1.0)
+  - FirebaseAppCheckInterop (11.1.0)
+  - FirebaseCore (11.1.0):
+    - FirebaseCoreInternal (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCoreExtension (11.1.0):
+    - FirebaseCore (~> 11.0)
+  - FirebaseCoreInternal (11.1.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.0)"
+  - FirebaseCrashlytics (11.1.0):
+    - FirebaseCore (~> 11.0)
+    - FirebaseInstallations (~> 11.0)
+    - FirebaseRemoteConfigInterop (~> 11.0)
+    - FirebaseSessions (~> 11.0)
+    - GoogleDataTransport (~> 10.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - FirebaseDatabase (11.1.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseSharedSwift (~> 11.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - leveldb-library (~> 1.22)
+  - FirebaseInstallations (11.1.0):
+    - FirebaseCore (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - PromisesObjC (~> 2.4)
+  - FirebaseMessaging (11.1.0):
+    - FirebaseCore (~> 11.0)
+    - FirebaseInstallations (~> 11.0)
+    - GoogleDataTransport (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Reachability (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - nanopb (~> 3.30910.0)
+  - FirebaseRemoteConfigInterop (11.1.0)
+  - FirebaseSessions (11.1.0):
+    - FirebaseCore (~> 11.0)
+    - FirebaseCoreExtension (~> 11.0)
+    - FirebaseInstallations (~> 11.0)
+    - GoogleDataTransport (~> 10.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - nanopb (~> 3.30910.0)
+    - PromisesSwift (~> 2.1)
+  - FirebaseSharedSwift (11.1.0)
+  - FittedSheets (2.6.1)
+  - GoogleDataTransport (10.1.0):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - GoogleSignIn (8.0.0):
+    - AppAuth (< 2.0, >= 1.7.3)
+    - AppCheckCore (~> 11.0)
+    - GTMAppAuth (< 5.0, >= 4.1.1)
+    - GTMSessionFetcher/Core (~> 3.3)
+  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.0.2):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.0.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.0.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.0.2)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.0.2)
+  - GoogleUtilities/Reachability (8.0.2):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (8.0.2):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMAppAuth (4.1.1):
+    - AppAuth/Core (~> 1.7)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3)
+  - GTMSessionFetcher/Core (3.5.0)
+  - InputBarAccessoryView (5.5.0):
+    - InputBarAccessoryView/Core (= 5.5.0)
+  - InputBarAccessoryView/Core (5.5.0)
+  - Kingfisher (7.12.0)
+  - leveldb-library (1.22.5)
+  - lottie-ios (4.5.0)
+  - MessageKit (3.8.0):
+    - InputBarAccessoryView (~> 5.5.0)
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
+  - PromisesObjC (2.4.0)
+  - PromisesSwift (2.4.0):
+    - PromisesObjC (= 2.4.0)
+  - Protobuf (3.28.0)
+  - Realm (10.53.0):
+    - Realm/Headers (= 10.53.0)
+  - Realm/Headers (10.53.0)
+  - RealmSwift (10.53.0):
+    - Realm (= 10.53.0)
+  - SkyFloatingLabelTextField (4.0.0)
+  - SSZipArchive (2.4.3)
+  - SVGAPlayer (2.5.7):
+    - SVGAPlayer/Core (= 2.5.7)
+    - SVGAPlayer/ProtoFiles (= 2.5.7)
+  - SVGAPlayer/Core (2.5.7):
+    - SSZipArchive (>= 1.8.1)
+    - SVGAPlayer/ProtoFiles
+  - SVGAPlayer/ProtoFiles (2.5.7):
+    - Protobuf (~> 3.4)
+  - SwiftyJSON (5.0.2)
+  - ToastViewSwift (2.1.2)
+  - TXIMSDK_Plus_iOS (8.1.6905)
+  - TYPagerController (2.1.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - BDAlphaPlayer
+  - DropDown
+  - Firebase/Crashlytics
+  - FirebaseDatabase
+  - FirebaseMessaging
+  - FittedSheets
+  - GoogleSignIn
+  - Kingfisher
+  - lottie-ios
+  - MessageKit
+  - RealmSwift
+  - SkyFloatingLabelTextField
+  - SVGAPlayer
+  - SwiftyJSON
+  - ToastViewSwift
+  - TXIMSDK_Plus_iOS
+  - TYPagerController
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AppAuth
+    - AppCheckCore
+    - BDAlphaPlayer
+    - DropDown
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - FirebaseCrashlytics
+    - FirebaseDatabase
+    - FirebaseInstallations
+    - FirebaseMessaging
+    - FirebaseRemoteConfigInterop
+    - FirebaseSessions
+    - FirebaseSharedSwift
+    - FittedSheets
+    - GoogleDataTransport
+    - GoogleSignIn
+    - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - InputBarAccessoryView
+    - Kingfisher
+    - leveldb-library
+    - lottie-ios
+    - MessageKit
+    - nanopb
+    - PromisesObjC
+    - PromisesSwift
+    - Protobuf
+    - Realm
+    - RealmSwift
+    - SkyFloatingLabelTextField
+    - SSZipArchive
+    - SVGAPlayer
+    - SwiftyJSON
+    - ToastViewSwift
+    - TXIMSDK_Plus_iOS
+    - TYPagerController
+
+SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  AppCheckCore: e25aaaac234b333320b0bebb8fc21ed3576819ba
+  BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Firebase: fdb3bd378401f26a7adfcf446b0a630f8c20c0e8
+  FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
+  FirebaseCore: 6e2a2782e234b14d48e880ed369ac55cda87fed7
+  FirebaseCoreExtension: aa5c9779c2d0d39d83f1ceb3fdbafe80c4feecfa
+  FirebaseCoreInternal: adefedc9a88dbe393c4884640a73ec9e8e790f8c
+  FirebaseCrashlytics: 95cfe27373ff2edab39c28583d93cbf2dfff401d
+  FirebaseDatabase: 97244835d8566e28a001f74b6d5c12e4aed622a3
+  FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
+  FirebaseMessaging: 61014ecade746724664eee1f6c066c058a7c9fa7
+  FirebaseRemoteConfigInterop: abf8b1bbc0bf1b84abd22b66746926410bf91a87
+  FirebaseSessions: 78f137e68dc01ca71606169ba4ac73b98c13752a
+  FirebaseSharedSwift: 260a35e08943ec810d820a70bc0359136351d0c5
+  FittedSheets: 37e35f105c531f3845075f1788dd8517a35315c4
+  GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
+  GoogleSignIn: ce8c89bb9b37fb624b92e7514cc67335d1e277e4
+  GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
+  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
+  InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
+  Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
+  leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
+  lottie-ios: a881093fab623c467d3bce374367755c272bdd59
+  MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
+  Protobuf: 9f10df3b9b31e47a98789ea4d2f12bb9f84de2ad
+  Realm: e3d9f52df62d7479cf921e5d70294da4fdd2081f
+  RealmSwift: 03b060aea36701f8f4bef9fd1d4f4788ae867505
+  SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+  SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
+  SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
+  ToastViewSwift: 62e4c54cd482dd1106c2b2224103a8b171763cf3
+  TXIMSDK_Plus_iOS: 9a37039c252a5950185ad23b6115db302afda83a
+  TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
+
+PODFILE CHECKSUM: bb35f17b762cb9fae5f2b9c32970d70baf0f40cd
+
+COCOAPODS: 1.15.2
