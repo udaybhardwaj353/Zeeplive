@@ -599,7 +599,7 @@ extension DiscoverViewController {
         }
         
         updateUserStatusToFirebase()
-        isApiInProgress = false
+//        isApiInProgress = false
     }
     
     func getSettingsData() {

@@ -938,10 +938,14 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
       print(text)
       messageInputBar.inputTextView.text = ""
     //  sendMessageUsingNewMethod(message: text)
-      createAndSendMessage(message: text,type: "text")
       
+      let replacedString = replaceNumbersWithAsterisks(text)
+          print(replacedString)
+      
+      createAndSendMessage(message: replacedString,type: "text")
       
    }
+    
 }
 
 // MARK: - EXTENSION FOR USING PICKER VIEW FOR SELECTING IMAGE AND SENDING IMAGE FROM HERE IN THE MESSAGE

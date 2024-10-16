@@ -54,6 +54,7 @@ class PKLiveHostListViewController: UIViewController {
         tblView.delegate = self
         tblView.dataSource = self
         tblView.register(UINib(nibName: "PKLiveHostListTableViewCell", bundle: nil), forCellReuseIdentifier: "PKLiveHostListTableViewCell")
+        tblView.isMultipleTouchEnabled = false
         
     }
     

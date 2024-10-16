@@ -11,31 +11,31 @@ import Lottie
 import Kingfisher
 
 protocol delegatePKViewTableViewCell: AnyObject {
-    
-    func pkgiftButton(isPressed:Bool)
-    func pkuserDetailsPressed(selectedIndex: Int)
-    func pkcloseBroad(isPressed:Bool, status : Int)
-    func pkdistributionClicked(openWebView:Bool)
-    func pkviewRewardClicked(isClicked:Bool)
-    func pkbuttonAudienceList(isClicked:Bool)
-    func pkcellIndexClicked(index:Int)
-    func pkmessageClicked(userImage:String , userName:String , userLevel:String, userID:String)
-    func pkgameButtonClicked(isClicked:Bool)
-    func pkFirstViewClicked(isClicked:Bool)
-    func pkSecondViewClicked(isClicked:Bool)
-    func giftedUserPressed(userID:Int, userName:String, userImage: String)
-    func pkuserOnMic(index:Int)
-    func pkOpponentuserOnMic(index:Int)
-    func pkButtonFollowPressed(isPressed:Bool)
-    func pkmicButtonPressed(isPressed:Bool)
-    func pkbuttonOneToOnePressed(isPressed:Bool)
-    func pkbuttonJoinMicPressed(isPressed:Bool)
-    func pkmuteMic(isPressed:String)
+
+        func pkgiftButton(isPressed:Bool)
+        func pkuserDetailsPressed(selectedIndex: Int)
+        func pkcloseBroad(isPressed:Bool)
+        func pkdistributionClicked(openWebView:Bool)
+        func pkviewRewardClicked(isClicked:Bool)
+        func pkbuttonAudienceList(isClicked:Bool)
+        func pkcellIndexClicked(index:Int)
+        func pkmessageClicked(userImage:String , userName:String , userLevel:String, userID:String)
+        func pkgameButtonClicked(isClicked:Bool)
+        func pkFirstViewClicked(isClicked:Bool)
+        func pkSecondViewClicked(isClicked:Bool)
+        func giftedUserPressed(userID:Int, userName:String, userImage: String)
+        func pkuserOnMic(index:Int)
+        func pkOpponentuserOnMic(index:Int)
+        func pkButtonFollowPressed(isPressed:Bool)
+        func pkmicButtonPressed(isPressed:Bool)
+        func pkbuttonOneToOnePressed(isPressed:Bool)
+        func pkbuttonJoinMicPressed(isPressed:Bool)
+        func pkmuteMic(isPressed:String)
     
 }
 
 class PKViewTableViewCell: UITableViewCell {
-    
+
     lazy var headerView: UIView = {
         let v = UIView(frame: CGRect(x: 0, y: 0, width: viewLiveMessages.frame.width, height: 100))
         v.backgroundColor = UIColor(hexString: "000000")?.withAlphaComponent(0.35)
@@ -44,10 +44,10 @@ class PKViewTableViewCell: UITableViewCell {
         let lab = UILabel(frame: CGRect(x: 9, y: 8, width: viewLiveMessages.frame.width - 18, height: 100 - 16))
         lab.backgroundColor = .clear
         lab.text = "Welcome to ZeepLive!! Please don't share inappropriate content like pornography or violence as it's strictly against our policy. Our AI system continuously monitors content to ensure compliance"
-        lab.textColor = UIColor(hexString: "FFC300")
+        lab.textColor = UIColor(hexString: "F9B248")
         lab.numberOfLines = 0
         lab.textAlignment = .left
-        lab.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        lab.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         v.addSubview(lab)
         v.isUserInteractionEnabled = false
         return v
@@ -92,7 +92,6 @@ class PKViewTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPKSecondUserName: UILabel!
     @IBOutlet weak var viewPKBottom: UIView!
     @IBOutlet weak var viewPKAnimation: UIView!
-    @IBOutlet weak var viewPKAnimation01: UIView!
     @IBOutlet weak var viewUsersOnMic: UIView!
     @IBOutlet weak var viewOpponentUsersOnMic: UIView!
     @IBOutlet weak var viewFirstUserOnMicOutlet: UIButton!
@@ -151,20 +150,20 @@ class PKViewTableViewCell: UITableViewCell {
     
     
     weak var delegate: delegatePKViewTableViewCell?
-    lazy var totalMsgData = liveMessageModel()
-    lazy var liveMessages: [liveMessageModel] = []
-    lazy var groupUsers = [joinedGroupUserProfile]()
-    lazy var timer = Timer()
-    lazy var dailyEarningBeans: String = ""
-    lazy var weeklyEarningBeans:String = ""
-    lazy var lottieAnimationViews: [LottieAnimationView] = []
-    lazy var userInfoList: [V2TIMUserFullInfo]? = []
-    lazy var profileID: Int = 0
-    lazy var userID:Int = 0
-    lazy var giftFrom:String = ""
-    lazy var giftFirstUserID: Int = 0
-    lazy var giftFirstUserName: String = ""
-    lazy var giftFirstUserImage: String = ""
+   lazy var totalMsgData = liveMessageModel()
+   lazy var liveMessages: [liveMessageModel] = []
+   lazy var groupUsers = [joinedGroupUserProfile]()
+   lazy var timer = Timer()
+   lazy var dailyEarningBeans: String = ""
+   lazy var weeklyEarningBeans:String = ""
+   lazy var lottieAnimationViews: [LottieAnimationView] = []
+   lazy var userInfoList: [V2TIMUserFullInfo]? = []
+   lazy var profileID: Int = 0
+   lazy var userID:Int = 0
+   lazy var giftFrom:String = ""
+   lazy var giftFirstUserID: Int = 0
+   lazy var giftFirstUserName: String = ""
+   lazy var giftFirstUserImage: String = ""
     lazy var giftSecondUserID: Int = 0
     lazy var giftSecondUserName: String = ""
     lazy var giftSecondUserImage: String = ""
@@ -198,15 +197,13 @@ class PKViewTableViewCell: UITableViewCell {
     lazy var muteMic = false
     lazy var isMicMutedByHost: Bool = false
     lazy var hostFollow: Int = 0
-    var hasAnimated = [IndexPath: Bool]()
-    var pkcloseBroad = Int()
-    var isAnimation = false
+    lazy var hasJoinedMic: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //        myGiftCoins = 119
-        //        opponentGiftCoins = 450
+//        myGiftCoins = 119
+//        opponentGiftCoins = 450
         
         txtFldMessage.delegate = self
         
@@ -217,47 +214,41 @@ class PKViewTableViewCell: UITableViewCell {
         timerAndNotification()
         configureBottomBarWork()
         configureImages()
-        LottieBoomAnimation()
-        //   startTimer()
+     //   startTimer()
         
-        //  updateBottomBar()
+      //  updateBottomBar()
         
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        isAnimation = false
-        viewPKAnimation01.isHidden = false
-        
-        
+
+       
     }
     
-    //    override func prepareForReuse() {
-    //           super.prepareForReuse()
-    //
-    //        removeLottieAnimationViews()
-    //        groupUsers.removeAll()
-    //        liveMessages.removeAll()
-    //        userInfoList?.removeAll()
-    //        // Clearing other instance variables
-    //        liveMessages = []
-    //        groupUsers = []
-    //        lottieAnimationViews = []
-    //        userInfoList = nil
-    //        zegoMicUsersList = []
-    //        zegoOpponentMicUsersList = []
-    //        NotificationCenter.default.removeObserver(self)
-    //        headerView.removeFromSuperview()
-    //
-    //       }
+//    override func prepareForReuse() {
+//           super.prepareForReuse()
+//       
+//        removeLottieAnimationViews()
+//        groupUsers.removeAll()
+//        liveMessages.removeAll()
+//        userInfoList?.removeAll()
+//        // Clearing other instance variables
+//        liveMessages = []
+//        groupUsers = []
+//        lottieAnimationViews = []
+//        userInfoList = nil
+//        zegoMicUsersList = []
+//        zegoOpponentMicUsersList = []
+//        NotificationCenter.default.removeObserver(self)
+//        headerView.removeFromSuperview()
+//        
+//       }
     
     @IBAction func btnCloseBroadPressed(_ sender: Any) {
         print("Close Broad Button Pressed")
-        let status = 1
         timer.invalidate()
-        delegate?.pkcloseBroad(isPressed: true, status: status)
-        pkcloseBroad = status
-        print("pkcloseBroad: \(status)")
+        delegate?.pkcloseBroad(isPressed: true)
     }
     @IBAction func btnViewAudiencePressed(_ sender: Any) {
         print("View Audience List Button Pressed")
@@ -287,7 +278,7 @@ class PKViewTableViewCell: UITableViewCell {
     }
     @IBAction func btnOneToOneCallPressed(_ sender: Any) {
         print("Button One TO One Call Pressed")
-        
+       
         self.viewOneToOneCall.isHidden = true
         delegate?.pkbuttonOneToOnePressed(isPressed: true)
         
@@ -295,11 +286,11 @@ class PKViewTableViewCell: UITableViewCell {
             guard let strongSelf = self else { return }
             strongSelf.viewOneToOneCall.isHidden = false
         }
+
         
-        
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 25.0) {
-        //            self.viewOneToOneCall.isHidden = false
-        //        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 25.0) {
+//            self.viewOneToOneCall.isHidden = false
+//        }
         
     }
     @IBAction func btnGiftPressed(_ sender: Any) {
@@ -321,7 +312,7 @@ class PKViewTableViewCell: UITableViewCell {
         } else {
             print("Firebase par message post kar denge")
             let replacedString = replaceNumbersWithAsterisks(txtFldMessage.text ?? "")
-            print(replacedString)
+                print(replacedString)
             
             sendMessage(message: replacedString ?? "N/A", groupid: groupID)
             sendMessage(message: replacedString ?? "N/A", groupid: secondgroupID)
@@ -421,11 +412,11 @@ class PKViewTableViewCell: UITableViewCell {
     @IBAction func btnMicPressed(_ sender: Any) {
         print("Button Mic Pressed For Mute/Unmute Speaker in PK table view cell")
         if isMuteMicButtonPressed
-            
+        
         {
             delegate?.pkmicButtonPressed(isPressed: isMuteMicButtonPressed)
             isMuteMicButtonPressed = false
-            btnMicOutlet.setImage(UIImage(named:  "speakeron"), for: .normal)
+          btnMicOutlet.setImage(UIImage(named:  "speakeron"), for: .normal)
             
         }
         
@@ -433,8 +424,8 @@ class PKViewTableViewCell: UITableViewCell {
             
             delegate?.pkmicButtonPressed(isPressed: isMuteMicButtonPressed)
             isMuteMicButtonPressed = true
-            btnMicOutlet.setImage(UIImage(named:  "speakeroff"), for: .normal)
-            
+          btnMicOutlet.setImage(UIImage(named:  "speakeroff"), for: .normal)
+
         }
         
     }
@@ -445,9 +436,18 @@ class PKViewTableViewCell: UITableViewCell {
         isJoinMicPressed = true
         btnJoinMicOutlet.isHidden = true
         delegate?.pkbuttonJoinMicPressed(isPressed: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
-            self.btnJoinMicOutlet.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) { [weak self] in
+            guard let strongSelf = self else {
+                // self was deallocated before this block could run
+                return
+            }
+            if (strongSelf.hasJoinedMic == true) {
+                strongSelf.btnJoinMicOutlet.isHidden = true
+            } else {
+                strongSelf.btnJoinMicOutlet?.isHidden = false
+            }
         }
+
         
     }
     
@@ -456,7 +456,7 @@ class PKViewTableViewCell: UITableViewCell {
         print("Button Mute Mic Pressed in PK View Table View Cell")
         
         if (isMicMutedByHost == false) {
-            
+           
             if muteMic
                 
             {
@@ -485,15 +485,15 @@ class PKViewTableViewCell: UITableViewCell {
     }
     
     func clearData() {
-        
+    
         removeLottieAnimationViews()
         groupUsers.removeAll()
         liveMessages.removeAll()
         userInfoList?.removeAll()
-        
+     
         collectionView.removeFromSuperview()
         totalMsgData = liveMessageModel()
-        
+
         viewMain = nil
         imgViewUserImage = nil
         lblUserName = nil
@@ -521,7 +521,7 @@ class PKViewTableViewCell: UITableViewCell {
         btnViewRewardOutlet = nil
         viewLiveMessages = nil
         tblViewLiveMessages = nil
-        
+      
         collectionView = nil
         btnViewAudienceOutlet = nil
         viewUserRoomStatus = nil
@@ -539,131 +539,131 @@ class PKViewTableViewCell: UITableViewCell {
         viewGift = nil
         lblSendGiftHostName = nil
         lblNoOfGift = nil
-        
-        headerView.removeFromSuperview()
-        print("PK video room table cell ka deinit call hua hai.")
-        timer.invalidate()
-        KingfisherManager.shared.cache.clearDiskCache()
-        KingfisherManager.shared.cache.clearMemoryCache()
-        KingfisherManager.shared.cache.clearCache() {
-            print("Saare cache clear hue hai")
-        }
-        
-        lblBroadViewCount = nil
-        NotificationCenter.default.removeObserver(self)
-        headerView.removeFromSuperview()
-        contentView.subviews.forEach { $0.removeFromSuperview() }
-        backgroundView = nil
-        viewBijlee.removeFromSuperview()
-        // Invalidate timers
-        timer.invalidate()
-        pktimer.invalidate()
-        
-        // Clearing other instance variables
-        liveMessages = []
-        groupUsers = []
-        lottieAnimationViews = []
-        userInfoList = nil
-        zegoMicUsersList = []
-        zegoOpponentMicUsersList = []
-        
-        // Clearing other lazy variables
-        dailyEarningBeans = ""
-        weeklyEarningBeans = ""
-        //  profileID = 0
-        //  userID = 0
-        giftFrom = ""
-        //  giftFirstUserID = 0
-        giftFirstUserName = ""
-        giftFirstUserImage = ""
-        //  giftSecondUserID = 0
-        giftSecondUserName = ""
-        giftSecondUserImage = ""
-        //   giftThirdUserID = 0
-        giftThirdUserName = ""
-        giftThirdUserImage = ""
-        // giftOpponentFirstUserID = 0
-        giftOpponentFirstUsername = ""
-        giftOpponentFirstUserImage = ""
-        //  giftOpponentSecondUserID = 0
-        giftOpponentSecondUsername = ""
-        giftOpponentSecondUserImage = ""
-        //  giftOpponentThirdUserID = 0
-        giftOpponentThirdUsername = ""
-        giftOpponentThirdUserImage = ""
-        //  myGiftCoins = 0
-        // opponentGiftCoins = 0
-        // totalTime = 0
-        //                    viewPK.removeFromSuperview()
-        //                    viewGift.removeFromSuperview()
-        //                    viewMain.removeFromSuperview()
-        //                    viewBottom.removeFromSuperview()
-        //                viewMessage.removeFromSuperview()
+
+headerView.removeFromSuperview()
+print("PK video room table cell ka deinit call hua hai.")
+timer.invalidate()
+KingfisherManager.shared.cache.clearDiskCache()
+KingfisherManager.shared.cache.clearMemoryCache()
+KingfisherManager.shared.cache.clearCache() {
+    print("Saare cache clear hue hai")
+}
+
+lblBroadViewCount = nil
+NotificationCenter.default.removeObserver(self)
+headerView.removeFromSuperview()
+contentView.subviews.forEach { $0.removeFromSuperview() }
+backgroundView = nil
+viewBijlee.removeFromSuperview()
+// Invalidate timers
+     timer.invalidate()
+     pktimer.invalidate()
+     
+     // Clearing other instance variables
+     liveMessages = []
+     groupUsers = []
+     lottieAnimationViews = []
+     userInfoList = nil
+     zegoMicUsersList = []
+     zegoOpponentMicUsersList = []
+     
+     // Clearing other lazy variables
+     dailyEarningBeans = ""
+     weeklyEarningBeans = ""
+   //  profileID = 0
+   //  userID = 0
+     giftFrom = ""
+   //  giftFirstUserID = 0
+     giftFirstUserName = ""
+     giftFirstUserImage = ""
+   //  giftSecondUserID = 0
+     giftSecondUserName = ""
+     giftSecondUserImage = ""
+  //   giftThirdUserID = 0
+     giftThirdUserName = ""
+     giftThirdUserImage = ""
+    // giftOpponentFirstUserID = 0
+     giftOpponentFirstUsername = ""
+     giftOpponentFirstUserImage = ""
+   //  giftOpponentSecondUserID = 0
+     giftOpponentSecondUsername = ""
+     giftOpponentSecondUserImage = ""
+   //  giftOpponentThirdUserID = 0
+     giftOpponentThirdUsername = ""
+     giftOpponentThirdUserImage = ""
+   //  myGiftCoins = 0
+    // opponentGiftCoins = 0
+    // totalTime = 0
+//                    viewPK.removeFromSuperview()
+//                    viewGift.removeFromSuperview()
+//                    viewMain.removeFromSuperview()
+//                    viewBottom.removeFromSuperview()
+//                viewMessage.removeFromSuperview()
         
     }
     
     deinit {
-        
+            
         print("PK table view cell main deinit call hua hai.")
-        removeLottieAnimationViews()
-        groupUsers.removeAll()
-        liveMessages.removeAll()
-        if var userInfoList = userInfoList {
-            userInfoList.removeAll()
-        }
-        //  userInfoList?.removeAll()
-        //   tblViewLiveMessages.dataSource = nil
-        //  tblViewLiveMessages.delegate = nil
-        //   collectionView.dataSource = nil
-        //  collectionView.delegate = nil
-        //  collectionView.removeFromSuperview()
-        totalMsgData = liveMessageModel()
+                removeLottieAnimationViews()
+                groupUsers.removeAll()
+                liveMessages.removeAll()
+            if var userInfoList = userInfoList {
+                userInfoList.removeAll()
+            }
+              //  userInfoList?.removeAll()
+             //   tblViewLiveMessages.dataSource = nil
+              //  tblViewLiveMessages.delegate = nil
+             //   collectionView.dataSource = nil
+              //  collectionView.delegate = nil
+              //  collectionView.removeFromSuperview()
+                totalMsgData = liveMessageModel()
         
-        viewMain = nil
-        imgViewUserImage = nil
-        lblUserName = nil
-        viewBottom = nil
-        btnSendMessageOutlet = nil
-        viewGift = nil
-        btnGameOutlet = nil
-        btnGiftOutlet = nil
-        viewGift = nil
-        
-        delegate = nil
-        viewMessage = nil
-        btnSendMessageOutlet = nil
-        viewTextField = nil
-        txtFldMessage = nil
-        viewMessageBottomConstraints = nil
-        viewUserDetailOutlet = nil
-        imgViewDistribution = nil
-        lblRoomUserName = nil
-        lblBroadViewCount = nil
-        btnFollowUserOutlet = nil
-        btnCloseBroadOutlet = nil
-        btnViewDistributionOutlet = nil
-        lblDistributionAmount = nil
-        btnViewRewardOutlet = nil
-        viewLiveMessages = nil
-        tblViewLiveMessages = nil
-        
-        collectionView = nil
-        btnViewAudienceOutlet = nil
-        viewUserRoomStatus = nil
-        lblRoomUserName = nil
-        lblRoomUserStatus = nil
-        lblViewRewardRank = nil
-        btnViewRewardOutlet = nil
-        imgViewDistribution = nil
-        viewOneToOneCall = nil
-        viewLuckyGiftDetails = nil
-        viewLuckyGift = nil
-        imgViewGift = nil
-        imgViewUser = nil
-        viewUserImage = nil
-        viewGift = nil
-        lblSendGiftHostName = nil
-        lblNoOfGift = nil
+                viewMain = nil
+                imgViewUserImage = nil
+                lblUserName = nil
+                viewBottom = nil
+                btnSendMessageOutlet = nil
+                viewGift = nil
+                btnGameOutlet = nil
+                btnGiftOutlet = nil
+                viewGift = nil
+                
+                delegate = nil
+                viewMessage = nil
+                btnSendMessageOutlet = nil
+                viewTextField = nil
+                txtFldMessage = nil
+                viewMessageBottomConstraints = nil
+                viewUserDetailOutlet = nil
+                imgViewDistribution = nil
+                lblRoomUserName = nil
+                lblBroadViewCount = nil
+                btnFollowUserOutlet = nil
+                btnCloseBroadOutlet = nil
+                btnViewDistributionOutlet = nil
+                lblDistributionAmount = nil
+                btnViewRewardOutlet = nil
+                viewLiveMessages = nil
+                tblViewLiveMessages = nil
+              
+                collectionView = nil
+                btnViewAudienceOutlet = nil
+                viewUserRoomStatus = nil
+                lblRoomUserName = nil
+                lblRoomUserStatus = nil
+                lblViewRewardRank = nil
+                btnViewRewardOutlet = nil
+                imgViewDistribution = nil
+                viewOneToOneCall = nil
+                viewLuckyGiftDetails = nil
+                viewLuckyGift = nil
+                imgViewGift = nil
+                imgViewUser = nil
+                viewUserImage = nil
+                viewGift = nil
+                lblSendGiftHostName = nil
+                lblNoOfGift = nil
         
         headerView.removeFromSuperview()
         print("PK video room table cell ka deinit call hua hai.")
@@ -681,49 +681,49 @@ class PKViewTableViewCell: UITableViewCell {
         backgroundView = nil
         viewBijlee.removeFromSuperview()
         // Invalidate timers
-        timer.invalidate()
-        pktimer.invalidate()
-        
-        // Clearing other instance variables
-        liveMessages = []
-        groupUsers = []
-        lottieAnimationViews = []
-        userInfoList = nil
-        zegoMicUsersList = []
-        zegoOpponentMicUsersList = []
-        
-        // Clearing other lazy variables
-        dailyEarningBeans = ""
-        weeklyEarningBeans = ""
-        profileID = 0
-        userID = 0
-        giftFrom = ""
-        giftFirstUserID = 0
-        giftFirstUserName = ""
-        giftFirstUserImage = ""
-        giftSecondUserID = 0
-        giftSecondUserName = ""
-        giftSecondUserImage = ""
-        giftThirdUserID = 0
-        giftThirdUserName = ""
-        giftThirdUserImage = ""
-        giftOpponentFirstUserID = 0
-        giftOpponentFirstUsername = ""
-        giftOpponentFirstUserImage = ""
-        giftOpponentSecondUserID = 0
-        giftOpponentSecondUsername = ""
-        giftOpponentSecondUserImage = ""
-        giftOpponentThirdUserID = 0
-        giftOpponentThirdUsername = ""
-        giftOpponentThirdUserImage = ""
-        myGiftCoins = 0
-        opponentGiftCoins = 0
-        totalTime = 0
-        //            viewPK.removeFromSuperview()
-        //            viewGift.removeFromSuperview()
-        //            viewMain.removeFromSuperview()
-        //            viewBottom.removeFromSuperview()
-        //        viewMessage.removeFromSuperview()
+             timer.invalidate()
+             pktimer.invalidate()
+             
+             // Clearing other instance variables
+             liveMessages = []
+             groupUsers = []
+             lottieAnimationViews = []
+             userInfoList = nil
+             zegoMicUsersList = []
+             zegoOpponentMicUsersList = []
+             
+             // Clearing other lazy variables
+             dailyEarningBeans = ""
+             weeklyEarningBeans = ""
+             profileID = 0
+             userID = 0
+             giftFrom = ""
+             giftFirstUserID = 0
+             giftFirstUserName = ""
+             giftFirstUserImage = ""
+             giftSecondUserID = 0
+             giftSecondUserName = ""
+             giftSecondUserImage = ""
+             giftThirdUserID = 0
+             giftThirdUserName = ""
+             giftThirdUserImage = ""
+             giftOpponentFirstUserID = 0
+             giftOpponentFirstUsername = ""
+             giftOpponentFirstUserImage = ""
+             giftOpponentSecondUserID = 0
+             giftOpponentSecondUsername = ""
+             giftOpponentSecondUserImage = ""
+             giftOpponentThirdUserID = 0
+             giftOpponentThirdUsername = ""
+             giftOpponentThirdUserImage = ""
+             myGiftCoins = 0
+             opponentGiftCoins = 0
+             totalTime = 0
+//            viewPK.removeFromSuperview()
+//            viewGift.removeFromSuperview()
+//            viewMain.removeFromSuperview()
+//            viewBottom.removeFromSuperview()
+//        viewMessage.removeFromSuperview()
         
     }
     
@@ -775,10 +775,6 @@ extension PKViewTableViewCell {
         animationView3.play()
         animationView3.isUserInteractionEnabled = false
         
-//        //MARK: - LottieBoomAnimation
-        self.viewPKAnimation01.isHidden = false
-        isAnimation = false
-        
         let animationView4 = LottieAnimationView()
         animationView4.contentMode = .scaleToFill
         animationView4.frame = viewStackMiddle.bounds
@@ -786,7 +782,6 @@ extension PKViewTableViewCell {
         
         animationView4.animation = LottieAnimation.named("MId_animation_Udpated") // Replace with your animation file name
         animationView4.loopMode = .loop
-        animationView4.animationSpeed = 0.5
         animationView4.play()
         animationView4.isUserInteractionEnabled = false
         
@@ -803,54 +798,6 @@ extension PKViewTableViewCell {
         lottieAnimationViews = [animationView, animationView1, animationView2, animationView3, animationView4, animationView5]
         
     }
-    
-    func LottieBoomAnimation(){
-        //MARK: - Animation
-        let animationViewPK = LottieAnimationView()
-        animationViewPK.contentMode = .scaleToFill
-        animationViewPK.frame = viewPKAnimation01.bounds
-        viewPKAnimation01.addSubview(animationViewPK)
-        viewPKAnimation01.layer.cornerRadius = 10
-        
-        animationViewPK.animation = LottieAnimation.named("PK_small") // Replace with your animation file name
-        animationViewPK.loopMode = .loop
-        animationViewPK.animationSpeed = 0.5
-//        animationViewPK.backgroundColor = UIColor.systemYellow
-        viewPKAnimation01.alpha = 0.0
-        viewPKAnimation01.transform = CGAffineTransform(scaleX: 0.0, y: 0.0) // Start fully scaled down
-        boomAnimation()
-        animationViewPK.play()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            self.boomAnimation()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                if self.pkcloseBroad == 0{
-                    self.viewPKAnimation01.isHidden = true
-                }
-            }
-        }
-        animationViewPK.isUserInteractionEnabled = false
-    }
-    
-    func boomAnimation() {
-            // Start with a quick scale-up "boom" effect and add rotation
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.0,
-                           usingSpringWithDamping: 0.5,
-                           initialSpringVelocity: 10,
-                           options: [.curveEaseOut],
-                           animations: {
-                // Scale it up, rotate, and fade it in
-                let scaleTransform = CGAffineTransform(scaleX: 1.2, y: 1.2) // Overshoot the size
-                let rotationTransform = CGAffineTransform(rotationAngle: CGFloat.pi / 4) // Rotate by 45 degrees
-                self.viewPKAnimation01.transform = scaleTransform.concatenating(rotationTransform) // Combine scale and rotation
-                self.viewPKAnimation01.alpha = 1.0
-            }, completion: { _ in
-                // Add a slight scale-down and remove some of the rotation for a subtle "bounce back" effect
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.viewPKAnimation01.transform = CGAffineTransform(scaleX: 1.0, y: 1.0) // Return to normal size
-                })
-            })
-        }
    
     func removeLottieAnimationViews() {
           // Remove Lottie animation views from their superviews
@@ -859,6 +806,21 @@ extension PKViewTableViewCell {
     
     func configureUI() {
     
+        let userIdToCheck = String(profileID)
+        let userFollow = GlobalClass.sharedInstance.isUserFollowed(userIdToCheck: userIdToCheck)
+        print("User with ID \(userIdToCheck) is followed: \(userFollow)")
+        
+        if (userFollow == true) {
+       
+            print("User isko follow karta hai.")
+            btnFollowUserOutlet.isHidden = true
+            
+        } else {
+         
+            btnFollowUserOutlet.isHidden = false
+           
+        }
+        
         let gender = UserDefaults.standard.string(forKey: "gender") ?? ""
         
         if (gender.lowercased() == "male") {
@@ -872,8 +834,7 @@ extension PKViewTableViewCell {
         
         btnGameWidthConstraints.constant = 0
         btnGameOutlet.isHidden = true
-        viewMain.backgroundColor = #colorLiteral(red: 0.1331779929, green: 0.01851655321, blue: 0.09019608051, alpha: 1)
-//        GlobalClass.sharedInstance.setPKControllerBackgroundColour()
+        viewMain.backgroundColor = GlobalClass.sharedInstance.setPKControllerBackgroundColour()
         viewMessage.isHidden = true
         viewMessage.layer.cornerRadius = viewMessage.frame.size.height / 2
         viewMessage.backgroundColor = GlobalClass.sharedInstance.setGapColour()
@@ -887,14 +848,13 @@ extension PKViewTableViewCell {
         btnViewRewardOutlet.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         viewUserRoomStatus.layer.cornerRadius = viewUserRoomStatus.frame.height / 2
         viewUserRoomStatus.backgroundColor = .black.withAlphaComponent(0.6)
-        lblRoomUserName.textColor = UIColor(hexString: "FFC300")
+        lblRoomUserName.textColor = UIColor(hexString: "F9B248")
         
         viewPKSecondUserName.backgroundColor = .black.withAlphaComponent(0.4)
         viewPKSecondUserName.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewPKSecondUserName.layer.cornerRadius = viewPKSecondUserName.frame.height / 2
         
-        viewPKBottom.backgroundColor = #colorLiteral(red: 0.1816209947, green: 0.1313851712, blue: 0.2472988534, alpha: 1)
-//        GlobalClass.sharedInstance.setPKControllerBackgroundColour()
+        viewPKBottom.backgroundColor = GlobalClass.sharedInstance.setPKControllerBackgroundColour()
        
         viewLuckyGiftDetails.layer.cornerRadius = viewLuckyGiftDetails.frame.height / 2
         viewLuckyGiftDetails.backgroundColor = .black.withAlphaComponent(0.3)
@@ -919,7 +879,8 @@ extension PKViewTableViewCell {
     }
     
     func collectionViewWork() {
-        collectionView.register(UINib(nibName: "BroadJoinCollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "BroadJoinCollectionViewCell2")
+    
+        collectionView.register(UINib(nibName: "BroadJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BroadJoinCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isUserInteractionEnabled = true
@@ -1172,12 +1133,12 @@ extension PKViewTableViewCell {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
-            lblTimerCount.text = timeFormatted(totalTime)
+            self.lblTimerCount?.text = self.timeFormatted(self.totalTime)
             
-            if totalTime != 0 {
-                totalTime -= 1
+            if self.totalTime != 0 {
+                self.totalTime -= 1
             } else {
-                endTimer()
+                self.endTimer()
             }
         }
     }
@@ -1187,7 +1148,7 @@ extension PKViewTableViewCell {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            lblTimerCount.text = "00:00"
+            self.lblTimerCount.text = "00:00"
 //            totalTime = pkTimeDifference
 //            startTimer()
            // self.pktimer.invalidate()
@@ -1260,6 +1221,11 @@ extension PKViewTableViewCell {
             btnJoinMicOutlet.isHidden = true
         } else {
             btnJoinMicOutlet.isHidden = false
+            if (hasJoinedMic == true) {
+                btnJoinMicOutlet.isHidden = true
+            } else {
+                btnJoinMicOutlet.isHidden = false
+            }
         }
         if (hostFollow == 1) {
             btnFollowUserOutlet.isHidden = true
@@ -1283,6 +1249,21 @@ extension PKViewTableViewCell {
         btnSendMessageOutlet.isHidden = false
         btnGameOutlet.isHidden = false
      //   viewPKBottom.isHidden = false
+     
+        let userIdToCheck = String(profileID)
+        let userFollow = GlobalClass.sharedInstance.isUserFollowed(userIdToCheck: userIdToCheck)
+        print("User with ID \(userIdToCheck) is followed: \(userFollow)")
+        
+        if (userFollow == true) {
+       
+            print("User isko follow karta hai.")
+            btnFollowUserOutlet.isHidden = true
+            
+        } else {
+         
+            btnFollowUserOutlet.isHidden = false
+           
+        }
         
     }
     
@@ -1391,7 +1372,7 @@ extension PKViewTableViewCell : UITableViewDelegate,UITableViewDataSource {
        
         cell.lblUserLevel.text = " Lv." + (liveMessages[indexPath.row].level ?? "N/A") 
         cell.lblUserName.text = liveMessages[indexPath.row].userName ?? "N/A"
-       
+     
         if (liveMessages[indexPath.row].type == "2") {
           
             let count = String(liveMessages[indexPath.row].giftCount ?? 0)
@@ -1511,61 +1492,45 @@ extension PKViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BroadJoinCollectionViewCell2", for: indexPath) as! BroadJoinCollectionViewCell2
-   
-//        self.viewPKAnimation01.isHidden = false
-      
-        if isAnimation == false{
-            LottieBoomAnimation()
-            isAnimation = true
-        }
-       
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BroadJoinCollectionViewCell", for: indexPath) as! BroadJoinCollectionViewCell 
+        
+        
         cell.resetCellState()
         cell.isUserInteractionEnabled = true
-        //        self.viewPKAnimation01.isHidden = false
-        cell.viewMain2.translatesAutoresizingMaskIntoConstraints = false
-        cell.viewMain2.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        cell.viewMain2.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        cell.viewMain2.layer.cornerRadius = 15
-        cell.viewMain2.layer.masksToBounds = true
+        cell.viewMain.layer.cornerRadius = 15
+        cell.imgViewUserPhoto.layer.cornerRadius = 15
+        cell.imgViewUserPhoto.layer.masksToBounds = true
         
-        cell.imgViewUserPhoto2.translatesAutoresizingMaskIntoConstraints = false
-        cell.imgViewUserPhoto2.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        cell.imgViewUserPhoto2.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        cell.imgViewUserPhoto2.layer.cornerRadius = 15
-        cell.imgViewUserPhoto2.layer.masksToBounds = true
-        
-        //  cell.imgViewUserPhoto.layer.cornerRadius = cell.imgViewUserPhoto.frame.height / 2
+      //  cell.imgViewUserPhoto.layer.cornerRadius = cell.imgViewUserPhoto.frame.height / 2
         
         
         // Clear the image first
-        cell.imgViewUserPhoto2.image = nil
+        cell.imgViewUserPhoto.image = nil
+
+        loadImageForCell(from: userInfoList?[indexPath.row].faceURL ?? "", into: cell.imgViewUserPhoto)
+//        if let imageURL = URL(string: userInfoList?[indexPath.row].faceURL ?? "") {
+//            KF.url(imageURL)
+//                .cacheOriginalImage()
+//                .onSuccess { [weak cell] result in
+//                    DispatchQueue.main.async {
+//                        cell?.imgViewUserPhoto.image = result.image
+//                    }
+//                }
+//                .onFailure { error in
+//                    print("Image loading failed with error: \(error)")
+//                    cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
+//                }
+//                .set(to: cell.imgViewUserPhoto)
+//        } else {
+//            cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
+//        }
+
+        cell.imgViewUserPhoto.isUserInteractionEnabled = true
+        cell.viewMain.isUserInteractionEnabled = true
         
-        loadImageForCell(from: userInfoList?[indexPath.row].faceURL ?? "", into: cell.imgViewUserPhoto2)
-        //        if let imageURL = URL(string: userInfoList?[indexPath.row].faceURL ?? "") {
-        //            KF.url(imageURL)
-        //                .cacheOriginalImage()
-        //                .onSuccess { [weak cell] result in
-        //                    DispatchQueue.main.async {
-        //                        cell?.imgViewUserPhoto.image = result.image
-        //                    }
-        //                }
-        //                .onFailure { error in
-        //                    print("Image loading failed with error: \(error)")
-        //                    cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
-        //                }
-        //                .set(to: cell.imgViewUserPhoto)
-        //        } else {
-        //            cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
-        //        }
-        
-        cell.imgViewUserPhoto2.isUserInteractionEnabled = true
-        cell.viewMain2.isUserInteractionEnabled = true
-        
- 
         return cell
     }
-
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -1610,19 +1575,36 @@ extension PKViewTableViewCell {
         print(status)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            guard let self = self else { return }
+            guard let strongSelf = self else { return }
             
-            // Assuming name and status are your variables
-            lblRoomUserName.text = name + ":"
-            
-            if (status == "4") {
-                lblRoomUserStatus.text = "has entered the room"
-            } else {
-                lblRoomUserStatus.text = "has left the room"
+            // Make sure you're accessing UI elements on the main thread
+            DispatchQueue.main.async {
+                // Assuming name and status are your variables
+                strongSelf.lblRoomUserName.text = name + ":"
+                
+                if status == "4" {
+                    strongSelf.lblRoomUserStatus.text = "has entered the room"
+                } else {
+                    strongSelf.lblRoomUserStatus.text = "has left the room"
+                }
             }
-            
         }
+        
     }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+//            guard let self = self else { return }
+//            
+//            // Assuming name and status are your variables
+//            lblRoomUserName.text = name + ":"
+//            
+//            if (status == "4") {
+//                lblRoomUserStatus.text = "has entered the room"
+//            } else {
+//                lblRoomUserStatus.text = "has left the room"
+//            }
+//            
+//        }
+//    }
     
     func showJoinedUser(users: [V2TIMUserFullInfo]) {
         DispatchQueue.main.async { [weak self] in

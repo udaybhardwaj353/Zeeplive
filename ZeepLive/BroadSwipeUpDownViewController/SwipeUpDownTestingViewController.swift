@@ -129,6 +129,7 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -231,6 +232,24 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
 //            print("Tap detected inside the safe area. Enabling table view scrolling.")
 //        }
 //    }
+    
+    func sendRequestForAdmin() {
+        guard let groupID = usersList.data?[currentIndex].groupID else {
+            print("Invalid group ID")
+            return
+        }
+
+        // Fetch the current group attributes
+        V2TIMManager.sharedInstance().getGroupAttributes(groupID, keys: ["groupChatMuteList"], succ: { attributes in
+            // Handle success and access the group attributes
+            print("Group attributes in swipe up down viw controller is: \(attributes)")
+            
+        }, fail: { code, desc in
+            // Handle failure
+            print("Failed to fetch group attributes: \(code), \(desc ?? "Unknown error")")
+        })
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -698,39 +717,39 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
     }
 // MARK: - SCROLL VIEW SWIPE UP AND DOWN FUNCTIONALITY FUNCTION WORKING
    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        print("Scroll view scrolled to top.")
-    }
+//    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+//        print("Scroll view scrolled to top.")
+//    }
+//    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//      //  adjustScrollViewInsets()
+//        if scrollView.contentOffset.y < 0 {
+//            print("Scroll view is at the top.")
+//        } else {
+//            print("Scroll view is scrolling.")
+//        }
+//    }
+//    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        print("Scroll view will begin dragging to top.")
+//    }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      //  adjustScrollViewInsets()
-        if scrollView.contentOffset.y < 0 {
-            print("Scroll view is at the top.")
-        } else {
-            print("Scroll view is scrolling.")
-        }
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("Scroll view will begin dragging to top.")
-    }
-    
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        print("scroll view should scroll to top function called.")
-        return false
-        
-    }
-    func adjustScrollViewInsets() {
-        tblView.contentInsetAdjustmentBehavior = .never
-        
-    }
+//    func adjustScrollViewInsets() {
+//        tblView.contentInsetAdjustmentBehavior = .never
+//        
+//    }
 
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        print("Scroll view did scroll to top.")
 //    }
     
-
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        print("scroll view should scroll to top function called.")
+        return false
+        
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -792,6 +811,17 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
                     
                     print("Jo prevvious index ka remove ho rha hai woh hai: \(previousIndex)")
                     print("Jo agle index ka add ho rh ahai woh hai: \(currentIndex)")
+                    
+                    if (isPK == true) {
+                        
+                        removeLiveAsCoHostForPK()
+                        
+                    } else {
+                    
+                        removeLiveAsCoHost()
+                        
+                    }
+                    
                     removeMessageObserver(id: usersList.data?[previousIndex].profileID ?? 0)
                     quitgroup(id: usersList.data?[previousIndex].groupID ?? "")
                     removeObserver(id: usersList.data?[previousIndex].profileID ?? 0)
@@ -842,6 +872,15 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
         
         if (isPK == true) {
             
+            removeLiveAsCoHostForPK()
+            
+                guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                    // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                    return
+                }
+                cell.hasJoinedMic = hasJoinedMic
+                
+            
             if let visibleCells = tblView?.visibleCells {
                         for cell in visibleCells {
                             if let pkCell = cell as? PKViewTableViewCell {
@@ -880,12 +919,24 @@ class SwipeUpDownTestingViewController: UIViewController, V2TIMConversationListe
             
             if (hasJoinedMic == true) {
                 removeLiveAsCoHost()
+              
+                    guard let cell = self.tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
+                        // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                        return
+                    }
+                    
+                    cell.hasJoinedMic = hasJoinedMic
+                    
+                
+                
                 print("User ne mic join kiya hua hai host ka.")
             } else {
             
                 print("User ne mic join nahi kiya hua hai host ka.")
                 
             }
+            
+            removeLiveAsCoHost()
             
             ZLFireBaseManager.share.updateCoHostInviteStatusToFirebase(userid: (UserDefaults.standard.string(forKey: "UserProfileId") ?? ""), status: "gone")
             stopPublishCoHostStream()
@@ -1581,7 +1632,7 @@ extension SwipeUpDownTestingViewController {
                         cell.btnJoinMicOutlet.isHidden = true
                          
                         loadImage(from: usersList.data?[currentIndex].profileImage, into: cell.imgViewEndUserDetail)
-
+                        dismiss(animated: true, completion: nil)
                         
                     }
                 }
@@ -1748,7 +1799,7 @@ extension SwipeUpDownTestingViewController {
                             // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
                             return
                         }
-                            
+                            cell.hasJoinedMic = self.hasJoinedMic
                             cell.btnMuteMicOutlet.isHidden = true
                             cell.btnMuteMicWidthConstraints.constant = 0
                             
@@ -1758,7 +1809,7 @@ extension SwipeUpDownTestingViewController {
                             // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
                             return
                         }
-                            
+                            cell.hasJoinedMic = self.hasJoinedMic
                             cell.btnMuteMicOutlet.isHidden = true
                             cell.btnMuteMicWidthConstraints.constant = 0
                             
@@ -1773,6 +1824,113 @@ extension SwipeUpDownTestingViewController {
            }
         print("The changed zegosendmicuserslist are: \(zegoSendMicUsersList)")
         
+    }
+    
+    func removeLiveAsCoHostForPK() {
+        
+        print("The zego send mic users list in removeliveascohost in pk publish controller is: \(zegoSendMicUsersList)")
+        print("The room id in removeliveascohost in pk publish controller is: \(room)")
+        
+        hasJoinedMic = false
+        guard let userid = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            // Handle the case where currentUserProfileID is nil
+            return
+        }
+        
+        if zegoSendMicUsersList.contains(where: { $0.key == userid }) {
+            print("ID exists in zegoSendMicUsersList")
+            //  zegoSendMicUsersList["coHostUserStatus"] = "delete"
+            if let jsonString = zegoSendMicUsersList[userid],
+               let data = jsonString.data(using: .utf8),
+               var jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                
+                // Access and modify the data inside the JSON object
+                if let coHostUserStatus = jsonObject["coHostUserStatus"] as? String {
+                    print("Original coHostUserStatus: \(coHostUserStatus)")
+                    jsonObject["coHostUserStatus"] = "delete"  // Update the value of "coHostUserStatus"
+                    
+                    // Convert the updated JSON object back to a string
+                    if let updatedJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: []),
+                       let updatedJsonString = String(data: updatedJsonData, encoding: .utf8) {
+                        
+                        // Update the value in zegoSendMicUsersList with the updated JSON string
+                        zegoSendMicUsersList[userid] = updatedJsonString
+                        print("Updated User Data: \(updatedJsonString)")
+                    } else {
+                        print("Error converting JSON object to string")
+                    }
+                } else {
+                    print("coHostUserStatus not found in JSON object")
+                }
+            } else {
+                print("User ID \(userid) not found in zegoSendMicUsersList or data is not a valid JSON string")
+            }
+            
+            let listString = jsonString(from: zegoSendMicUsersList)
+            
+            // Create the structure for pkHost as a dictionary
+            let pkHost: [String: Any] = [
+                "coHost123": listString // This should be a nested dictionary
+            ]
+            
+            // Convert pkHost to JSON string
+            let pkHostString = jsonString(from: pkHost)
+            
+            //            // Prepare the map (coHost123 data)
+            //            let coHostInfoStr = jsonString(from: zegoSendMicUsersList)
+            //
+            // Build the main JSON structure for pkHost
+            let pkHostMap: [String: Any] = [
+                "pkHost": pkHostString,
+                // "coHost123": zegoSendMicUsersList, // coHost123 data
+                "pkHostImage": "", // Example data
+                "pkHostName": "",  // Example data, you can replace these values dynamically
+                "pkHostRoomID": "", // Example data
+                "pkHostUserID": "", // Example data
+                "pk_end_time": "", // Example end time
+                "type": "pk_start"
+                
+            ]
+            
+            // Convert pkHostMap to JSON string
+            if let pkHostData = try? JSONSerialization.data(withJSONObject: pkHostMap, options: []),
+               let infoStr = String(data: pkHostData, encoding: .utf8) {
+                
+                print("The final information being sent is: \(infoStr)")
+                
+                // Set room extra info using the SDK
+                ZegoExpressEngine.shared().setRoomExtraInfo(infoStr, forKey: "SYC_USER_INFO", roomID: room) { errorCode in
+                    print(errorCode)
+                    print(errorCode.description)
+                    if errorCode == 0 {
+                        print("Successfully sent extra room info to remove self from the mic join in case of pk.")
+                        guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                            // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                            return
+                        }
+                        
+                        print("The data count in zegomic user list before removing is: \(self.zegoMicUsersList.count)")
+                        // Remove the user ID from zegoMicUsersList
+                        self.zegoMicUsersList.removeAll { $0.coHostID == userid }
+                        print("The data count in zegomic user list after removing is: \(self.zegoMicUsersList.count)")
+                        
+                        cell.hasJoinedMic = false // hasjoinedMic
+                        cell.usersOnMic(data: self.zegoMicUsersList)
+                        cell.btnMuteMicOutlet.isHidden = true
+                        cell.btnMuteMicWidthConstraints.constant = 0
+                        
+                    } else {
+                        print("Failed to send extra room info.")
+                    }
+                }
+            } else {
+                print("Error converting pkHostMap to JSON string")
+            }
+            
+            
+            print("The changed zegosendmicuserslist are: \(zegoSendMicUsersList)")
+            
+        }
     }
     
     func joinLiveAsCoHostForPK() {
@@ -1993,11 +2151,50 @@ extension SwipeUpDownTestingViewController {
                         } else {
                             joinLiveAsCoHost()
                         }
+                      
                         hasJoinedMic = true
+                      
+                        if (isPK == true) {
+                            
+                            guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                return
+                            }
+                            cell.hasJoinedMic = hasJoinedMic
+                            
+                        } else {
+                            
+                            guard let cell = self.tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
+                                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                return
+                            }
+                            
+                            cell.hasJoinedMic = hasJoinedMic
+                            
+                        }
                       //  startPublishCoHostStream()
                     } else {
                         print("Status accept nahi hai. baaki sab se koi lena dena nahi hai bhai....")
                         hasJoinedMic = false
+                        if (isPK == true) {
+                            
+                            guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                return
+                            }
+                            cell.hasJoinedMic = hasJoinedMic
+                            
+                        } else {
+                            
+                            guard let cell = self.tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
+                                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                return
+                            }
+                            
+                            cell.hasJoinedMic = hasJoinedMic
+                            
+                        }
+                        
                     }
                     
                 } else {
@@ -2707,6 +2904,8 @@ extension SwipeUpDownTestingViewController {
             // Joined the group successfully
             print("Group Join Login Success")
        
+         //   self.sendRequestForAdmin()
+            
             DispatchQueue.global(qos: .background).async { [weak self] in
                 guard let self = self else { return }
 
@@ -3350,13 +3549,14 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
     }
     
     func closeBroad(isPressed: Bool) {
+        
         print("Close broad button pressed")
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
-        nextViewController.headingText = "Do you want to exit broad?"
-        nextViewController.buttonName = "Yes"
+        nextViewController.headingText = "Are you sure you want to close?"
+        nextViewController.buttonName = "Close"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -3446,7 +3646,10 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         let options = SheetOptions(
             pullBarHeight: 0, useInlineMode: true
         )
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
+        
+        
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
+
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
         sheetController.allowGestureThroughOverlay = false
@@ -3454,6 +3657,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         sheetController.dismissOnOverlayTap = true
         sheetController.minimumSpaceAbovePullBar = 0
         sheetController.treatPullBarAsClear = true
+        
         sheetController.animateIn(to: view, in: self)
         
     }
@@ -3477,7 +3681,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         )
         
 //        vcAudiencePresent = true
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
 
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
@@ -3858,9 +4062,36 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
     func leaveMicPressed(isPressed: Bool) {
         
         print("Leave Mic is pressed in the Watching Broad Page. For Leaving the join mic.")
-        removeLiveAsCoHost()
-        hasJoinedMic = false
+        if (isPK == true) {
+            
+            removeLiveAsCoHostForPK()
+            
+        } else {
+            
+            removeLiveAsCoHost()
+            
+        }
         
+        hasJoinedMic = false
+      
+        if (isPK == true) {
+            
+            guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                return
+            }
+            cell.hasJoinedMic = hasJoinedMic
+            cell.btnJoinMicOutlet.isHidden = false
+        } else {
+            
+            guard let cell = self.tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
+                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                return
+            }
+            
+            cell.hasJoinedMic = hasJoinedMic
+            cell.btnJoinMicOutlet.isHidden = false
+        }
     }
     
     func muteMicPressed(isPressed: Bool) {
@@ -3911,7 +4142,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
 // MARK: - EXTENSION FOR USING DELEGATES METHODS WHEN THE PK IS BEING PLAYING
 
 extension SwipeUpDownTestingViewController: delegatePKViewTableViewCell {
-
+ 
     func pkmuteMic(isPressed: String) {
         
         print("Mute pk mic is pressed: \(isPressed)")
@@ -3941,7 +4172,9 @@ extension SwipeUpDownTestingViewController: delegatePKViewTableViewCell {
             }
             
         }
+        
     }
+    
    
     func pkgiftButton(isPressed: Bool) {
         print("PK gift button pressed hui hai")
@@ -3989,13 +4222,13 @@ extension SwipeUpDownTestingViewController: delegatePKViewTableViewCell {
         present(nextViewController, animated: true, completion: nil)
     }
     
-    func pkcloseBroad(isPressed: Bool , status : Int) {
+    func pkcloseBroad(isPressed: Bool) {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close?"
-        nextViewController.buttonName = "Yes"
+        nextViewController.buttonName = "Close"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -4703,7 +4936,7 @@ extension SwipeUpDownTestingViewController: ZegoEventHandler {
         print("The extra info room details count is: \(roomExtraInfoList.count)")
         
         print(roomExtraInfoList)
-        print(roomExtraInfoList[0])
+       // print(roomExtraInfoList[0])
         print("The room values are: \(roomExtraInfoList.first?.value)")
         
 //        for roomExtraInfo in roomExtraInfoList {
@@ -4807,6 +5040,8 @@ extension SwipeUpDownTestingViewController: ZegoEventHandler {
                                                                     return
                                                                 }
                                                                 cell.usersOnMic(data: zegoMicUsersList)
+                                                                hasJoinedMic = false
+                                                                
                                                             } else {
                                                                 
                                                                 print("Dekh rhain hai yhn aaega kya...")
@@ -5084,6 +5319,7 @@ extension SwipeUpDownTestingViewController: ZegoEventHandler {
                                                            return
                                                        }
                                                        cell.usersOnMic(data: zegoMicUsersList)
+                                                       hasJoinedMic = false
                                                    }
                                                } else {
                                                    // There is no element with the same coHostID in zegoMicUsersList
@@ -5346,6 +5582,28 @@ extension SwipeUpDownTestingViewController: ZegoEventHandler {
                                                                         if (id == micUser.coHostID) {
                                                                             ZegoExpressEngine.shared().stopPublishingStream()
                                                                         print("User ne join mic  kia tha isliye stream publish  hui hai aur publish karna bnd hui hai....")
+                                                                            hasJoinedMic = false
+                                                                            if (isPK == true) {
+                                                                                
+                                                                                guard let cell = tblView?.visibleCells[0] as? PKViewTableViewCell else {
+                                                                                    // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                                                                    return
+                                                                                }
+                                                                                cell.hasJoinedMic = false
+                                                                                cell.btnJoinMicOutlet.isHidden = false
+                                                                                
+                                                                            } else {
+                                                                                
+                                                                                guard let cell = tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
+                                                                                    // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+                                                                                    return
+                                                                                }
+                                                                                
+                                                                                cell.hasJoinedMic = false
+                                                                                cell.btnJoinMicOutlet.isHidden = false
+                                                                                
+                                                                            }
+                                                                            
                                                                         } else {
                                                                             print("User ne join mic nahi kia tha isliye stream publish nahi hui hai bas play hui hai....")
                                                                         }
@@ -7222,3 +7480,41 @@ extension SwipeUpDownTestingViewController {
 //            // Handle the case where the index is out of bounds
 //            print("Index out of bounds")
 //        }
+
+//            var infoStr1 = ""
+//            var type = ""
+//                // Convert mainCoHostList to JSON string
+//                infoStr1 = jsonString(from: zegoSendMicUsersList)
+//                type = "coHost123"
+//
+//
+//            // Create a map with type as key and infoStr1 as value
+//            var map: [String: String] = [:]
+//            map[type] = infoStr1
+//
+//            // Convert map to JSON string
+//            let infoStr2 = jsonString(from: map)
+//
+//            // Set room extra info using the SDK
+//            ZegoExpressEngine.shared().setRoomExtraInfo(infoStr2, forKey: "SYC_USER_INFO", roomID: room, callback: { errorCode in
+//
+//                    print(errorCode)
+//                    print(errorCode.description)
+//                    if errorCode == 0 {
+//                     print("Successfully delete wala message bhej dia hai extra room info wale main.")
+//                        guard let cell = self.tblView?.visibleCells[0] as? PKViewTableViewCell else {
+//                        // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
+//                        return
+//                    }
+//                        cell.usersOnMic(data: self.zegoMicUsersList)
+//                        cell.btnMuteMicOutlet.isHidden = true
+//                        cell.btnMuteMicWidthConstraints.constant = 0
+//
+//                    } else {
+//                        print("Message abhi group mai shi se nahi gya hai room extra info wala.")
+//                    }
+//                })
+//
+//           } else {
+//               print("ID does not exist in zegoSendMicUsersList")
+//           }

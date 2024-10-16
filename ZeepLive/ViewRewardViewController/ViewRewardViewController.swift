@@ -123,44 +123,65 @@ extension ViewRewardViewController: UITableViewDelegate, UITableViewDataSource, 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ViewRewardNewHeaderTableViewCell", for: indexPath) as! ViewRewardNewHeaderTableViewCell
-
-            let usersToShow = Array(dailyWeeeklyList.prefix(3))
-            cell.configure(with: usersToShow, interval: interval)
+            
+            // Ensure the dailyWeeeklyList has elements to display
+            if !dailyWeeeklyList.isEmpty || dailyWeeeklyList.count >= 3 {
+                // If dailyWeeeklyList has fewer than 3 elements, use all of them
+                let usersToShow = Array(dailyWeeeklyList.prefix(3))
+                cell.configure(with: usersToShow, interval: interval)
+            } else {
+                // If the list is empty, handle it gracefully (optional)
+                cell.configure(with: [], interval: interval)
+            }
             
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DailyListTableViewCell", for: indexPath) as! DailyListTableViewCell
+            
+            // Ensure the adjusted index does not exceed the array count.
+            let adjustedIndex = indexPath.row + 3
+            if adjustedIndex < dailyWeeeklyList.count {
+                let item = dailyWeeeklyList[adjustedIndex]
 
-            let item = dailyWeeeklyList[indexPath.row + 3] // Adjust index for section 1
-
-            if let profileImageURL = URL(string: item.profileImages?[0].imageName ?? " ") {
-                KF.url(profileImageURL)
-                    .cacheOriginalImage()
-                    .onSuccess { result in
-                        DispatchQueue.main.async {
-                            cell.imgViewUserPhoto.image = result.image
+                // Handle profile image loading with Kingfisher
+                if let profileImageURL = URL(string: item.profileImages?.first?.imageName ?? " ") {
+                    KF.url(profileImageURL)
+                        .cacheOriginalImage()
+                        .onSuccess { result in
+                            DispatchQueue.main.async {
+                                cell.imgViewUserPhoto.image = result.image
+                            }
                         }
-                    }
-                    .onFailure { error in
-                        print("Image loading failed with error: \(error)")
-                        cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
-                    }
-                    .set(to: cell.imgViewUserPhoto)
-            } else {
-                cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
-            }
+                        .onFailure { error in
+                            print("Image loading failed with error: \(error)")
+                            cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
+                        }
+                        .set(to: cell.imgViewUserPhoto)
+                } else {
+                    cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
+                }
 
-            cell.lblCountNumber.text = String(indexPath.row + 4)
-            cell.lblUserName.text = item.name ?? "No Name"
-            cell.lblUserLevel.text = String(format: "Lv%i", item.charmLevel ?? 0)//String(item.charmLevel ?? 0)
-            if (interval == "daily") {
-                cell.lblTotalBeans.text = String(item.dailyEarningBeans ?? 0)
+                // Update cell labels
+                cell.lblCountNumber.text = String(indexPath.row + 4)
+                cell.lblUserName.text = item.name ?? "No Name"
+                cell.lblUserLevel.text = String(format: "Lv%i", item.charmLevel ?? 0)
+                if interval == "daily" {
+                    cell.lblTotalBeans.text = String(item.dailyEarningBeans ?? 0)
+                } else {
+                    cell.lblTotalBeans.text = String(item.weeklyEarningBeans ?? 0)
+                }
             } else {
-                cell.lblTotalBeans.text = String(item.weeklyEarningBeans ?? 0)
+                // If the index is out of bounds, handle gracefully
+                cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
+                cell.lblCountNumber.text = "N/A"
+                cell.lblUserName.text = "N/A"
+                cell.lblUserLevel.text = "Lv0"
+                cell.lblTotalBeans.text = "0"
             }
             
             cell.selectionStyle = .none
@@ -168,11 +189,12 @@ extension ViewRewardViewController: UITableViewDelegate, UITableViewDataSource, 
         }
     }
 
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 0) {
-            return 215
+            return 290
         } else {
-            return 60
+            return 70
         }
     }
 

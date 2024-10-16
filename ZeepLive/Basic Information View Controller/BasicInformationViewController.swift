@@ -101,7 +101,7 @@ extension BasicInformationViewController: UITableViewDelegate, UITableViewDataSo
                      cell.imgViewUserPhoto.image = selectedImage
                  }
         
-        if (userGender == "Female") {
+        if (userGender.lowercased() == "female") {
             
             cell.viewAgencyID.isHidden = false
             

@@ -32,7 +32,6 @@ class AccountDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var lblFollowersCount: UILabel!
     @IBOutlet weak var viewContent: UIView!
     @IBOutlet weak var viewCountry: UIView!
-    @IBOutlet weak var btnCopy: UIButton!
     
    weak var delegate: delegateAccountDetailsTableViewCell?
     @IBOutlet weak var viewUserImageBackgroundOutlet: UIControl!
@@ -105,7 +104,6 @@ class AccountDetailsTableViewCell: UITableViewCell {
         
     }
     
- 
     @IBAction func viewFollowersPressed(_ sender: Any) {
         
         print("View See Followers List Pressed")

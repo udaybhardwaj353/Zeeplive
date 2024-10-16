@@ -16,6 +16,7 @@ import ToastViewSwift
 //import FURenderKit
 import Vision
 import AVFoundation
+import ToastViewSwift
 
 class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsViewController, delegateCallNotificationViewController, delegatePKShowFriendsListOptionsViewController {
   
@@ -177,8 +178,9 @@ class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsV
     var countdownTimer: Timer?
     lazy var totalTime = 180
     var isTimerRunning: Bool = false
-    lazy var selectedMessageIndex: Int = 0
-    
+    lazy var selectedIndex: Int = 0
+    lazy var selectedProfileID: String = ""
+    lazy var isPKRequestSent: Bool = false
 //    let captureSession = AVCaptureSession()
 //      let movieOutput = AVCaptureMovieFileOutput()
 //      var previewLayer: AVCaptureVideoPreviewLayer!
@@ -217,6 +219,7 @@ class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsV
         addLottieAnimation()
         getGroupCallBack()
         addObserverForPKRequest()
+        addObserverForPKDetailsRequest()
         
       //  setRoomExtraInfo(from: "close")
     //    addObserverForPKRequestDetails()
@@ -245,13 +248,39 @@ class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsV
     @IBAction func btnPKPressed(_ sender: Any) {
         
         print("Button PK Pressed. For Showing Options.")
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPopUpViewController") as! PKPopUpViewController
-        nextViewController.modalPresentationStyle = .overCurrentContext
-        nextViewController.delegate = self
         
-        present(nextViewController, animated: true, completion: nil)
-        
+        if (isPKRequestSent == true) {
+            
+            print("PK ke liye request bhej chuke ho. phir se nahi bhejoge.")
+            
+            let config = ToastConfiguration(
+                direction: .bottom
+            )
+            
+            let toast = Toast.text("Pk request already sent. Waiting for response.",config: config)
+            toast.show()
+            
+            
+        } else {
+            
+            if (pkRequestsHostList.count > 0) {
+                
+                let config = ToastConfiguration(
+                    direction: .bottom
+                )
+                
+                let toast = Toast.text("Please, waiting for previous request.",config: config)
+                toast.show()
+                
+            } else {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPopUpViewController") as! PKPopUpViewController
+                nextViewController.modalPresentationStyle = .overCurrentContext
+                nextViewController.delegate = self
+                
+                present(nextViewController, animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -261,6 +290,7 @@ class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsV
         
         if (isFirstTime == true) {
             print("YE sb kch kaam nahi karana hai.")
+            createLiveBroadcastForListing()
         } else {
             print("YE sab kaam karana hai.")
          
@@ -309,6 +339,7 @@ class PublishStreamViewController: UIViewController, delegateJoinMicUserOptionsV
         totalTime = 180
         isTimerRunning = false
         countdownTimer = nil
+        countdownTimer?.invalidate()
        // FUDemoManager.shared().removeDemoView()
         
     }
@@ -632,6 +663,9 @@ extension PublishStreamViewController: delegateCommonPopUpViewController {
     
     func deleteButtonPressed(isPressed: Bool) {
        
+        removePKObserversForPKDetailsNode()
+        removePKRequestDetailsNode(hostProfileID: String(pkInviteHostData.profileID ?? 0))
+        removePKRequestListNode(hostProfileID: String(pkInviteHostData.profileID ?? 0))
         removeUserOnMic()
         quitgroup(id: groupID)
         removePKRequestDetailsOnFirebase()
@@ -660,7 +694,7 @@ extension PublishStreamViewController: delegateCommonPopUpViewController {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close?"
-        nextViewController.buttonName = "Yes"
+        nextViewController.buttonName = "Close"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -1021,13 +1055,18 @@ extension PublishStreamViewController: delegateGamesOptionInBroadViewController,
     
     func muteUserChat(isMute: Bool) {
         
-        print("User ki caht ko mute karna hai.")
+        print("User ki chat ko mute karna hai.")
         
     }
     
     func kickOutUser(isKickout: Bool) {
         
         print("User ko KickOut karna hai broad se.")
+        
+        print("For kickout user in publish view controller the selected profile id is: \(selectedProfileID)")
+        print("For kickout user in publish view controller the  group id is: \(groupID)")
+        
+        kickOutUserBroad(profileID: selectedProfileID, groupID: groupID)
         
     }
     
@@ -1924,87 +1963,143 @@ extension PublishStreamViewController {
     
     
     func addObserverForPKRequest() {
-        
- 
         guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
             // Handle the case where currentUserProfileID is nil
             return
         }
-        
+
         let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-list").child(String(currentUserProfileID))
         
-        pkRequestHandle = coHostRef.observe(.value) { [weak self] (snapshot, error) in
-            guard let self = self else {
-                // Ensure self is still valid
+        // Observe child added
+        pkRequestHandle = coHostRef.observe(.childAdded) { [weak self] (snapshot) in
+            guard let self = self, let value = snapshot.value as? [String: Any] else {
                 return
             }
-            
-            if let error = error {
-                // Handle the error, if any
-                print("Firebase observe error: \(error)")
-                return
-            }
-            
-            // Handle the updated data here
-            if let value = snapshot.value as? [String: Any] {
-                print("The response we are getting from Firebase in PK Request is:\(value)")
-                
-                do {
-                      // Convert the dictionary to JSON data
-                      let jsonData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                      
-                      // Convert the JSON data to a string (if needed, but not necessary for parsing)
-                      if let jsonString = String(data: jsonData, encoding: .utf8) {
-                          print("JSON String: \(jsonString)")
-                      }
-                      
-                      // Parse the JSON data to a dictionary
-                      if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                          // Iterate over the keys in the dictionary
-                          for (key, userDetails) in json {
-                              if let userDetails = userDetails as? [String: Any] {
-                                  let invitelogUserID = userDetails["invitelog_userid"] as? String
-                                  let name = userDetails["name"] as? String
-                                  let pkId = userDetails["pk_id"] as? String
-                                  let pkIsOneMore = userDetails["pk_is_one_more"] as? Bool
-                                  let pkTime = userDetails["pk_time"] as? Int
-                                  let userImage = userDetails["user_image"] as? String
-
-                                  print("Key: \(key)")
-                                  print("Invite Log User ID: \(invitelogUserID ?? "0")")
-                                  print("Name: \(name ?? "")")
-                                  print("PK ID: \(pkID ?? "0")")
-                                  print("PK Is One More: \(pkIsOneMore ?? false)")
-                                  print("PK Time: \(pkTime ?? 0)")
-                                  print("User Image: \(userImage ?? "")")
-                                  
-                                  pkID = pkId ?? ""
-                                  print("The pk id when we are getting request is: \(pkID)")
-                                  
-                                  pkRequestHostDetail.key = key
-                                  pkRequestHostDetail.inviteUserID = invitelogUserID
-                                  pkRequestHostDetail.name = name
-                                  pkRequestHostDetail.pkID = pkID
-                                  pkRequestHostDetail.pkOneMoreTime = pkIsOneMore
-                                  pkRequestHostDetail.pkTime = pkTime
-                                  pkRequestHostDetail.userImage = userImage
-                                  
-                                  pkRequestsHostList.append(pkRequestHostDetail)
-                                  print("The Data in the PK Request Host List is: \(pkRequestsHostList)")
-                                  print("The count in the PK Request Host List is: \(pkRequestsHostList.count)")
-                                  
-                              }
-                          }
-                     
-                          tblViewPKRequest.reloadData()
-                      }
-                  } catch {
-                      print("Failed to parse JSON: \(error.localizedDescription)")
-                  }
-                
-            }
+            self.handlePKRequestSnapshot(value, key: snapshot.key)
         }
         
+        // Observe child changed (for updates)
+        coHostRef.observe(.childChanged) { [weak self] (snapshot) in
+            guard let self = self, let value = snapshot.value as? [String: Any] else {
+                return
+            }
+            self.handlePKRequestSnapshot(value, key: snapshot.key)
+        }
+        
+        // Observe child removed (for deletions)
+        coHostRef.observe(.childRemoved) { [weak self] (snapshot) in
+            guard let self = self else { return }
+            self.handlePKRequestDeletion(snapshot.key)
+        }
+    }
+
+    func handlePKRequestSnapshot(_ value: [String: Any], key: String) {
+        // Handle parsing and adding the new or updated data here
+        let invitelogUserID = value["invitelog_userid"] as? String
+        let name = value["name"] as? String
+        let pkID = value["pk_id"] as? String
+        let pkIsOneMore = value["pk_is_one_more"] as? Bool
+        let pkTime = value["pk_time"] as? Int
+        let userImage = value["user_image"] as? String
+        
+        print("Key: \(key)")
+        print("Invite Log User ID: \(invitelogUserID ?? "0")")
+        print("Name: \(name ?? "")")
+        print("PK ID: \(pkID ?? "0")")
+        print("PK Is One More: \(pkIsOneMore ?? false)")
+        print("PK Time: \(pkTime ?? 0)")
+        print("User Image: \(userImage ?? "")")
+        
+    //    var pkRequestHostDetail = pkRequestHostDetail
+        pkRequestHostDetail.key = key
+        pkRequestHostDetail.inviteUserID = invitelogUserID
+        pkRequestHostDetail.name = name
+        pkRequestHostDetail.pkID = pkID
+        pkRequestHostDetail.pkOneMoreTime = pkIsOneMore
+        pkRequestHostDetail.pkTime = pkTime
+        pkRequestHostDetail.userImage = userImage
+        
+        // Update the list with new or modified data
+        if let index = pkRequestsHostList.firstIndex(where: { $0.key == key }) {
+            pkRequestsHostList[index] = pkRequestHostDetail
+        } else {
+            pkRequestsHostList.append(pkRequestHostDetail)
+        }
+
+        print("The updated PK Request Host List is: \(pkRequestsHostList)")
+    
+       // dismiss(animated: true, completion: nil)
+        tblViewPKRequest.reloadData()
+    }
+
+    func handlePKRequestDeletion(_ key: String) {
+        // Remove the item from the list if it's deleted in Firebase
+        if let index = pkRequestsHostList.firstIndex(where: { $0.key == key }) {
+            pkRequestsHostList.remove(at: index)
+            print("Removed item with key: \(key)")
+            print("The updated PK Request Host List after deletion is: \(pkRequestsHostList)")
+            tblViewPKRequest.reloadData()
+        }
+    }
+
+    func addObserverForPKDetailsRequest() {
+        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            // Handle the case where currentUserProfileID is nil
+            return
+        }
+
+        // Change the reference to pk-invite-details
+        let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-details").child(String(currentUserProfileID))
+        
+        // Observe child added
+        pkRequestHandle = coHostRef.observe(.childAdded) { [weak self] (snapshot) in
+            guard let self = self, let value = snapshot.value as? [String: Any] else {
+                return
+            }
+            print("The snapshot is: \(value)")
+           // self.handlePKRequestSnapshot(value, key: snapshot.key)
+        }
+        
+        // Observe child changed (for updates)
+        coHostRef.observe(.childChanged) { [weak self] (snapshot) in
+            guard let self = self, let value = snapshot.value as? [String: Any] else {
+                return
+            }
+            print("The snapshot is: \(value)")
+            guard
+                          let value = snapshot.value as? [String: Any],
+                          let pkID = value["pk_id"] as? String,
+                          let status = value["status"] as? String else {
+                        print("Error: Invalid snapshot or missing fields")
+                        return
+                    }
+            
+            print(pkID)
+            print(status)
+           removePKRequest(pkID: pkID)
+            
+          //  self.handlePKRequestSnapshot(value, key: snapshot.key)
+        }
+        
+        // Observe child removed (for deletions)
+        coHostRef.observe(.childRemoved) { [weak self] (snapshot) in
+            guard let self = self else { return }
+           // print("The snapshot is: \(value)")
+            
+          //  self.handlePKRequestDeletion(snapshot.key)
+        }
+    }
+
+    // Function to remove PK request from the list
+    private func removePKRequest(pkID: String) {
+        if let index = pkRequestsHostList.firstIndex(where: { $0.pkID == pkID }) {
+            pkRequestsHostList.remove(at: index)
+            // Optionally reload the table view or update UI
+            tblViewPKRequest.reloadData()
+            print("Removed PK Request with ID: \(pkID)")
+        } else {
+            print("PK Request with ID: \(pkID) not found in the list.")
+        }
     }
     
 
@@ -2038,51 +2133,72 @@ extension PublishStreamViewController {
                     print("PK ID: \(pkID)")
                     
                     if status.lowercased() == "pk_accept" {
-                       
-                    //    updateUserStatusToFirebase(status:"PK")
+                        
+                        //    updateUserStatusToFirebase(status:"PK")
                         removeMessagesOnFirebase()
                         
                         if let sheetController = sheetController {
-                                sheetController.dismiss(animated: true)
-                            }
+                            sheetController.dismiss(animated: true)
+                        }
                         dismiss(animated: true, completion: nil)
-                        quitgroup(id: groupID)
-                      //  removePKRequestDetailsOnFirebase()
-                        removeMessagesOnFirebase()
-                      //  removePKRequestOnFirebase()
-                        removeCoHostInviteDetailsOnFirebase()
-                        removeCoHostInviteListOnFirebase()
+//                        quitgroup(id: groupID)
+//                        //  removePKRequestDetailsOnFirebase()
+//                        removeMessagesOnFirebase()
+//                        //  removePKRequestOnFirebase()
+//                        removeCoHostInviteDetailsOnFirebase()
+//                        removeCoHostInviteListOnFirebase()
                         
                         pkRequestsHostList.removeAll()
+                        tblViewPKRequest.reloadData()
                         
-                    //    pkRequestHostDetail.key = key
+                        //    pkRequestHostDetail.key = key
                         pkRequestHostDetail.inviteUserID = hostProfileID
                         pkRequestHostDetail.name = pkInviteHostData.name
                         pkRequestHostDetail.pkID = pkID
                         pkRequestHostDetail.pkOneMoreTime = false
-                      //  pkRequestHostDetail.pkTime = pkTime
+                        //  pkRequestHostDetail.pkTime = pkTime
                         pkRequestHostDetail.userImage = pkInviteHostData.profileImage
                         
                         pkRequestsHostList.append(pkRequestHostDetail)
                         
-                       // sendUserPKRequestDetails(hostProfileID: pkRequestsHostList.inviteUserID ?? "")
+                      //  pkRequestsHostList[0].inviteUserID = ""
                         
-                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPublishViewController") as! PKPublishViewController
-                        nextViewController.pkRequestHostDetail = self.pkRequestsHostList[0]
-                        nextViewController.channelName = self.channelName
-                        nextViewController.streamName = self.streamName
-                        nextViewController.groupID = self.groupID
-                        nextViewController.dailyEarningBeans = dailyEarningBeans
-                        nextViewController.weeklyEarningBeans = weeklyEarningBeans
-                        nextViewController.pkID = hostPKID
-                        
-                        print("The data we are sending in the PKPublish View COntroller is: \(self.pkRequestsHostList[0])")
-                        if (pkRequestsHostList[0].inviteUserID == "") || (pkRequestsHostList[0].inviteUserID == nil) {
+                        if (pkRequestsHostList[0].inviteUserID == "") || (pkRequestsHostList[0].inviteUserID == nil) || (pkRequestsHostList[0].inviteUserID == "0") {
                             
                             showAlert(title: "ERROR!", message: "Something Went Wrong", viewController: self)
+                            
                         } else {
+                            // sendUserPKRequestDetails(hostProfileID: pkRequestsHostList.inviteUserID ?? "")
+                            
+                           // isFirstTime = false
+                            
+                            quitgroup(id: groupID)
+                            //  removePKRequestDetailsOnFirebase()
+                            removeMessagesOnFirebase()
+                            //  removePKRequestOnFirebase()
+                            removeCoHostInviteDetailsOnFirebase()
+                            removeCoHostInviteListOnFirebase()
+                            removePKRequestDetailsOnFirebase()
+                            removePKRequestOnFirebase()
+                            
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPublishViewController") as! PKPublishViewController
+                            nextViewController.pkRequestHostDetail = self.pkRequestsHostList[0]
+                            nextViewController.channelName = self.channelName
+                            nextViewController.streamName = self.streamName
+                            nextViewController.groupID = self.groupID
+                            nextViewController.dailyEarningBeans = dailyEarningBeans
+                            nextViewController.weeklyEarningBeans = weeklyEarningBeans
+                            nextViewController.pkID = hostPKID
+                          
+                            isPKRequestSent = false
+                            
                             self.navigationController?.pushViewController(nextViewController, animated: true)
+                            
+                            pkRequestsHostList.removeAll()
+                            tblViewPKRequest.reloadData()
+                            
+                            
                         }
                         
                        // self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -2100,18 +2216,108 @@ extension PublishStreamViewController {
     
     func removePKRequestObserver(hostProfileID: String = "") {
         
+        print("Remove pk request observer function called.")
         guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
             // Handle the case where currentUserProfileID is nil
             return
         }
         
+        print("The host id is: \(hostProfileID) and the current user id is: \(currentUserProfileID)")
         if let pkRequestHandle = pkRequestHandle {
             let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-details").child(hostProfileID).child(String(currentUserProfileID))
             coHostRef.removeObserver(withHandle: pkRequestHandle)
+            print("Remove pk request observer function called.")
             self.pkRequestHandle = nil
         }
     }
 
+    func removePKRequestDetailsNode(hostProfileID: String = "") {
+        print("Remove pk request node function called.")
+        
+        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            // Handle the case where currentUserProfileID is nil
+            return
+        }
+        
+        print("The host id is: \(hostProfileID) and the current user id is: \(currentUserProfileID)")
+        
+        // Create the reference to the node to be deleted
+        let coHostRef = ZLFireBaseManager.share.pkRequestRef
+            .child("pk-invite-details")
+            .child(hostProfileID)
+            .child(String(currentUserProfileID))
+        
+        // Delete the node
+        coHostRef.removeValue { error, _ in
+            if let error = error {
+                print("Error deleting node: \(error.localizedDescription)")
+            } else {
+                print("Node deleted successfully.")
+            }
+        }
+    }
+
+    func removePKRequestListNode(hostProfileID: String = "") {
+        print("Remove pk request node function called for removing list.")
+        
+        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            // Handle the case where currentUserProfileID is nil
+            return
+        }
+        
+        print("The host id is: \(hostProfileID) and the current user id is: \(currentUserProfileID)")
+        
+        // Create the reference to the node to be deleted
+        let coHostRef = ZLFireBaseManager.share.pkRequestRef
+            .child("pk-invite-list")
+            .child(hostProfileID)
+            .child(String(currentUserProfileID))
+        
+        // Delete the node
+        coHostRef.removeValue { error, _ in
+            if let error = error {
+                print("Error deleting node: \(error.localizedDescription)")
+            } else {
+                print("Node deleted successfully.")
+            }
+        }
+    }
+    
+    func removePKObserversForPKDetailsNode() {
+        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            return
+        }
+        
+        let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-details").child(String(currentUserProfileID))
+        
+        if let handle = pkRequestHandle {
+            coHostRef.removeObserver(withHandle: handle)
+        }
+        
+        if let handle = pkRequestHandle {
+            coHostRef.removeObserver(withHandle: handle)
+        }
+        
+        if let handle = pkRequestHandle {
+            coHostRef.removeObserver(withHandle: handle)
+        }
+    }
+
+    // Function to remove the observer
+    func removePKRequestObserver() {
+        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+            return
+        }
+        
+        let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-details").child(String(currentUserProfileID))
+        
+        if let handle = pkRequestHandle {
+            coHostRef.removeObserver(withHandle: handle)
+            print("Observer removed.")
+        }
+    }
+    
+    
     func setRoomExtraInfo() {
         
             print("Poori dictionary  bhejni hai. Woh wala kaam krna hai.")
@@ -2527,9 +2733,10 @@ extension PublishStreamViewController : UITableViewDelegate,UITableViewDataSourc
         
         if (tableView == tblViewLiveMessages) {
             
-            selectedMessageIndex = indexPath.row
-           
-            print("The selected message indexPath is: \(selectedMessageIndex)")
+            selectedIndex = indexPath.row
+            selectedProfileID = liveMessages[indexPath.row].userID ?? ""
+            
+            print("The selected message indexPath is: \(selectedIndex)")
             
             print("The selected message indexPath is: \(indexPath.row)")
             let image = liveMessages[indexPath.row].userImage ?? ""
@@ -2554,42 +2761,99 @@ extension PublishStreamViewController : UITableViewDelegate,UITableViewDataSourc
             nextViewController.modalPresentationStyle = .overCurrentContext
             
             present(nextViewController, animated: true, completion: nil)
+            
         } else if (tableView == tblViewPKRequest) {
         
          //   updateUserStatusToFirebase(status:"PK")
             
-            sendUserPKRequestDetails(hostProfileID: pkRequestsHostList[indexPath.row].inviteUserID ?? "")
-            
-           // ZegoExpressEngine.shared().stopPublishingStream()
-            ZegoExpressEngine.shared().stopPublishingStream(.main)
+//            sendUserPKRequestDetails(hostProfileID: pkRequestsHostList[indexPath.row].inviteUserID ?? "")
+//            
+//           // ZegoExpressEngine.shared().stopPublishingStream()
+//            ZegoExpressEngine.shared().stopPublishingStream(.main)
            //  ZegoExpressEngine.shared().logoutRoom()
           //  ZegoExpressEngine.destroy(nil)
             
             print("The PK Request Clicked or Selected index is: \(indexPath.row) ")
             
          //   DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPublishViewController") as! PKPublishViewController
-                nextViewController.pkRequestHostDetail = pkRequestsHostList[indexPath.row]
-                nextViewController.channelName = channelName
-                nextViewController.streamName = streamName
-                nextViewController.groupID = groupID
-                nextViewController.dailyEarningBeans = dailyEarningBeans
-                nextViewController.weeklyEarningBeans = weeklyEarningBeans
-                nextViewController.pkID = pkID//hostPKID
             
-            print("The data we are sending in the PKPublish View COntroller is: \(self.pkRequestsHostList[indexPath.row])")
+//            pkRequestsHostList[indexPath.row].inviteUserID = ""
             
             if (pkRequestsHostList[indexPath.row].inviteUserID == "") || (pkRequestsHostList[indexPath.row].inviteUserID == nil) {
                 
                 showAlert(title: "ERROR!", message: "Something Went Wrong", viewController: self)
-            } else {
-                self.navigationController?.pushViewController(nextViewController, animated: true)
-            }
                 
-                self.pkRequestsHostList.remove(at: indexPath.row)
-                self.tblViewPKRequest.reloadData()
-           // }
+            } else {
+                
+                print("\(pkRequestsHostList.count)")
+                print(pkRequestsHostList[indexPath.row])
+                
+                addObserve(id: pkRequestsHostList[indexPath.row].inviteUserID) { [weak self] status in
+                    guard let self = self else { return } // Ensure self is available
+                    
+                    print("Received status: \(status)")
+                    
+                    if (status.lowercased() == "live") {
+                     
+                        print("Dusre host ka pk kisi aur ke saath nahi chal raha hai.")
+                        
+                        // Check if the indexPath.row is valid
+                        if indexPath.row < pkRequestsHostList.count {
+                            
+                           // removePKRequestObserver()
+                            removePKRequestObserver(hostProfileID:String(pkInviteHostData.profileID ?? 0))
+                            
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPublishViewController") as! PKPublishViewController
+                            
+                            print("\(pkRequestsHostList.count)")
+                            print(pkRequestsHostList[indexPath.row])
+                            
+                            nextViewController.pkRequestHostDetail = self.pkRequestsHostList[indexPath.row]
+                            nextViewController.channelName = self.channelName
+                            nextViewController.streamName = self.streamName
+                            nextViewController.groupID = self.groupID
+                            nextViewController.dailyEarningBeans = self.dailyEarningBeans
+                            nextViewController.weeklyEarningBeans = self.weeklyEarningBeans
+                            nextViewController.pkID = self.pkRequestsHostList[indexPath.row].pkID ?? "" //self.pkID // hostPKID
+                            
+                            self.sendUserPKRequestDetails(hostProfileID: self.pkRequestsHostList[indexPath.row].inviteUserID ?? "")
+                            
+                            ZegoExpressEngine.shared().stopPublishingStream(.main)
+                            self.removePKRequestDetailsOnFirebase()
+                            self.removePKRequestOnFirebase()
+                            self.pkRequestsHostList.removeAll()
+                            self.tblViewPKRequest.reloadData()
+                            self.isPKRequestSent = false
+                            
+                            self.navigationController?.pushViewController(nextViewController, animated: true)
+                            
+                        } else {
+                            
+                            print("Host ki pk request list main index nahi hai. isliye pk publish wale par nahi jaenge.")
+                        }
+                 
+                    } else {
+                        
+                        print("Dusre Host ka pk kisi aur ke sath chl raha hai.")
+                        
+                        let config = ToastConfiguration(
+                            direction: .bottom
+                        )
+                        let toast = Toast.text("Host is on another pk.", config: config)
+                        toast.show()
+                        self.pkRequestsHostList.removeAll()
+                        self.tblViewPKRequest.reloadData()
+                        self.isPKRequestSent = false
+                        
+                       
+                    }
+                }
+
+
+                   
+            }
+            
         } else {
             
             currentIndexForCoHost = indexPath.row
@@ -2617,6 +2881,68 @@ extension PublishStreamViewController : UITableViewDelegate,UITableViewDataSourc
             
         }
     }
+    
+    func addObserve(id: String?, completion: @escaping (String) -> Void) {
+        guard let currentUserProfileID = id else {
+            // Handle the case where currentUserProfileID is nil
+            print("Error: Invalid ID")
+            completion("Unknown") // Return a default status or handle this case as needed
+            return
+        }
+
+        print("The profile id for observe is: \(currentUserProfileID)")
+        let userStatusRef = ZLFireBaseManager.share.userRef.child("UserStatus").child(String(currentUserProfileID))
+
+        // Use observeSingleEvent to get data only once
+        userStatusRef.observeSingleEvent(of: .value) { snapshot in
+            // Ensure the snapshot has valid data
+            guard let value = snapshot.value as? [String: Any] else {
+                print("No data found or invalid data")
+                completion("Unknown") // Return a default status if there's no valid data
+                return
+            }
+
+            // Extract the "status" field from the data
+            let status = value["status"] as? String ?? "Unknown"
+            print("Status: \(status)")
+
+            // Call the completion handler with the extracted status
+            completion(status)
+
+            // You can also extract other fields if needed
+            let opponentGiftCoins = value["pk_opponent_gift_coins"] as? Int ?? 0
+            let name = value["name"] as? String ?? "Unknown"
+            let profilePic = value["profilePic"] as? String ?? ""
+            let pkEndTime = value["pk_end_time"] as? Int ?? 0
+
+            print("Opponent Gift Coins: \(opponentGiftCoins)")
+            print("Name: \(name)")
+            print("Profile Pic: \(profilePic)")
+            print("PK End Time: \(pkEndTime)")
+
+            // Extract nested data (pk_opponent_user_detail)
+            if let opponentDetail = value["pk_opponent_user_detail"] as? [String: Any] {
+                let opponentName = opponentDetail["user_name"] as? String ?? "Unknown"
+                let opponentAge = opponentDetail["age"] as? Int ?? 0
+                let opponentLocation = opponentDetail["location"] as? String ?? "Unknown"
+                
+                print("Opponent Name: \(opponentName)")
+                print("Opponent Age: \(opponentAge)")
+                print("Opponent Location: \(opponentLocation)")
+            }
+
+            // Extract gifted users data
+            if let giftedUsers = value["pk_opponent_side_gifted_users"] as? [String: [String: Any]] {
+                for (userKey, userDetails) in giftedUsers {
+                    let userName = userDetails["userName"] as? String ?? "Unknown"
+                    let totalGift = userDetails["totalGift"] as? Int ?? 0
+                    print("User \(userKey) - Name: \(userName), Total Gift: \(totalGift)")
+                }
+            }
+        }
+    }
+
+    
 }
 
 // MARK: - EXXTENSION FOR USING COLLECTION VIEW DELEGATES AND FUNCTIONS AND THEIR WORKING
@@ -2726,9 +3052,13 @@ extension PublishStreamViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+     
         print(indexPath.item)
         
         if (collectionView == collectionViewBroadList) {
+            
+           
+            
             
              let userProfileId = UserDefaults.standard.string(forKey: "UserProfileId")
                let userId = UserDefaults.standard.string(forKey: "UserId")
@@ -2740,6 +3070,11 @@ extension PublishStreamViewController: UICollectionViewDelegate, UICollectionVie
                     print("User apne khud ki profile ko khol raha hai.")
                     
                 } else {
+                    
+                    print(userInfoList?[indexPath.item].userID)
+                    
+                    selectedIndex = indexPath.item
+                    selectedProfileID = userInfoList?[indexPath.item].userID ?? ""
                     
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                     let nextViewController = storyBoard.instantiateViewController(withIdentifier: "JoinedAudienceDetailsForHostViewController") as! JoinedAudienceDetailsForHostViewController
@@ -2921,9 +3256,27 @@ extension PublishStreamViewController: delegateRequestJoinMicUserListCollectionV
         print("The PK invite sent host id is: \(id)")
         print("The PK invite sent host details are: \(details)")
         
+        dismiss(animated: true, completion: nil)
+        
         removePKRequestObserver(hostProfileID: id)
+        removePKRequestDetailsNode(hostProfileID: id)
+        removePKRequestListNode(hostProfileID: id)
         pkInviteHostData = details
         addObserverForPKRequestDetails(hostProfileID: id)
+        isPKRequestSent = true
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
+            guard let strongSelf = self else { return }
+            
+            // Make sure you're accessing UI elements on the main thread
+            DispatchQueue.main.async {
+                
+                strongSelf.isPKRequestSent = false
+                strongSelf.removePKRequestObserver(hostProfileID: id)
+                strongSelf.removePKRequestDetailsNode(hostProfileID: id)
+                strongSelf.removePKRequestListNode(hostProfileID: id)
+            }
+        }
         
     }
     
@@ -3384,6 +3737,35 @@ extension PublishStreamViewController {
           })
       }
 
+    // MARK: - FUNCTION FOR CALLING API TO ADD DIAMONDS IN THE USER ACCOUNT
+    
+    func kickOutUserBroad(profileID:String, groupID:String) {
+          
+        let params = [
+            "group_id": groupID,
+            "profile_id": profileID,
+            
+        ] as [String : Any]
+        
+        print("The param data we are sending to kickout the user from our live broad is: \(params)")
+          
+        ApiWrapper.sharedManager().kickOutUserFromBroad(url: AllUrls.getUrl.kickOutUser,parameters: params) { [weak self] (data) in
+            guard let self = self else { return }
+            
+            if (data["success"] as? Bool == true) {
+                print(data)
+             
+                print("sab shi hai. kuch gadbad nahi hai. user ke account main diamond add kar diya hai shi se.")
+                
+                
+            }  else {
+                
+                print("Kuch gadbad hai coins abhi add nahi hue hai user ke balance main shi se.")
+               
+            }
+        }
+    }
+    
     
 }
 // MARK: - EXTENSION FOR THE FUNCTIONS OF ZEGO TO CREATE ENGINE, GO LIVE , STOP LIVE , STOP PUBLISHING STREAM AND DESTROY ENGINE
@@ -4283,7 +4665,7 @@ extension PublishStreamViewController: ZegoEventHandler {
     
 }
 
-extension PublishStreamViewController : ZegoCustomVideoProcessHandler{
+extension PublishStreamViewController : ZegoCustomVideoProcessHandler {
     
     
     func onCapturedUnprocessedCVPixelBuffer(_ buffer: CVPixelBuffer, timestamp: CMTime, channel: ZegoPublishChannel) {
@@ -4395,6 +4777,9 @@ extension PublishStreamViewController {
         countdownTimer = nil
         isTimerRunning = false
         
+        removePKObserversForPKDetailsNode()
+        removePKRequestDetailsNode(hostProfileID: String(pkInviteHostData.profileID ?? 0))
+        removePKRequestListNode(hostProfileID: String(pkInviteHostData.profileID ?? 0))
         removeUserOnMic()
         quitgroup(id: groupID)
         removePKRequestDetailsOnFirebase()
@@ -4480,3 +4865,128 @@ extension PublishStreamViewController {
 //          }
 //      }
     
+
+//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PKPublishViewController") as! PKPublishViewController
+//                nextViewController.pkRequestHostDetail = pkRequestsHostList[indexPath.row]
+//                nextViewController.channelName = channelName
+//                nextViewController.streamName = streamName
+//                nextViewController.groupID = groupID
+//                nextViewController.dailyEarningBeans = dailyEarningBeans
+//                nextViewController.weeklyEarningBeans = weeklyEarningBeans
+//                nextViewController.pkID = pkID//hostPKID
+//
+//                print("The data we are sending in the PKPublish View COntroller is: \(self.pkRequestsHostList[indexPath.row])")
+//                print("The data we are sending in the PKPublish View COntroller Invite ID is: \(self.pkRequestsHostList[indexPath.row].inviteUserID)")
+//
+//                    sendUserPKRequestDetails(hostProfileID: pkRequestsHostList[indexPath.row].inviteUserID ?? "")
+//
+//                    ZegoExpressEngine.shared().stopPublishingStream(.main)
+//                    removePKRequestDetailsOnFirebase()
+//                    removePKRequestOnFirebase()
+//                    pkRequestsHostList.removeAll()
+//                    tblViewPKRequest.reloadData()
+//                    isPKRequestSent = false
+//
+//                    self.navigationController?.pushViewController(nextViewController, animated: true)
+
+// Check if the indexPath.row is within the bounds of the pkRequestsHostList array
+//            if indexPath.row >= 0 && indexPath.row < self.pkRequestsHostList.count {
+//                pkRequestsHostList.remove(at: indexPath.row)
+//                tblViewPKRequest.reloadData()
+//                print("Item successfully removed from pkRequestsHostList at index \(indexPath.row)")
+//            } else {
+//                print("Error: Index out of range for pkRequestsHostList. Invalid index: \(indexPath.row)")
+//            }
+
+
+//                self.pkRequestsHostList.remove(at: indexPath.row)
+//                self.tblViewPKRequest.reloadData()
+// }
+
+
+//    func addObserverForPKRequest() {
+//
+//
+//        guard let currentUserProfileID = UserDefaults.standard.string(forKey: "UserProfileId") else {
+//            // Handle the case where currentUserProfileID is nil
+//            return
+//        }
+//
+//        let coHostRef = ZLFireBaseManager.share.pkRequestRef.child("pk-invite-list").child(String(currentUserProfileID))
+//
+//        pkRequestHandle = coHostRef.observe(.value) { [weak self] (snapshot, error) in
+//            guard let self = self else {
+//                // Ensure self is still valid
+//                return
+//            }
+//
+//            if let error = error {
+//                // Handle the error, if any
+//                print("Firebase observe error: \(error)")
+//                return
+//            }
+//
+//            // Handle the updated data here
+//            if let value = snapshot.value as? [String: Any] {
+//                print("The response we are getting from Firebase in PK Request is:\(value)")
+//
+//                pkRequestsHostList.removeAll()
+//
+//                do {
+//                      // Convert the dictionary to JSON data
+//                      let jsonData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+//
+//                      // Convert the JSON data to a string (if needed, but not necessary for parsing)
+//                      if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                          print("JSON String: \(jsonString)")
+//                      }
+//
+//                      // Parse the JSON data to a dictionary
+//                      if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+//                          // Iterate over the keys in the dictionary
+//                          for (key, userDetails) in json {
+//                              if let userDetails = userDetails as? [String: Any] {
+//                                  let invitelogUserID = userDetails["invitelog_userid"] as? String
+//                                  let name = userDetails["name"] as? String
+//                                  let pkId = userDetails["pk_id"] as? String
+//                                  let pkIsOneMore = userDetails["pk_is_one_more"] as? Bool
+//                                  let pkTime = userDetails["pk_time"] as? Int
+//                                  let userImage = userDetails["user_image"] as? String
+//
+//                                  print("Key: \(key)")
+//                                  print("Invite Log User ID: \(invitelogUserID ?? "0")")
+//                                  print("Name: \(name ?? "")")
+//                                  print("PK ID: \(pkID ?? "0")")
+//                                  print("PK Is One More: \(pkIsOneMore ?? false)")
+//                                  print("PK Time: \(pkTime ?? 0)")
+//                                  print("User Image: \(userImage ?? "")")
+//
+//                                  pkID = pkId ?? ""
+//                                  print("The pk id when we are getting request is: \(pkID)")
+//
+//                                  pkRequestHostDetail.key = key
+//                                  pkRequestHostDetail.inviteUserID = invitelogUserID
+//                                  pkRequestHostDetail.name = name
+//                                  pkRequestHostDetail.pkID = pkID
+//                                  pkRequestHostDetail.pkOneMoreTime = pkIsOneMore
+//                                  pkRequestHostDetail.pkTime = pkTime
+//                                  pkRequestHostDetail.userImage = userImage
+//
+//                                  pkRequestsHostList.append(pkRequestHostDetail)
+//                                  print("The Data in the PK Request Host List is: \(pkRequestsHostList)")
+//                                  print("The count in the PK Request Host List is: \(pkRequestsHostList.count)")
+//
+//                              }
+//                          }
+//
+//                          tblViewPKRequest.reloadData()
+//                      }
+//                  } catch {
+//                      print("Failed to parse JSON: \(error.localizedDescription)")
+//                  }
+//
+//            }
+//        }
+//
+//    }

@@ -914,7 +914,7 @@ extension HomeScreenViewController {
                 
             }
         }
-        isApiInProgress = false
+       // isApiInProgress = false
     }
     
 //    func getPoints() {

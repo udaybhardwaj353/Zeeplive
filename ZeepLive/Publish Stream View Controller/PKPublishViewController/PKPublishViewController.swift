@@ -226,6 +226,7 @@ class PKPublishViewController: UIViewController, ZegoEventHandler, delegateJoine
     lazy var pkID: String = ""
     lazy var secondGroupID: String = ""
     lazy var pkEndTime: Int = 0
+    lazy var taskID: String = ""
     
     weak var sheetController:SheetViewController!
     var userMessageHandle: DatabaseHandle?
@@ -255,6 +256,8 @@ class PKPublishViewController: UIViewController, ZegoEventHandler, delegateJoine
         
        // getUserDetails()
       //  getUserProfileID()
+        
+        btnCloseBroadOutlet.isUserInteractionEnabled = false
         
         print("THe pk id we are getting in the PK Publish View Controller is: \(pkID)")
         
@@ -365,6 +368,7 @@ class PKPublishViewController: UIViewController, ZegoEventHandler, delegateJoine
                         print(errorCode.description)
                         if errorCode == 0 {
                          print("Successfully delete wala message bhej dia hai extra room info wale main pk publish view controller main..")
+                            
                         } else {
                             print("Message abhi group mai shi se nahi gya hai room extra info wala pk publish view controller main..")
                         }
@@ -607,7 +611,11 @@ class PKPublishViewController: UIViewController, ZegoEventHandler, delegateJoine
     
     func deleteButtonPressed(isPressed: Bool) {
        
+        dismiss(animated: true, completion: nil)
+        
         updateDataOnClosePK()
+        print("The pk id we are passing on the firebase is: \(pkID)")
+        
         ZLFireBaseManager.share.updateUserStatusToPKRequestFirebase(status: "completed", pkid: pkID)
       
         removeObserverForCoHostInviteList()
@@ -637,7 +645,7 @@ class PKPublishViewController: UIViewController, ZegoEventHandler, delegateJoine
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close?"
-        nextViewController.buttonName = "Yes"
+        nextViewController.buttonName = "Close"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -1467,6 +1475,13 @@ extension PKPublishViewController {
                     print(errorCode.description)
                     if errorCode == 0 {
                      print("Successfully delete wala message bhej dia hai extra room info wale main.")
+                       
+                        print("The data count in zegomic user list before removing is: \(self.zegoMicUsersList.count)")
+                        self.zegoMicUsersList.removeAll { $0.coHostID == userid }
+                        print("The data count in zegomic user list after removing is: \(self.zegoMicUsersList.count)")
+                        
+                        self.usersOnMic(data: self.zegoMicUsersList)
+                        
                     } else {
                         print("Message abhi group mai shi se nahi gya hai room extra info wala.")
                     }
@@ -1755,6 +1770,8 @@ extension PKPublishViewController {
                 return
             }
             
+            btnCloseBroadOutlet.isUserInteractionEnabled = true
+            
             // Handle the updated data here
             if let value = snapshot.value as? [String: Any] {
                 print("The response we are getting from Firebase is:The response we are getting from Firebase is:\(value)")
@@ -1819,6 +1836,8 @@ extension PKPublishViewController {
                             
                         } else {
                             
+                            endLiveBroadcast()
+                            dismiss(animated: true, completion: nil)
                             setRoomExtraInfoOnExit()
                             let identifier = (UserDefaults.standard.string(forKey: "UserProfileId") ?? "")
                             removeMessageObserver(id: identifier)
@@ -3118,6 +3137,9 @@ extension PKPublishViewController {
         
         lblLeftStackViewGiftAmount.text = "0"
         lblRightStackViewGiftAmount.text = "0"
+       
+        let formattedString1 = formatNumber(Int(UserDefaults.standard.string(forKey: "weeklyearning") ?? "0") ?? 0)
+        lblDistributionAmount.text = formattedString1
         
     }
     
@@ -4295,6 +4317,137 @@ extension PKPublishViewController {
     
 }
 
+// MARK: - EXTENSION FOR API CALLING IN PK PUBLISH VIEW CONTROLLER
+
+extension PKPublishViewController {
+    
+    
+    // MARK - Function to call api and get the details from the server for going live
+      
+      func createLiveBroadcastForListing() {
+          
+          ApiWrapper.sharedManager().createLiveBroadCast(url: AllUrls.getUrl.createLiveBroadcast, completion: { [weak self] (data) in
+             
+              guard let self = self else {
+                  return // The object has been deallocated
+              }
+              
+              print("Phir se live dikhne wala api hit ho gaya hai.")
+              
+              if (data["success"] as? Bool == true) {
+                  print(data)
+                  print("Sab kuch sahi hai")
+                  
+                  let a = data["result"] as? [String: Any]
+                  print(a)
+                  
+                  if let id = a?["user_id"] as? Int {
+                      
+                      print("The id is: \(id)")
+                  }
+                  
+                  if let token = a?["token"] as? String {
+                      
+                      print("The token is: \(token)")
+                  }
+                  
+                  startCensorForTaskID()
+                  createLive()
+                  
+              } else {
+                  print(data["error"])
+                  print("Kuch error hai")
+              }
+          })
+      }
+    
+    // MARK - Function to get the task id from the backend on the basis of which we have to close the broad
+       
+       func startCensorForTaskID() {
+           
+           let params = [
+               
+               "room_id": channelName
+               
+           ] as [String : Any]
+           
+           ApiWrapper.sharedManager().startCensorVideo(url: AllUrls.getUrl.startCensorVideo,parameter: params ,completion: { [weak self] (data) in
+              
+               guard let self = self else {
+                   return // The object has been deallocated
+               }
+               
+               if (data["success"] as? Bool == true) {
+                   print(data)
+                   print("Sab kuch sahi hai")
+                   
+                   if let taskid = data["task_id"] as? String {
+                       
+                       print("The task id is: \(taskid)")
+                       taskID = taskid
+                       
+                   }
+                   
+                   
+               } else {
+                   print(data["error"])
+                   print("Kuch error hai")
+               }
+           })
+       }
+     
+     // MARK - Function to delete the live broadcast and call api for the backend to know the broad has ended
+       
+       func endLiveBroadcast() {
+           
+           let params = [
+               
+               "task_id": taskID
+               
+           ] as [String : Any]
+           
+           ApiWrapper.sharedManager().closeLiveBroadcastByHost(url: AllUrls.getUrl.endLiveBroadcastForHost,parameter: params ,completion: { [weak self] (data) in
+              
+               guard let self = self else {
+                   return // The object has been deallocated
+               }
+               
+               if (data["success"] as? Bool == true) {
+                   print(data)
+                   print("Sab kuch sahi hai")
+                   print("Broad delete ho gyi hai. backend par update kar diya hai")
+                   
+               } else {
+                   print(data["error"])
+                   print("Kuch error hai")
+               }
+           })
+       }
+       
+     // MARK - Function to call and let baccknd know ki host live ho gya hai
+       
+       func createLive() {
+           
+           ApiWrapper.sharedManager().createLive(url: AllUrls.getUrl.createLive, completion: { [weak self] (data) in
+              
+               guard let self = self else {
+                   return // The object has been deallocated
+               }
+               
+               if (data["success"] as? Bool == true) {
+                   print(data)
+                   print("Sab kuch sahi hai. Backend ko pta chl gya hai ki hum live ho gye hain.")
+                   
+               } else {
+                   print(data["error"])
+                   print("Kuch error hai")
+               }
+           })
+       }
+       
+    
+}
+
 extension PKPublishViewController {
     
     func onPublisherStateUpdate(_ state: ZegoPublisherState, errorCode: Int32, extendedData: [AnyHashable : Any]?, streamID: String) {
@@ -4328,7 +4481,8 @@ extension PKPublishViewController {
                 let streamID = stream.streamID
                 // Use streamID as needed
                 print("Added stream ID: \(streamID)")
-                
+                btnCloseBroadOutlet.isUserInteractionEnabled = true
+                createLiveBroadcastForListing()
             }
             
         }
@@ -4554,6 +4708,7 @@ extension PKPublishViewController {
                                                                 ZegoExpressEngine.shared().stopPlayingStream(streamID)
                                                                 
                                                                 zegoMicUsersList.removeAll(where: { $0.coHostID == micUser.coHostID })
+                                                                zegoOpponentMicUsersList.removeAll(where: { $0.coHostID == micUser.coHostID })
                                                                 print("Host ko hta do yhn se remove ho gyi hai par aaya hai")
                                                               
                                                                 usersOnMic(data: zegoMicUsersList)
@@ -4691,6 +4846,7 @@ extension PKPublishViewController {
                                                        ZegoExpressEngine.shared().stopPlayingStream(streamID)
                                                        
                                                        zegoMicUsersList.removeAll(where: { $0.coHostID == micUser.coHostID })
+                                                       zegoOpponentMicUsersList.removeAll(where: { $0.coHostID == micUser.coHostID })
                                                        print("Host ko hta do yhn se remove ho gyi hai par aaya hai")
                                                     
                                                        usersOnMic(data: zegoMicUsersList)
@@ -4946,65 +5102,67 @@ extension PKPublishViewController {
                                                                         let streamID = room + i.coHostID! + "_cohost_stream"
                                                                         print("THe stream id we are passing in case of the join mic in live is: \(streamID)")
                                                                         
+                                                                        if (i.coHostUserStatus?.lowercased() == "delete") {
+                                                                            
+                                                                            let coHostIDToRemove = i.coHostID
+                                                                            
+                                                                            print("User ko delete krna hai. add nahi.")
+                                                                            // Check if the zegoOpponentMicUsersList contains the coHostID
+                                                                            if zegoOpponentMicUsersList.contains(where: { $0.coHostID == coHostIDToRemove }) {
+                                                                                // Remove the element(s) with the matching coHostID
+                                                                                zegoOpponentMicUsersList.removeAll { $0.coHostID == coHostIDToRemove }
+                                                                                print("Removed coHostID \(coHostIDToRemove) from zegoOpponentMicUsersList")
+                                                                            } else {
+                                                                                print("coHostID \(coHostIDToRemove) does not exist in zegoOpponentMicUsersList")
+                                                                            }
+                                                                            
+                                                                            if zegoMicUsersList.contains(where: { $0.coHostID == coHostIDToRemove }) {
+                                                                                // Remove the element(s) with the matching coHostID
+                                                                                zegoMicUsersList.removeAll { $0.coHostID == coHostIDToRemove }
+                                                                                print("Removed coHostID \(coHostIDToRemove) from zegoOpponentMicUsersList")
+                                                                            } else {
+                                                                                print("coHostID \(coHostIDToRemove) does not exist in zegoOpponentMicUsersList")
+                                                                            }
+                                                                            
+                                                                            usersOnMic(data: zegoMicUsersList)
+                                                                            opponentUsersOnMic(data: zegoOpponentMicUsersList)
+                                                                            
+                                                                        } else {
+                                                                        
+                                                                            print("User ko add karna hai. delete nahi.")
+                                                                            
                                                                         let config = ZegoPlayerConfig()
                                                                         config.roomID = room
-                                                        
+                                                                        
                                                                         
                                                                         let zegocanvas = ZegoCanvas(view: UIView())
-                                                                    
+                                                                        
                                                                         ZegoExpressEngine.shared().startPlayingStream(streamID, canvas: zegocanvas, config: config)
                                                                         
                                                                         let id = (UserDefaults.standard.string(forKey: "UserProfileId") ?? "")
                                                                         print("The user joined id we are checking is : \(id)")
                                                                         
-//                                                                        if (id == micUser.coHostID) {
-//                                                                            guard let cell = tblView?.visibleCells[0] as? LiveRoomCellTableViewCell else {
-//                                                                                // Handle the case where the cell cannot be cast to LiveRoomCellTableViewCell
-//                                                                                return
-//                                                                            }
-//                                                                            
-//                                                                            if (i.coHostAudioStatus?.lowercased() == "mute") {
-//                                                                            
-//                                                                                isMutedByHost = true
-//                                                                                ZegoExpressEngine.shared().muteMicrophone(true)
-//                                                                                print("Microphone ko mute kar diya hai.")
-//                                                                                cell.isMicMutedByHost = true
-//                                                                                cell.btnMuteMicOutlet.setImage(UIImage(named:"micoff"), for: .normal)
-//                                                                            } else {
-//                                                                               
-//                                                                                isMutedByHost = false
-//                                                                                ZegoExpressEngine.shared().muteMicrophone(false)
-//                                                                                print("Microphone ko unmute kar diya hai.")
-//                                                                                cell.isMicMutedByHost = false
-//                                                                                cell.btnMuteMicOutlet.setImage(UIImage(named:"micon"), for: .normal)
-//                                                                            }
-//                                                                            
-//                                                                        print("User ne join mic kia tha isliye stream ka microphone host ne mute kiya hai....")
-//                                                                        } else {
-//                                                                            print("User ne join mic nahi kia tha isliye stream ko host ne mute nahi kiya hai....")
-//                                                                        }
-                                                                    
                                                                         
                                                                         let micUserJson: [String: Any] = [
-                                                                                "coHostUserImage": micUser.coHostUserImage,
-                                                                                "coHostUserName": micUser.coHostUserName,
-                                                                                "coHostID": micUser.coHostID,
-                                                                                "coHostUserStatus": micUser.coHostUserStatus,
-                                                                                "coHostLevel": micUser.coHostLevel,
-                                                                                "coHostAudioStatus":micUser.coHostAudioStatus,
-                                                                                "isHostMuted": micUser.isHostMuted
-                                                                            ]
-                                                                            
-                                                                            // Convert the JSON object to a JSON string
-                                                                            if let jsonData = try? JSONSerialization.data(withJSONObject: micUserJson, options: []),
-                                                                               let jsonString = String(data: jsonData, encoding: .utf8) {
-                                                                                
-                                                                                // Add the JSON string to zegoSendMicUsersList with coHostID as the key
-                                                                                zegoSendMicUsersList[micUser.coHostID ?? ""] = jsonString
-                                                                            } else {
-                                                                                print("Error converting micUser to JSON string")
-                                                                            }
+                                                                            "coHostUserImage": micUser.coHostUserImage,
+                                                                            "coHostUserName": micUser.coHostUserName,
+                                                                            "coHostID": micUser.coHostID,
+                                                                            "coHostUserStatus": micUser.coHostUserStatus,
+                                                                            "coHostLevel": micUser.coHostLevel,
+                                                                            "coHostAudioStatus":micUser.coHostAudioStatus,
+                                                                            "isHostMuted": micUser.isHostMuted
+                                                                        ]
                                                                         
+                                                                        // Convert the JSON object to a JSON string
+                                                                        if let jsonData = try? JSONSerialization.data(withJSONObject: micUserJson, options: []),
+                                                                           let jsonString = String(data: jsonData, encoding: .utf8) {
+                                                                            
+                                                                            // Add the JSON string to zegoSendMicUsersList with coHostID as the key
+                                                                            zegoSendMicUsersList[micUser.coHostID ?? ""] = jsonString
+                                                                        } else {
+                                                                            print("Error converting micUser to JSON string")
+                                                                        }
+                                                                    }
                                                                     }
                                                                 }
                                                             }

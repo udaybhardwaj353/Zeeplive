@@ -70,6 +70,7 @@ struct AllUrls {
         static let getFreeTarget = AllUrls.baseUrl + "getFreeTargetDetails"
         static let blockUser = AllUrls.baseUrl + "block-in-host-user-side"
         static let recharge = AllUrls.baseUrl + "apple-coin-recharge"
+        static let kickOutUser = AllUrls.baseUrl + "partyroomKickout"
         
     }
 }

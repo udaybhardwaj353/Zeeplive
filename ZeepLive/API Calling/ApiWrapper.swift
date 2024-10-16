@@ -2177,4 +2177,32 @@ class ApiWrapper: NSObject{
         }
     }
     
+    // MARK: - FUNCTION TO KICKOUT USER FROM THE BROAD FOR 2 HOURS AS DONE BY BACKEND
+    
+    func kickOutUserFromBroad(url: String,parameters:[String:Any],completion: @escaping(_ value:[String:Any])->Void) {
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + (UserDefaults.standard.string(forKey: "token") ?? "")]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, interceptor: nil).responseJSON { [weak self] response in
+            
+            switch response.result{
+            case .success(let value):
+                print(value)
+                let dict1 = value as? [String: Any]
+                print(dict1)
+                
+                do{
+                    completion(dict1 ?? [:])
+                    
+                }catch{
+                    completion( [:])
+                    print(String(describing: error))
+                }
+            case .failure(let error):
+                print(String(describing: error))
+                completion([:])
+            }
+        }
+    }
+    
 }
