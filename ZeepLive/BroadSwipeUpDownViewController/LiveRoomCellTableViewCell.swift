@@ -39,10 +39,10 @@ class LiveRoomCellTableViewCell: UITableViewCell {
         let lab = UILabel(frame: CGRect(x: 9, y: 8, width: viewLiveMessage.frame.width - 18, height: 100 - 16))
         lab.backgroundColor = .clear
         lab.text = "Welcome to ZeepLive!! Please don't share inappropriate content like pornography or violence as it's strictly against our policy. Our AI system continuously monitors content to ensure compliance"
-        lab.textColor = UIColor(hexString: "FFC300")
+        lab.textColor = UIColor(hexString: "F9B248")
         lab.numberOfLines = 0
         lab.textAlignment = .left
-        lab.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        lab.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         v.addSubview(lab)
         v.isUserInteractionEnabled = false
         return v
@@ -136,18 +136,17 @@ class LiveRoomCellTableViewCell: UITableViewCell {
     lazy var hostFollow: Int = 0
     lazy var groupID: String = ""
     var liveMessage = liveMessageModel()
+    lazy var hasJoinedMic: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        tblViewMicJoinedUsers.transform = CGAffineTransform(scaleX: 1, y: -1)
+       
         txtFldMessage.delegate = self
-        configureGiftView()
-        configureUI()
-        collecionViewWork()
-        tableViewWorkOfJoinMicUsers()
-        zegoMicUsersList.reverse()
-        tblViewMicJoinedUsers.reloadData()
         
+       configureGiftView()
+       configureUI()
+       collecionViewWork()
+       tableViewWorkOfJoinMicUsers()
         lblName.isHidden = true
         print("The user ID we get in the cell is: \(userID)")
         
@@ -250,7 +249,7 @@ class LiveRoomCellTableViewCell: UITableViewCell {
     
     func collecionViewWork() {
     
-        collectionView.register(UINib(nibName: "BroadJoinCollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "BroadJoinCollectionViewCell2")
+        collectionView.register(UINib(nibName: "BroadJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BroadJoinCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isUserInteractionEnabled = true
@@ -267,6 +266,23 @@ class LiveRoomCellTableViewCell: UITableViewCell {
     
     func configureUI() {
     
+        print("User with ID \(profileID) in Live Room Cell Table View Cell")
+        
+        let userIdToCheck = String(profileID)
+        let userFollow = GlobalClass.sharedInstance.isUserFollowed(userIdToCheck: userIdToCheck)
+        print("User with ID \(userIdToCheck) is followed: \(userFollow)")
+        
+        if (userFollow == true) {
+       
+            print("User isko follow karta hai.")
+            btnFollowHostOutlet.isHidden = true
+            
+        } else {
+         
+            btnFollowHostOutlet.isHidden = false
+           
+        }
+        
         let gender = UserDefaults.standard.string(forKey: "gender") ?? ""
         
         if (gender.lowercased() == "male") {
@@ -318,7 +334,7 @@ class LiveRoomCellTableViewCell: UITableViewCell {
         
         viewUserRoomStatus.layer.cornerRadius = viewUserRoomStatus.frame.height / 2
         viewUserRoomStatus.backgroundColor = UIColor(hexString: "000000")?.withAlphaComponent(0.35)//.black.withAlphaComponent(0.6)
-        lblRoomUserName.textColor = UIColor(hexString: "FFC300")
+        lblRoomUserName.textColor = UIColor(hexString: "F9B248")
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(handleTap), userInfo: nil, repeats: true)
         imgViewEndUserDetail.layer.cornerRadius = imgViewEndUserDetail.frame.height / 2
         
@@ -498,6 +514,21 @@ class LiveRoomCellTableViewCell: UITableViewCell {
         btnMessageOutlet.isHidden = false
         btnGameOutlet.isHidden = false
         
+        let userIdToCheck = String(profileID)
+        let userFollow = GlobalClass.sharedInstance.isUserFollowed(userIdToCheck: userIdToCheck)
+        print("User with ID \(userIdToCheck) is followed: \(userFollow)")
+        
+        if (userFollow == true) {
+       
+            print("User isko follow karta hai.")
+            btnFollowHostOutlet.isHidden = true
+            
+        } else {
+         
+            btnFollowHostOutlet.isHidden = false
+           
+        }
+        
     }
     
     func hideViews() {
@@ -565,6 +596,21 @@ class LiveRoomCellTableViewCell: UITableViewCell {
         btnMicOutlet.isHidden = false
         btnMessageOutlet.isHidden = false
         btnGameOutlet.isHidden = false
+        
+        let userIdToCheck = String(profileID)
+        let userFollow = GlobalClass.sharedInstance.isUserFollowed(userIdToCheck: userIdToCheck)
+        print("User with ID \(userIdToCheck) is followed: \(userFollow)")
+        
+        if (userFollow == true) {
+       
+            print("User isko follow karta hai.")
+            btnFollowHostOutlet.isHidden = true
+            
+        } else {
+         
+            btnFollowHostOutlet.isHidden = false
+           
+        }
         
     }
     
@@ -936,14 +982,11 @@ extension LiveRoomCellTableViewCell : UITableViewDelegate,UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        scrollToBottom()
         
-        
-       
         if (tableView == tblViewMicJoinedUsers) {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "MicJoinedUsersTableViewCell", for: indexPath) as! MicJoinedUsersTableViewCell
-            cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+            
             cell.lblMicUserName.text = zegoMicUsersList[indexPath.row].coHostUserName//"Prakhar Dixit"
 //            cell.imgViewMicUserImage.image = UIImage(named: "UserPlaceHolderImageForCell")
             loadImageForCell(from: zegoMicUsersList[indexPath.row].coHostUserImage, into: cell.imgViewMicUserImage)
@@ -952,7 +995,7 @@ extension LiveRoomCellTableViewCell : UITableViewDelegate,UITableViewDataSource 
             
         } else if (tableView == tblViewLiveMessage) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LiveMessagesTableViewCell", for: indexPath) as! LiveMessagesTableViewCell
-//            cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+            
             /*cell.lblUserMessage.text = liveMessages[indexPath.row].message ?? " N/A"*/ //"User Message User Message"
             cell.lblUserLevel.text = " Lv." + (liveMessages[indexPath.row].level ?? "N/A")
             cell.lblUserName.text = liveMessages[indexPath.row].userName ?? "N/A"
@@ -1050,26 +1093,6 @@ extension LiveRoomCellTableViewCell : UITableViewDelegate,UITableViewDataSource 
         return UITableViewCell()
     }
     
-    //MARK: - scrollToBottom
-    func scrollToBottom() {
-        let lastIndex = IndexPath(row: zegoMicUsersList.count - 1, section: 0)
-        tblViewMicJoinedUsers.scrollToRow(at: lastIndex, at: .bottom, animated: true)
-       
-        
-        
-//        if !zegoMicUsersList.isEmpty {
-//            let firstElement = zegoMicUsersList.removeFirst()
-//            zegoMicUsersList.append(firstElement)
-//            tblViewMicJoinedUsers.reloadData()
-//            
-//            // Scroll to the last row
-//            let lastRowIndex = zegoMicUsersList.count - 1
-//            if lastRowIndex >= 0 {
-//                let indexPath = IndexPath(row: lastRowIndex, section: 0)
-//                tblViewMicJoinedUsers.scrollToRow(at: indexPath, at: .bottom, animated: true) // Set animated to true for smooth scrolling
-//            }
-//        }
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -1201,37 +1224,37 @@ extension LiveRoomCellTableViewCell: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BroadJoinCollectionViewCell2", for: indexPath) as! BroadJoinCollectionViewCell2
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BroadJoinCollectionViewCell", for: indexPath) as! BroadJoinCollectionViewCell
          
         
         cell.resetCellState()
         cell.isUserInteractionEnabled = true
-        cell.viewMain2.layer.cornerRadius = 15
-        cell.imgViewUserPhoto2.layer.cornerRadius = cell.imgViewUserPhoto2.frame.height / 2 /*15*/ //cell.imgViewUserPhoto.frame.height / 2
-        cell.imgViewUserPhoto2.layer.masksToBounds = true
+        cell.viewMain.layer.cornerRadius = 15
+        cell.imgViewUserPhoto.layer.cornerRadius = cell.imgViewUserPhoto.frame.height / 2 /*15*/ //cell.imgViewUserPhoto.frame.height / 2
+        cell.imgViewUserPhoto.layer.masksToBounds = true
         
         // Clear the image first
-        cell.imgViewUserPhoto2.image = nil
+        cell.imgViewUserPhoto.image = nil
 
         if let imageURL = URL(string: userInfoList?[indexPath.row].faceURL ?? "") {
             KF.url(imageURL)
                 .cacheOriginalImage()
                 .onSuccess { [weak cell] result in
                     DispatchQueue.main.async {
-                        cell?.imgViewUserPhoto2.image = result.image
+                        cell?.imgViewUserPhoto.image = result.image
                     }
                 }
                 .onFailure { error in
                     print("Image loading failed with error: \(error)")
-                    cell.imgViewUserPhoto2.image = UIImage(named: "UserPlaceHolderImageForCell")
+                    cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
                 }
-                .set(to: cell.imgViewUserPhoto2)
+                .set(to: cell.imgViewUserPhoto)
         } else {
-            cell.imgViewUserPhoto2.image = UIImage(named: "UserPlaceHolderImageForCell")
+            cell.imgViewUserPhoto.image = UIImage(named: "UserPlaceHolderImageForCell")
         }
 
-        cell.imgViewUserPhoto2.isUserInteractionEnabled = true
-        cell.viewMain2.isUserInteractionEnabled = true
+        cell.imgViewUserPhoto.isUserInteractionEnabled = true
+        cell.viewMain.isUserInteractionEnabled = true
         
         return cell
     }

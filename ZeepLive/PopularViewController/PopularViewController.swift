@@ -754,7 +754,7 @@ extension PopularViewController {
                 
             }
         }
-        isApiInProgress = false
+        //isApiInProgress = false
     }
     
 //    func getPoints() {

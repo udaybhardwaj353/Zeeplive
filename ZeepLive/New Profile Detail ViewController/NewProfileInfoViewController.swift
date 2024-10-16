@@ -17,20 +17,24 @@ class NewProfileInfoViewController: UIViewController {
     @IBOutlet weak var viewCharmLevel: UIView!
     @IBOutlet weak var imgViewCharmLevel: UIImageView!
     @IBOutlet weak var lblCharmLevel: UILabel!
-    @IBOutlet weak var viewStarFans: UIView!
+    @IBOutlet weak var btnStarFans: UIButton!
     @IBOutlet weak var btnViewAllGiftRecievedOutlet: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lblGiftRecieved: UILabel!
+   
     
     lazy var giftDetails = [giftRecievedResult]()
     lazy var userID = String()
     lazy var richLevel: Int = 0
     lazy var charmLevel: Int = 0
+    lazy var profileID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("The user id we are gettign is: \(userID)")
+        print("The profile id we are getting in the new profile info view controller is: \(profileID)")
+        
         getGiftDetails()
        collectionViewWork()
         setData()
@@ -76,6 +80,20 @@ class NewProfileInfoViewController: UIViewController {
     
         lblGiftRecieved.isHidden = false
         btnViewAllGiftRecievedOutlet.isHidden = false
+        
+    }
+    
+    @IBAction func btnStarFansPressed(_ sender: Any) {
+        
+        print("Button Star Fans Pressed.")
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ContributorListViewController") as! ContributorListViewController
+        nextViewController.url = "https://zeep.live/top-fans-ranking?userid=\(profileID)"
+        print("The url we are sending in the contributor list view controller: \(nextViewController.url)")
+        self.present(nextViewController, animated: true, completion: nil)
+        
+     //  self.navigationController?.pushViewController(nextViewController, animated: true)
         
     }
     

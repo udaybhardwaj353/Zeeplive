@@ -260,45 +260,69 @@ extension SearchViewController {
 extension SearchViewController: UITextFieldDelegate {
 
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        DispatchQueue.main.asyncDeduped(target: self, after: 0.70) { [weak self] in
-            
-            if (self?.txtFldSearch.text == "") || (self?.txtFldSearch.text == nil) {
-                print("Api ko call nahi krana hai.")
-                self?.tblView.isHidden = true
-                self?.viewPlaceholder.isHidden = false
-                self?.searchData.data?.removeAll()
-                self?.pageNo = 1
-            } else {
-                print("Api ko call krana hai.")
-                self?.getSearchData()
-                
-            }
-        }
-        return true
-        
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        DispatchQueue.main.asyncDeduped(target: self, after: 0.70) { [weak self] in
+//            
+//            if (self?.txtFldSearch.text == "") || (self?.txtFldSearch.text == nil) {
+//                print("Api ko call nahi krana hai.")
+//                self?.tblView.isHidden = true
+//                self?.viewPlaceholder.isHidden = false
+//                self?.searchData.data?.removeAll()
+//                self?.pageNo = 1
+//            } else {
+//                print("Api ko call krana hai.")
+//                self?.getSearchData()
+//                
+//            }
+//        }
+//        return true
+//        
+//    }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.returnKeyType == .done {
-            textField.resignFirstResponder() // Hide the keyboard
-            // Your custom code when "Done" key is pressed
-            print("Done ki button press huyi hai keyboard main.")
-            if (txtFldSearch.text == "") || (txtFldSearch.text == nil) {
-                print("Api ko call nahi krana hai.")
-                tblView.isHidden = true
-                viewPlaceholder.isHidden = false
-                searchData.data?.removeAll()
-                pageNo = 1
-            } else {
-                print("Api ko call krana hai.")
-                pageNo = 1
-                getSearchData()
-                
-            }
-            
-        }
-        return true
-    }
+    // This method is called when the "Return" or "Done" button is pressed
+       func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           // Hide the keyboard
+           textField.resignFirstResponder()
+           
+           // Perform any action when "Return" or "Done" is pressed
+           print("Return or Done button pressed")
+           
+           if (txtFldSearch.text == "") || (txtFldSearch.text == nil) {
+                       print("Api ko call nahi krana hai.")
+                       tblView.isHidden = true
+                       viewPlaceholder.isHidden = false
+                       searchData.data?.removeAll()
+                       pageNo = 1
+                   } else {
+                       print("Api ko call krana hai.")
+                       pageNo = 1
+                       getSearchData()
+       
+                   }
+               
+           return true
+       }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        if textField.returnKeyType == .done {
+//            textField.resignFirstResponder() // Hide the keyboard
+//            // Your custom code when "Done" key is pressed
+//            print("Done ki button press huyi hai keyboard main.")
+//            if (txtFldSearch.text == "") || (txtFldSearch.text == nil) {
+//                print("Api ko call nahi krana hai.")
+//                tblView.isHidden = true
+//                viewPlaceholder.isHidden = false
+//                searchData.data?.removeAll()
+//                pageNo = 1
+//            } else {
+//                print("Api ko call krana hai.")
+//                pageNo = 1
+//                getSearchData()
+//                
+//            }
+//            
+//        }
+//        return true
+//    }
     
 }

@@ -39,6 +39,7 @@ class PKLiveHostListTableViewCell: UITableViewCell {
     @IBAction func btnInvitePressed(_ sender: UIButton) {
         
         print("Button Invite Live Host Pressed.")
+        btnInviteOutlet.isUserInteractionEnabled = false
         delegate?.buttonInvitePressed(index: sender.tag)
         
     }

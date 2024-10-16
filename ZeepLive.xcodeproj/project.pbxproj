@@ -182,6 +182,7 @@
 		2E9320E22AC43B2E00C39DB7 /* FreeTargetSubmitDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9320E02AC43B2E00C39DB7 /* FreeTargetSubmitDetailsTableViewCell.swift */; };
 		2E9320E32AC43B2E00C39DB7 /* FreeTargetSubmitDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9320E12AC43B2E00C39DB7 /* FreeTargetSubmitDetailsTableViewCell.xib */; };
 		2E95CF892A52EFD00004824B /* PlayLiveStreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E95CF882A52EFD00004824B /* PlayLiveStreamingViewController.swift */; };
+		2E95CF8C2A52F0C20004824B /* ZegoExpressEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 2E95CF8B2A52F0C20004824B /* ZegoExpressEngine */; };
 		2E95CF8F2A52F30D0004824B /* KeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E95CF8E2A52F30D0004824B /* KeyCenter.swift */; };
 		2E9735432B43E2F30064B913 /* MomentsSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9735422B43E2F30064B913 /* MomentsSwipeViewController.swift */; };
 		2E9735452B43E4B50064B913 /* MomentFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9735442B43E4B50064B913 /* MomentFollowingViewController.swift */; };
@@ -211,6 +212,7 @@
 		2EABAA022A00DB9D00482D54 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EABAA012A00DB9D00482D54 /* LoginViewController.swift */; };
 		2EAEA0972B8C9F8C00388660 /* MicJoinedUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEA0952B8C9F8C00388660 /* MicJoinedUsersTableViewCell.swift */; };
 		2EAEA0982B8C9F8C00388660 /* MicJoinedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEA0962B8C9F8C00388660 /* MicJoinedUsersTableViewCell.xib */; };
+		2EAFA7722CB4157200523836 /* ContributorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAFA7712CB4157200523836 /* ContributorListViewController.swift */; };
 		2EB3D51C2B6D0448008E1EB9 /* LuckyGiftCashbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB3D51B2B6D0448008E1EB9 /* LuckyGiftCashbackViewController.swift */; };
 		2EB4F7FC2BC3C66C00538D3B /* MomentSendGiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4F7FB2BC3C66C00538D3B /* MomentSendGiftViewController.swift */; };
 		2EB4F7FF2BC4249E00538D3B /* RequestJoinMicUserListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4F7FD2BC4249E00538D3B /* RequestJoinMicUserListCollectionViewCell.swift */; };
@@ -398,9 +400,6 @@
 		2EFD7AF32B67C00300E8092E /* live_motion_host_leave.svga in Resources */ = {isa = PBXBuildFile; fileRef = 2EFD7AF22B67C00300E8092E /* live_motion_host_leave.svga */; };
 		2EFD7AF52B67C32F00E8092E /* BusyTV.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EFD7AF42B67C32F00E8092E /* BusyTV.json */; };
 		3D07C8BF325DD37B927C5C51 /* Pods_ZeepLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891713FB2544404ED2E0B07A /* Pods_ZeepLive.framework */; };
-		3F7F45AC2CB3F93800C660A7 /* ZegoExpressEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7F45AB2CB3F93800C660A7 /* ZegoExpressEngine */; };
-		3F7F45B42CB40A7200C660A7 /* BroadJoinCollectionViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F45B32CB40A7200C660A7 /* BroadJoinCollectionViewCell2.xib */; };
-		3F7F45B52CB40A7200C660A7 /* BroadJoinCollectionViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F45B22CB40A7200C660A7 /* BroadJoinCollectionViewCell2.swift */; };
 		4AEE09CEF960C30701B50F63 /* Pods_ZeepLive_ZeepLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16106C8A61C41ED9D281E42 /* Pods_ZeepLive_ZeepLiveUITests.framework */; };
 		744622A8C922E4565E75C5C5 /* Pods_ZeepLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11FC89C6B9399A178EE1F5E /* Pods_ZeepLiveTests.framework */; };
 /* End PBXBuildFile section */
@@ -650,6 +649,7 @@
 		2EAEA0952B8C9F8C00388660 /* MicJoinedUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicJoinedUsersTableViewCell.swift; sourceTree = "<group>"; };
 		2EAEA0962B8C9F8C00388660 /* MicJoinedUsersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MicJoinedUsersTableViewCell.xib; sourceTree = "<group>"; };
 		2EAF3B9029F01F4100B4C1DA /* ZeepLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZeepLive.entitlements; sourceTree = "<group>"; };
+		2EAFA7712CB4157200523836 /* ContributorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorListViewController.swift; sourceTree = "<group>"; };
 		2EB3D51B2B6D0448008E1EB9 /* LuckyGiftCashbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyGiftCashbackViewController.swift; sourceTree = "<group>"; };
 		2EB4F7FB2BC3C66C00538D3B /* MomentSendGiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentSendGiftViewController.swift; sourceTree = "<group>"; };
 		2EB4F7FD2BC4249E00538D3B /* RequestJoinMicUserListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestJoinMicUserListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -802,6 +802,7 @@
 		2EC4DD1F2B32C78F0053542E /* VerifyOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOtpViewController.swift; sourceTree = "<group>"; };
 		2EC4DD252B32F0960053542E /* SmAntiFraud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmAntiFraud.h; sourceTree = "<group>"; };
 		2EC4DD272B32F0960053542E /* libSmAntiFraud.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSmAntiFraud.a; sourceTree = "<group>"; };
+		2EC4DD2C2B32F2AB0053542E /* ZeepLive-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeepLive-Bridging-Header.h"; sourceTree = "<group>"; };
 		2EC64A8F2C119CF3003AC395 /* ReelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
 		2EC671642AC2EB7400D7891A /* GetMyAgencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyAgencyData.swift; sourceTree = "<group>"; };
 		2EC671672AC30BF900D7891A /* FreeTargetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTargetViewController.swift; sourceTree = "<group>"; };
@@ -868,10 +869,6 @@
 		2EFD7AF02B67ACA600E8092E /* contribution_icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contribution_icon.json; sourceTree = "<group>"; };
 		2EFD7AF22B67C00300E8092E /* live_motion_host_leave.svga */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = live_motion_host_leave.svga; sourceTree = "<group>"; };
 		2EFD7AF42B67C32F00E8092E /* BusyTV.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BusyTV.json; sourceTree = "<group>"; };
-		3F7F45A92CB3F83400C660A7 /* ZeepLive-Bridging-Headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZeepLive-Bridging-Headers.h"; sourceTree = "<group>"; };
-		3F7F45AD2CB3FA2600C660A7 /* ZeepLive-Bridging-Headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZeepLive-Bridging-Headers.h"; sourceTree = "<group>"; };
-		3F7F45B22CB40A7200C660A7 /* BroadJoinCollectionViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadJoinCollectionViewCell2.swift; sourceTree = "<group>"; };
-		3F7F45B32CB40A7200C660A7 /* BroadJoinCollectionViewCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BroadJoinCollectionViewCell2.xib; sourceTree = "<group>"; };
 		5593D19058955DD455F4C566 /* Pods-ZeepLiveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeepLiveTests.release.xcconfig"; path = "Target Support Files/Pods-ZeepLiveTests/Pods-ZeepLiveTests.release.xcconfig"; sourceTree = "<group>"; };
 		73EB88D53F2E75518B6A5C24 /* Pods-ZeepLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeepLiveTests.debug.xcconfig"; path = "Target Support Files/Pods-ZeepLiveTests/Pods-ZeepLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		891713FB2544404ED2E0B07A /* Pods_ZeepLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZeepLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -888,10 +885,10 @@
 			files = (
 				2E3DC5B72AE92C49004230C4 /* AppInvokeSDK.xcframework in Frameworks */,
 				2EC4DD292B32F0960053542E /* libSmAntiFraud.a in Frameworks */,
-				3F7F45AC2CB3F93800C660A7 /* ZegoExpressEngine in Frameworks */,
 				2E8C2D9F2BBFCB57005C7FB6 /* StoreKit.framework in Frameworks */,
 				2E25C4B32C57C0AE0041FA44 /* ImSDK_Plus.framework in Frameworks */,
 				2EB5F2B12C8EFD3B00427B21 /* FURenderKit.framework in Frameworks */,
+				2E95CF8C2A52F0C20004824B /* ZegoExpressEngine in Frameworks */,
 				3D07C8BF325DD37B927C5C51 /* Pods_ZeepLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1033,8 +1030,6 @@
 				2EF23EBA2B5A8A6D003803F2 /* BroadJoinedAudienceListViewController */,
 				2E4BFD3A2B5E70C900E8867E /* JoinedAudienceDetailsViewController */,
 				2EB831FE2B550F1300A01053 /* LiveMessageTableViewCell */,
-				3F7F45B22CB40A7200C660A7 /* BroadJoinCollectionViewCell2.swift */,
-				3F7F45B32CB40A7200C660A7 /* BroadJoinCollectionViewCell2.xib */,
 			);
 			path = BroadSwipeUpDownViewController;
 			sourceTree = "<group>";
@@ -1194,7 +1189,7 @@
 		2E3FD43629E7D3AE00E1B97A = {
 			isa = PBXGroup;
 			children = (
-				3F7F45AD2CB3FA2600C660A7 /* ZeepLive-Bridging-Headers.h */,
+				2EC4DD2C2B32F2AB0053542E /* ZeepLive-Bridging-Header.h */,
 				2E3FD44129E7D3AE00E1B97A /* ZeepLive */,
 				2E3FD45829E7D3AF00E1B97A /* ZeepLiveTests */,
 				2E3FD46229E7D3AF00E1B97A /* ZeepLiveUITests */,
@@ -1312,7 +1307,6 @@
 				2E8DA0C02AA5C258007A27B4 /* TryingMp4VideoViewController.swift */,
 				2E8DA0C22AA5C3AA007A27B4 /* PlayVideoClass.swift */,
 				2E6AB9862A55A39F00AC678F /* chat_motion_connection.svga */,
-				3F7F45A92CB3F83400C660A7 /* ZeepLive-Bridging-Headers.h */,
 			);
 			path = ZeepLive;
 			sourceTree = "<group>";
@@ -1382,6 +1376,7 @@
 				2E48A7752BBA988E0066FD08 /* NewProfileDetailTableViewCell.xib */,
 				2E48A7782BBABF6D0066FD08 /* NewProfileInfoViewController.swift */,
 				2E7DCF732BBD241000EEB922 /* ShowAllGiftsViewController.swift */,
+				2EAFA7712CB4157200523836 /* ContributorListViewController.swift */,
 			);
 			path = "New Profile Detail ViewController";
 			sourceTree = "<group>";
@@ -2511,7 +2506,7 @@
 			);
 			name = ZeepLive;
 			packageProductDependencies = (
-				3F7F45AB2CB3F93800C660A7 /* ZegoExpressEngine */,
+				2E95CF8B2A52F0C20004824B /* ZegoExpressEngine */,
 			);
 			productName = ZeepLive;
 			productReference = 2E3FD43F29E7D3AE00E1B97A /* ZeepLive.app */;
@@ -2591,7 +2586,7 @@
 			);
 			mainGroup = 2E3FD43629E7D3AE00E1B97A;
 			packageReferences = (
-				3F7F45AA2CB3F93800C660A7 /* XCRemoteSwiftPackageReference "express-video-ios" */,
+				2E95CF8A2A52F0C20004824B /* XCRemoteSwiftPackageReference "express-video-ios" */,
 			);
 			productRefGroup = 2E3FD44029E7D3AE00E1B97A /* Products */;
 			projectDirPath = "";
@@ -2685,7 +2680,6 @@
 				2E7EB0412BA46EBC007823DB /* BankAccountListTableViewCell.xib in Resources */,
 				2E7AB0DB2B468C6F0032D5CF /* PostMomentImageCollectionViewCell.xib in Resources */,
 				2EB5F2AE2C8EFCE400427B21 /* fuzzytoonfilter.bundle in Resources */,
-				3F7F45B42CB40A7200C660A7 /* BroadJoinCollectionViewCell2.xib in Resources */,
 				2E06DA452B42A87A00206E69 /* UserMessageListTableViewCell.xib in Resources */,
 				2E3FD44F29E7D3AF00E1B97A /* LaunchScreen.storyboard in Resources */,
 				2E7F47D62B7B51E0005C752F /* MId_animation_Udpated.json in Resources */,
@@ -2959,7 +2953,6 @@
 				2E442E292A9E00370090B14E /* EnterUserDetailViewController.swift in Sources */,
 				2EC671652AC2EB7400D7891A /* GetMyAgencyData.swift in Sources */,
 				2E06DA492B42D48900206E69 /* MomentVideoViewController.swift in Sources */,
-				3F7F45B52CB40A7200C660A7 /* BroadJoinCollectionViewCell2.swift in Sources */,
 				2E3FD44729E7D3AE00E1B97A /* ViewController.swift in Sources */,
 				2E0943EE2B4D1FF30079B1FB /* ShowGiftViewController.swift in Sources */,
 				2EB5F2802C8EFCE400427B21 /* FUTipHUD.m in Sources */,
@@ -3073,6 +3066,7 @@
 				2E07DFA32BB29C5700D3B4BA /* PaymentSummaryViewController.swift in Sources */,
 				2E4250062B344F9C00A85DF1 /* NewViewController.swift in Sources */,
 				2E3FD47329E7F52000E1B97A /* WebViewViewController.swift in Sources */,
+				2EAFA7722CB4157200523836 /* ContributorListViewController.swift in Sources */,
 				2E33BF242A441108004673D6 /* GetFemaleIncomeReportListModel.swift in Sources */,
 				2EF2C1F12C25709300D640E8 /* PKPopUpViewController.swift in Sources */,
 				2ED6EBEA2A0B6A150023899A /* ShowListsViewController.swift in Sources */,
@@ -3401,8 +3395,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/creativefranzy003/Documents/ZeepLive copy Working Code On Simulator and on Phone.29 June 4/ZeepLive-Bridging-Headers.h";
-				SWIFT_PACKAGE_NAME = "ZeepLive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/creativefrenzy002/Desktop/ZeepLive copy Working Code On Simulator and on Phone.29 June 4/ZeepLive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3461,8 +3454,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/creativefranzy003/Documents/ZeepLive copy Working Code On Simulator and on Phone.29 June 4/ZeepLive-Bridging-Headers.h";
-				SWIFT_PACKAGE_NAME = "ZeepLive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/creativefrenzy002/Desktop/ZeepLive copy Working Code On Simulator and on Phone.29 June 4/ZeepLive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3590,20 +3582,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3F7F45AA2CB3F93800C660A7 /* XCRemoteSwiftPackageReference "express-video-ios" */ = {
+		2E95CF8A2A52F0C20004824B /* XCRemoteSwiftPackageReference "express-video-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zegolibrary/express-video-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.17.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3F7F45AB2CB3F93800C660A7 /* ZegoExpressEngine */ = {
+		2E95CF8B2A52F0C20004824B /* ZegoExpressEngine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3F7F45AA2CB3F93800C660A7 /* XCRemoteSwiftPackageReference "express-video-ios" */;
+			package = 2E95CF8A2A52F0C20004824B /* XCRemoteSwiftPackageReference "express-video-ios" */;
 			productName = ZegoExpressEngine;
 		};
 /* End XCSwiftPackageProductDependency section */

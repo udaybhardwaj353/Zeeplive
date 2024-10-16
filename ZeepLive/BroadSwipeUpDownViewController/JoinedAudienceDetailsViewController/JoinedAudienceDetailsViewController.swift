@@ -103,40 +103,6 @@ class JoinedAudienceDetailsViewController: UIViewController {
         
     }
     
-    @IBAction func copyBtn(_ sender: UIButton) {
-        lblUserId.becomeFirstResponder()
-            let copiedText = lblUserId.text ?? ""
-            UIPasteboard.general.string = copiedText
-            print("Copied value: \(copiedText)")
-            showCopyPopup(message: "Copied: \(copiedText)")
-        }
-
-    func showCopyPopup(message: String) {
-           let alertController = UIAlertController(title: "Copied!", message: message, preferredStyle: .alert)
-           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-           alertController.addAction(okAction)
-           present(alertController, animated: true, completion: nil)
-       }
-    
-    
-    @objc func pasteText() {
-//           if let pastedString = UIPasteboard.general.string {
-//               lblUserId.text = pastedString
-//               print("Pasted value: \(pastedString)")
-//           }
-       }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-         if action == #selector(copyBtn) || action == #selector(pasteText) {
-             return true
-         }
-         return false
-     }
-    
     @IBAction func btnReportUserPressed(_ sender: Any) {
         
         print("Button Report User Pressed.")
@@ -156,31 +122,23 @@ class JoinedAudienceDetailsViewController: UIViewController {
     }
     
     func configureUI() {
-        btnFollowUserOutlet.isHidden = false
+    
+        btnFollowUserOutlet.isHidden = true
         viewImageOutlet.layer.cornerRadius = viewImageOutlet.frame.height / 2
         imgViewUserPhoto.layer.cornerRadius = imgViewUserPhoto.frame.height / 2
         imgViewUserFrame.layer.cornerRadius = imgViewUserFrame.frame.height / 2
-//        viewUserCountry.layer.cornerRadius = viewUserCountry.frame.height / 2
+        viewUserCountry.layer.cornerRadius = viewUserCountry.frame.height / 2
       //  viewUserCountry.backgroundColor = .purple.withAlphaComponent(0.4)//GlobalClass.sharedInstance.setGapColour()
-//        viewUserID.layer.cornerRadius = viewUserID.frame.height / 2
+        viewUserID.layer.cornerRadius = viewUserID.frame.height / 2
        // viewUserID.backgroundColor = .purple.withAlphaComponent(0.4)//GlobalClass.sharedInstance.setGapColour()
         //viewMain.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewMain.layer.cornerRadius = 20
-        self.viewUserCountry.layer.cornerRadius = 10
-        self.viewUserID.layer.cornerRadius = 10
         
-        self.viewUserCountry.applyGradientBackgroundView(colors: [#colorLiteral(red: 0.4914765358, green: 0.1960422695, blue: 0.8939802051, alpha: 1), #colorLiteral(red: 0.7097539902, green: 0.2282280028, blue: 0.8939802051, alpha: 1)], startPoint: CGPoint(x: 0.0, y: 0.5), endPoint: CGPoint(x: 1.0, y: 0.5))
-        self.viewUserID.applyGradientBackgroundView(colors: [#colorLiteral(red: 0.4875565171, green: 0.1960422695, blue: 0.8939802051, alpha: 1), #colorLiteral(red: 0.7097539902, green: 0.2282280028, blue: 0.8939802051, alpha: 1)], startPoint: CGPoint(x: 0.0, y: 0.5), endPoint: CGPoint(x: 1.0, y: 0.5))
+        let gradientColors: [UIColor] = [UIColor(hexString: "#7B73EF")!, UIColor(hexString: "#C76ADE")!]
+        addGradientToView(to: viewUserCountry, cornerRadius: viewUserCountry.frame.height/2, colors: gradientColors)
+        addGradientToView(to: viewUserID, cornerRadius: viewUserID.frame.height/2, colors: gradientColors)
         
-      
-        
-        
-        
-//        let gradientColors: [UIColor] = [UIColor(hexString: "#7B73EF")!, UIColor(hexString: "#C76ADE")!]
-//        addGradientToView(to: viewUserCountry, cornerRadius: viewUserCountry.frame.height/2, colors: gradientColors)
-//        addGradientToView(to: viewUserID, cornerRadius: viewUserID.frame.height/2, colors: gradientColors)
-        
-//        addGradientToView(to: viewUserID, width: viewUserID.frame.width, height: viewUserID.frame.height, cornerRadius: viewUserID.frame.height/2, colors: gradientColors)
+       // addGradientToView(to: viewUserID, width: viewUserID.frame.width, height: viewUserID.frame.height, cornerRadius: viewUserID.frame.height/2, colors: gradientColors)
         
     }
     

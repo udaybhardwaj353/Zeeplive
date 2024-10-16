@@ -769,7 +769,7 @@ extension NearByViewController {
             }
         }
         
-        isApiInProgress = false
+      //  isApiInProgress = false
     }
     
     func oneToOneCallDialInBroad() {

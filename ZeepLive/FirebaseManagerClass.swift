@@ -36,6 +36,11 @@ class ZLFireBaseManager: NSObject {
         
         let pID = UserDefaults.standard.string(forKey: "UserProfileId")
         
+//        guard !id.isEmpty, id == nil else {
+//            print("Error: The id is either empty or contains invalid characters.")
+//            return
+//        }
+        
      //   if let pID = pID {
             ZLFireBaseManager.share.userRef.child("UserStatus").child(id).updateChildValues(data) { [weak self] (error, reference) in
                 
@@ -61,6 +66,11 @@ class ZLFireBaseManager: NSObject {
        // if let pID = pID {
         print("the id pk is: \(id)")
         print("the data pk is: \(data)")
+        
+//        guard !id.isEmpty, id == nil else {
+//            print("Error: The id is either empty or contains invalid characters.")
+//            return
+//        }
             ZLFireBaseManager.share.userRef.child("UserStatus").child(id).setValue(data) { [weak self] (error, reference) in
                 
                 guard let self = self else {
@@ -83,6 +93,12 @@ class ZLFireBaseManager: NSObject {
       //  let pID = UserDefaults.standard.string(forKey: "UserProfileId")
         
       //  if let pID = pID {
+        
+//        guard !pkid.isEmpty, pkid == nil else {
+//            print("Error: The id is either empty or contains invalid characters.")
+//            return
+//        }
+        
             ZLFireBaseManager.share.pkRef.child(pkid).child("status").setValue(status) { [weak self] (error, reference) in
                 
                 guard let self = self else {
@@ -107,6 +123,12 @@ class ZLFireBaseManager: NSObject {
       //  let pID = UserDefaults.standard.string(forKey: "UserProfileId")
         
        // if let pID = pID {
+        // Use guard to ensure the `pkid` is not empty and doesn't contain invalid characters
+           guard !pkid.isEmpty, pkid == nil else {
+               print("Error: The pkid is either empty or contains invalid characters.")
+               return
+           }
+        
             ZLFireBaseManager.share.pkRef.child(pkid).setValue(data) { [weak self] (error, reference) in
                 
                 guard let self = self else {
@@ -174,6 +196,11 @@ class ZLFireBaseManager: NSObject {
         
         print("The host id is: \(hostid)")
         
+//        guard !hostid.isEmpty, hostid == nil, hostid == "0" else {
+//            print("Error: The id is either empty or contains invalid characters.")
+//            return
+//        }
+        
             ZLFireBaseManager.share.userRef.child("UserStatus").child(String(hostid)).child("pk_myside_gift_coins").setValue(totalAmount) { [weak self] (error, reference) in
                 
                 guard let self = self else {
@@ -211,6 +238,11 @@ class ZLFireBaseManager: NSObject {
     func updatePKGiftUserDetailToFirebase(hostid: String,updateTo:String = "User3", value:[String:Any]) {
         
         print("The host id is: \(hostid)")
+        
+//        guard !hostid.isEmpty, hostid == nil, hostid == "0" else {
+//            print("Error: The id is either empty or contains invalid characters.")
+//            return
+//        }
         
         ZLFireBaseManager.share.userRef.child("UserStatus").child(String(hostid)).child("pk_my_side_gifted_users").child(updateTo).setValue(value) { [weak self] (error, reference) in
                 
@@ -274,6 +306,11 @@ class ZLFireBaseManager: NSObject {
         
 //        guard let hostid = UserDefaults.standard.string(forKey: "UserProfileId") else {
 //            // Handle the case where currentUserProfileID is nil
+//            return
+//        }
+        
+//        guard !userid.isEmpty, userid == nil, userid == "0" else {
+//            print("Error: The id is either empty or contains invalid characters.")
 //            return
 //        }
         

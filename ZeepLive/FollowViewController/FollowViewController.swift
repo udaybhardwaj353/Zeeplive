@@ -49,6 +49,7 @@ class FollowViewController: UIViewController {
         super.viewWillAppear(animated)
     
         pageNo = 1
+        isRefreshing = true
         getUsersFollowList()
         
         isApiInProgress = false
@@ -659,6 +660,7 @@ extension FollowViewController {
                 
                 print("Userlist ko khali krna hai kyunki refresh krna hai isko.")
                 usersList.data?.removeAll()
+                isRefreshing = false
                 
             } else {
                 
@@ -767,7 +769,7 @@ extension FollowViewController {
                 
             }
         }
-        isApiInProgress = false
+       // isApiInProgress = false
         
     }
     

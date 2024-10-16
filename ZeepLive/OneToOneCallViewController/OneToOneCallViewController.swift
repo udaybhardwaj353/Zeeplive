@@ -140,7 +140,7 @@ class OneToOneCallViewController: UIViewController, ZegoEventHandler {
         if (cameFrom == "user") {
           
             calculateTimeToPlayBroad()
-            startCall()
+//            startCall()
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CallConnectingViewController") as! CallConnectingViewController
             nextViewController.hostImage = hostImage
@@ -204,7 +204,7 @@ class OneToOneCallViewController: UIViewController, ZegoEventHandler {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close call?"
-        nextViewController.buttonName = "Yes"
+        nextViewController.buttonName = "Close"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -1375,6 +1375,12 @@ extension OneToOneCallViewController {
             }
             
             isBroadStarted = true
+            
+            if (cameFrom == "user") {
+                
+                startCall()
+                
+            }
             
         } else if updateType == ZegoUpdateType.delete {
             // Handle deleted streams

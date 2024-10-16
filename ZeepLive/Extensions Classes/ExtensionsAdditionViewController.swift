@@ -47,32 +47,6 @@ extension UITableViewCell {
     
 }
 
-
-extension UIView {
-    
-    func applyGradientBackgroundView(colors: [UIColor], locations: [NSNumber]? = nil, startPoint: CGPoint = CGPoint(x: 0.0, y: 0.5), endPoint: CGPoint = CGPoint(x: 1.0, y: 0.5)) {
-        
-        // Remove existing gradient layers
-        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = colors.map { $0.cgColor }
-        gradientLayer.locations = locations
-        gradientLayer.startPoint = startPoint
-        gradientLayer.endPoint = endPoint
-        gradientLayer.frame = bounds
-        gradientLayer.cornerRadius = layer.cornerRadius
-        
-        layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-//    override open func layoutSubviews() {
-//        super.layoutSubviews()
-//        // Reapply the gradient when the view's bounds change
-//        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.frame = bounds }
-//    }
-}
-
 // Generate a random alphanumeric string of a specified length . Added on 1st February
 func generateRandomString(length: Int) -> String {
     let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

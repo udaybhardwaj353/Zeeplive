@@ -37,7 +37,7 @@ class ChooseGenderViewController: UIViewController {
         print("Button Select Male Pressed")
         btnSelectMaleOutlet.setImage(UIImage(named: "GenderSelect"), for: .normal)
         btnSelectFemaleOutlet.setImage(UIImage(named: "GenderUnSelect"), for: .normal)
-        genderSelected = "Male"
+        genderSelected = "male"
         
     }
     
@@ -46,7 +46,7 @@ class ChooseGenderViewController: UIViewController {
         print("Button Select Female Pressed")
         btnSelectFemaleOutlet.setImage(UIImage(named: "GenderSelect"), for: .normal)
         btnSelectMaleOutlet.setImage(UIImage(named: "GenderUnSelect"), for: .normal)
-        genderSelected = "Female"
+        genderSelected = "female"
         
     }
     
@@ -77,12 +77,12 @@ class ChooseGenderViewController: UIViewController {
     
     func configureGenderSelection() {
     
-        if (genderSelected == "Male") {
+        if (genderSelected == "male") {
              
             btnSelectMaleOutlet.setImage(UIImage(named: "GenderSelect"), for: .normal)
             btnSelectFemaleOutlet.setImage(UIImage(named: "GenderUnSelect"), for: .normal)
             
-        } else if (genderSelected == "Female") {
+        } else if (genderSelected == "female") {
             
             btnSelectFemaleOutlet.setImage(UIImage(named: "GenderSelect"), for: .normal)
             btnSelectMaleOutlet.setImage(UIImage(named: "GenderUnSelect"), for: .normal)
