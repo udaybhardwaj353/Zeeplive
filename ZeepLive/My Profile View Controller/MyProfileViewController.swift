@@ -236,7 +236,10 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyProfileTableViewCell", for: indexPath) as! MyProfileTableViewCell
-            
+            cell.copyView.isHidden = true
+            cell.copyW.constant = 0
+            cell.copyView.layer.borderColor = #colorLiteral(red: 0.5569999814, green: 0.5569999814, blue: 0.5759999752, alpha: 1)
+            cell.copyView.layer.borderWidth = 1.5
 //            if (indexPath.row == 0) {
 //
 //                cell.imgViewUserPhoto.isHidden = false
@@ -344,7 +347,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
 //
             cell.lblOptionName.text = arrOptionName[indexPath.row]
             if (indexPath.row == 4) {
-                
+                                cell.copyView.isHidden = true
+                cell.copyW.constant = 0
                               cell.lblUserDetail.text = age
                               cell.imgViewUserPhoto.isHidden = true
                               cell.lblUserDetail.isHidden = false
@@ -356,7 +360,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                       } else if (indexPath.row == 5) {
                         
                           let city = UserDefaults.standard.string(forKey: "city")
-                          
+                          cell.copyView.isHidden = true
+                          cell.copyW.constant = 0
                               cell.lblUserDetail.text = city//"India"
                               cell.lblUserDetail.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
                               cell.imgViewUserPhoto.isHidden = true
@@ -367,7 +372,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                               cell.imgViewSideArrow.isHidden = true
                           
                         }  else if (indexPath.row == 6) {
-                        
+                            cell.copyView.isHidden = true
+                            cell.copyW.constant = 0
                                 cell.lblUserDetail.text = "English"
                                 cell.lblUserDetail.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
                                 cell.imgViewUserPhoto.isHidden = true
@@ -380,7 +386,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     }  else if (indexPath.row == 3) {
                         
                         let gender = UserDefaults.standard.string(forKey: "gender")
-                        
+                        cell.copyView.isHidden = true
+                        cell.copyW.constant = 0
                                 cell.lblUserDetail.text = gender//"Male"
                                 cell.lblUserDetail.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
                                 cell.imgViewUserPhoto.isHidden = true
@@ -393,7 +400,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     } else  if (indexPath.row == 2) {
                         
                             let name = UserDefaults.standard.string(forKey: "UserName")
-                        
+                        cell.copyView.isHidden = true
+                        cell.copyW.constant = 0
                                 cell.lblUserDetail.text = name
                                 cell.lblUserDetail.font = UIFont.boldSystemFont(ofSize: 17)
                                 cell.imgViewUserPhoto.isHidden = true
@@ -407,7 +415,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     } else  if (indexPath.row == 1) {
                         
                             let id = UserDefaults.standard.string(forKey: "UserProfileId")
-                        
+                            cell.copyView.isHidden = false
+                        cell.copyW.constant = 45
                                 cell.lblUserDetail.text = id//"User ID"
                                 cell.lblUserDetail.font = UIFont.systemFont(ofSize: 14)
                                 cell.imgViewUserPhoto.isHidden = true
@@ -417,8 +426,9 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                 cell.viewMainHeightConstraints.constant = 0
                                 cell.imgViewSideArrow.isHidden = true
                         
-                    } else if (indexPath.row == 7) {
-                        
+                    } else if (indexPath.row == 7) { 
+                        cell.copyView.isHidden = true
+                        cell.copyW.constant = 0
                                 cell.viewLine.isHidden = true
                                 cell.viewMainHeightConstraints.constant = 10
                                 cell.lblUserDetail.isHidden = true
@@ -427,7 +437,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                 cell.imgViewSideArrow.isHidden = false
                             
                     } else if (indexPath.row == 0) {
-                        
+                        cell.copyView.isHidden = true
+                        cell.copyW.constant = 0
                                     cell.imgViewSideArrow.isHidden = false
                                     cell.viewLine.isHidden = false
                                     cell.viewMainHeightConstraints.constant = 0
@@ -492,6 +503,41 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
+    @objc func btnCopy(_ sender: UIButton){
+        let cell = tblView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! AccountDetailsTableViewCell
+        cell.lblUserId.becomeFirstResponder()
+        let copiedText = cell.lblUserId.text ?? ""
+            UIPasteboard.general.string = copiedText
+            print("Copied value: \(copiedText)")
+            showCopyPopup(message: "Copied: \(copiedText)")
+        }
+
+    func showCopyPopup(message: String) {
+           let alertController = UIAlertController(title: "Copied!", message: message, preferredStyle: .alert)
+           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(okAction)
+           present(alertController, animated: true, completion: nil)
+       }
+    
+    
+    @objc func pasteText() {
+//           if let pastedString = UIPasteboard.general.string {
+//               lblUserId.text = pastedString
+//               print("Pasted value: \(pastedString)")
+//           }
+       }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+         if action == #selector(btnCopy) || action == #selector(pasteText) {
+             return true
+         }
+         return false
+     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
      

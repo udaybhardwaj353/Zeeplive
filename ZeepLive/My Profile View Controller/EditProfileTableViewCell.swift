@@ -75,7 +75,6 @@ class EditProfileTableViewCell: UITableViewCell {
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
-        
         print("Button save user details pressed")
         print(txtfldUserName.text)
         print(txtfldUserCity.text)

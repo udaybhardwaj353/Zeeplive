@@ -3446,10 +3446,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         let options = SheetOptions(
             pullBarHeight: 0, useInlineMode: true
         )
-        
-        
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
-
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
         sheetController.allowGestureThroughOverlay = false
@@ -3457,7 +3454,6 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         sheetController.dismissOnOverlayTap = true
         sheetController.minimumSpaceAbovePullBar = 0
         sheetController.treatPullBarAsClear = true
-        
         sheetController.animateIn(to: view, in: self)
         
     }
@@ -3481,7 +3477,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         )
         
 //        vcAudiencePresent = true
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
 
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
