@@ -170,9 +170,9 @@ extension ViewRewardViewController: UITableViewDelegate, UITableViewDataSource, 
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 0) {
-            return 290
+            return 215
         } else {
-            return 70
+            return 60
         }
     }
 

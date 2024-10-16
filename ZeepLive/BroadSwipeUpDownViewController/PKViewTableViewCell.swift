@@ -11,31 +11,31 @@ import Lottie
 import Kingfisher
 
 protocol delegatePKViewTableViewCell: AnyObject {
-
-        func pkgiftButton(isPressed:Bool)
-        func pkuserDetailsPressed(selectedIndex: Int)
+    
+    func pkgiftButton(isPressed:Bool)
+    func pkuserDetailsPressed(selectedIndex: Int)
     func pkcloseBroad(isPressed:Bool, status : Int)
-        func pkdistributionClicked(openWebView:Bool)
-        func pkviewRewardClicked(isClicked:Bool)
-        func pkbuttonAudienceList(isClicked:Bool)
-        func pkcellIndexClicked(index:Int)
-        func pkmessageClicked(userImage:String , userName:String , userLevel:String, userID:String)
-        func pkgameButtonClicked(isClicked:Bool)
-        func pkFirstViewClicked(isClicked:Bool)
-        func pkSecondViewClicked(isClicked:Bool)
-        func giftedUserPressed(userID:Int, userName:String, userImage: String)
-        func pkuserOnMic(index:Int)
-        func pkOpponentuserOnMic(index:Int)
-        func pkButtonFollowPressed(isPressed:Bool)
-        func pkmicButtonPressed(isPressed:Bool)
-        func pkbuttonOneToOnePressed(isPressed:Bool)
-        func pkbuttonJoinMicPressed(isPressed:Bool)
-        func pkmuteMic(isPressed:String)
+    func pkdistributionClicked(openWebView:Bool)
+    func pkviewRewardClicked(isClicked:Bool)
+    func pkbuttonAudienceList(isClicked:Bool)
+    func pkcellIndexClicked(index:Int)
+    func pkmessageClicked(userImage:String , userName:String , userLevel:String, userID:String)
+    func pkgameButtonClicked(isClicked:Bool)
+    func pkFirstViewClicked(isClicked:Bool)
+    func pkSecondViewClicked(isClicked:Bool)
+    func giftedUserPressed(userID:Int, userName:String, userImage: String)
+    func pkuserOnMic(index:Int)
+    func pkOpponentuserOnMic(index:Int)
+    func pkButtonFollowPressed(isPressed:Bool)
+    func pkmicButtonPressed(isPressed:Bool)
+    func pkbuttonOneToOnePressed(isPressed:Bool)
+    func pkbuttonJoinMicPressed(isPressed:Bool)
+    func pkmuteMic(isPressed:String)
     
 }
 
 class PKViewTableViewCell: UITableViewCell {
-
+    
     lazy var headerView: UIView = {
         let v = UIView(frame: CGRect(x: 0, y: 0, width: viewLiveMessages.frame.width, height: 100))
         v.backgroundColor = UIColor(hexString: "000000")?.withAlphaComponent(0.35)
@@ -151,20 +151,20 @@ class PKViewTableViewCell: UITableViewCell {
     
     
     weak var delegate: delegatePKViewTableViewCell?
-   lazy var totalMsgData = liveMessageModel()
-   lazy var liveMessages: [liveMessageModel] = []
-   lazy var groupUsers = [joinedGroupUserProfile]()
-   lazy var timer = Timer()
-   lazy var dailyEarningBeans: String = ""
-   lazy var weeklyEarningBeans:String = ""
-   lazy var lottieAnimationViews: [LottieAnimationView] = []
-   lazy var userInfoList: [V2TIMUserFullInfo]? = []
-   lazy var profileID: Int = 0
-   lazy var userID:Int = 0
-   lazy var giftFrom:String = ""
-   lazy var giftFirstUserID: Int = 0
-   lazy var giftFirstUserName: String = ""
-   lazy var giftFirstUserImage: String = ""
+    lazy var totalMsgData = liveMessageModel()
+    lazy var liveMessages: [liveMessageModel] = []
+    lazy var groupUsers = [joinedGroupUserProfile]()
+    lazy var timer = Timer()
+    lazy var dailyEarningBeans: String = ""
+    lazy var weeklyEarningBeans:String = ""
+    lazy var lottieAnimationViews: [LottieAnimationView] = []
+    lazy var userInfoList: [V2TIMUserFullInfo]? = []
+    lazy var profileID: Int = 0
+    lazy var userID:Int = 0
+    lazy var giftFrom:String = ""
+    lazy var giftFirstUserID: Int = 0
+    lazy var giftFirstUserName: String = ""
+    lazy var giftFirstUserImage: String = ""
     lazy var giftSecondUserID: Int = 0
     lazy var giftSecondUserName: String = ""
     lazy var giftSecondUserImage: String = ""
@@ -205,8 +205,8 @@ class PKViewTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        myGiftCoins = 119
-//        opponentGiftCoins = 450
+        //        myGiftCoins = 119
+        //        opponentGiftCoins = 450
         
         txtFldMessage.delegate = self
         
@@ -218,38 +218,38 @@ class PKViewTableViewCell: UITableViewCell {
         configureBottomBarWork()
         configureImages()
         LottieBoomAnimation()
-     //   startTimer()
+        //   startTimer()
         
-      //  updateBottomBar()
+        //  updateBottomBar()
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         isAnimation = false
         viewPKAnimation01.isHidden = false
-
-       
+        
+        
     }
     
-//    override func prepareForReuse() {
-//           super.prepareForReuse()
-//       
-//        removeLottieAnimationViews()
-//        groupUsers.removeAll()
-//        liveMessages.removeAll()
-//        userInfoList?.removeAll()
-//        // Clearing other instance variables
-//        liveMessages = []
-//        groupUsers = []
-//        lottieAnimationViews = []
-//        userInfoList = nil
-//        zegoMicUsersList = []
-//        zegoOpponentMicUsersList = []
-//        NotificationCenter.default.removeObserver(self)
-//        headerView.removeFromSuperview()
-//        
-//       }
+    //    override func prepareForReuse() {
+    //           super.prepareForReuse()
+    //
+    //        removeLottieAnimationViews()
+    //        groupUsers.removeAll()
+    //        liveMessages.removeAll()
+    //        userInfoList?.removeAll()
+    //        // Clearing other instance variables
+    //        liveMessages = []
+    //        groupUsers = []
+    //        lottieAnimationViews = []
+    //        userInfoList = nil
+    //        zegoMicUsersList = []
+    //        zegoOpponentMicUsersList = []
+    //        NotificationCenter.default.removeObserver(self)
+    //        headerView.removeFromSuperview()
+    //
+    //       }
     
     @IBAction func btnCloseBroadPressed(_ sender: Any) {
         print("Close Broad Button Pressed")
@@ -287,7 +287,7 @@ class PKViewTableViewCell: UITableViewCell {
     }
     @IBAction func btnOneToOneCallPressed(_ sender: Any) {
         print("Button One TO One Call Pressed")
-       
+        
         self.viewOneToOneCall.isHidden = true
         delegate?.pkbuttonOneToOnePressed(isPressed: true)
         
@@ -295,11 +295,11 @@ class PKViewTableViewCell: UITableViewCell {
             guard let strongSelf = self else { return }
             strongSelf.viewOneToOneCall.isHidden = false
         }
-
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 25.0) {
-//            self.viewOneToOneCall.isHidden = false
-//        }
+        
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 25.0) {
+        //            self.viewOneToOneCall.isHidden = false
+        //        }
         
     }
     @IBAction func btnGiftPressed(_ sender: Any) {
@@ -321,7 +321,7 @@ class PKViewTableViewCell: UITableViewCell {
         } else {
             print("Firebase par message post kar denge")
             let replacedString = replaceNumbersWithAsterisks(txtFldMessage.text ?? "")
-                print(replacedString)
+            print(replacedString)
             
             sendMessage(message: replacedString ?? "N/A", groupid: groupID)
             sendMessage(message: replacedString ?? "N/A", groupid: secondgroupID)
@@ -421,11 +421,11 @@ class PKViewTableViewCell: UITableViewCell {
     @IBAction func btnMicPressed(_ sender: Any) {
         print("Button Mic Pressed For Mute/Unmute Speaker in PK table view cell")
         if isMuteMicButtonPressed
-        
+            
         {
             delegate?.pkmicButtonPressed(isPressed: isMuteMicButtonPressed)
             isMuteMicButtonPressed = false
-          btnMicOutlet.setImage(UIImage(named:  "speakeron"), for: .normal)
+            btnMicOutlet.setImage(UIImage(named:  "speakeron"), for: .normal)
             
         }
         
@@ -433,8 +433,8 @@ class PKViewTableViewCell: UITableViewCell {
             
             delegate?.pkmicButtonPressed(isPressed: isMuteMicButtonPressed)
             isMuteMicButtonPressed = true
-          btnMicOutlet.setImage(UIImage(named:  "speakeroff"), for: .normal)
-
+            btnMicOutlet.setImage(UIImage(named:  "speakeroff"), for: .normal)
+            
         }
         
     }
@@ -456,7 +456,7 @@ class PKViewTableViewCell: UITableViewCell {
         print("Button Mute Mic Pressed in PK View Table View Cell")
         
         if (isMicMutedByHost == false) {
-           
+            
             if muteMic
                 
             {
@@ -485,15 +485,15 @@ class PKViewTableViewCell: UITableViewCell {
     }
     
     func clearData() {
-    
+        
         removeLottieAnimationViews()
         groupUsers.removeAll()
         liveMessages.removeAll()
         userInfoList?.removeAll()
-     
+        
         collectionView.removeFromSuperview()
         totalMsgData = liveMessageModel()
-
+        
         viewMain = nil
         imgViewUserImage = nil
         lblUserName = nil
@@ -521,7 +521,7 @@ class PKViewTableViewCell: UITableViewCell {
         btnViewRewardOutlet = nil
         viewLiveMessages = nil
         tblViewLiveMessages = nil
-      
+        
         collectionView = nil
         btnViewAudienceOutlet = nil
         viewUserRoomStatus = nil
@@ -539,131 +539,6 @@ class PKViewTableViewCell: UITableViewCell {
         viewGift = nil
         lblSendGiftHostName = nil
         lblNoOfGift = nil
-
-headerView.removeFromSuperview()
-print("PK video room table cell ka deinit call hua hai.")
-timer.invalidate()
-KingfisherManager.shared.cache.clearDiskCache()
-KingfisherManager.shared.cache.clearMemoryCache()
-KingfisherManager.shared.cache.clearCache() {
-    print("Saare cache clear hue hai")
-}
-
-lblBroadViewCount = nil
-NotificationCenter.default.removeObserver(self)
-headerView.removeFromSuperview()
-contentView.subviews.forEach { $0.removeFromSuperview() }
-backgroundView = nil
-viewBijlee.removeFromSuperview()
-// Invalidate timers
-     timer.invalidate()
-     pktimer.invalidate()
-     
-     // Clearing other instance variables
-     liveMessages = []
-     groupUsers = []
-     lottieAnimationViews = []
-     userInfoList = nil
-     zegoMicUsersList = []
-     zegoOpponentMicUsersList = []
-     
-     // Clearing other lazy variables
-     dailyEarningBeans = ""
-     weeklyEarningBeans = ""
-   //  profileID = 0
-   //  userID = 0
-     giftFrom = ""
-   //  giftFirstUserID = 0
-     giftFirstUserName = ""
-     giftFirstUserImage = ""
-   //  giftSecondUserID = 0
-     giftSecondUserName = ""
-     giftSecondUserImage = ""
-  //   giftThirdUserID = 0
-     giftThirdUserName = ""
-     giftThirdUserImage = ""
-    // giftOpponentFirstUserID = 0
-     giftOpponentFirstUsername = ""
-     giftOpponentFirstUserImage = ""
-   //  giftOpponentSecondUserID = 0
-     giftOpponentSecondUsername = ""
-     giftOpponentSecondUserImage = ""
-   //  giftOpponentThirdUserID = 0
-     giftOpponentThirdUsername = ""
-     giftOpponentThirdUserImage = ""
-   //  myGiftCoins = 0
-    // opponentGiftCoins = 0
-    // totalTime = 0
-//                    viewPK.removeFromSuperview()
-//                    viewGift.removeFromSuperview()
-//                    viewMain.removeFromSuperview()
-//                    viewBottom.removeFromSuperview()
-//                viewMessage.removeFromSuperview()
-        
-    }
-    
-    deinit {
-            
-        print("PK table view cell main deinit call hua hai.")
-                removeLottieAnimationViews()
-                groupUsers.removeAll()
-                liveMessages.removeAll()
-            if var userInfoList = userInfoList {
-                userInfoList.removeAll()
-            }
-              //  userInfoList?.removeAll()
-             //   tblViewLiveMessages.dataSource = nil
-              //  tblViewLiveMessages.delegate = nil
-             //   collectionView.dataSource = nil
-              //  collectionView.delegate = nil
-              //  collectionView.removeFromSuperview()
-                totalMsgData = liveMessageModel()
-        
-                viewMain = nil
-                imgViewUserImage = nil
-                lblUserName = nil
-                viewBottom = nil
-                btnSendMessageOutlet = nil
-                viewGift = nil
-                btnGameOutlet = nil
-                btnGiftOutlet = nil
-                viewGift = nil
-                
-                delegate = nil
-                viewMessage = nil
-                btnSendMessageOutlet = nil
-                viewTextField = nil
-                txtFldMessage = nil
-                viewMessageBottomConstraints = nil
-                viewUserDetailOutlet = nil
-                imgViewDistribution = nil
-                lblRoomUserName = nil
-                lblBroadViewCount = nil
-                btnFollowUserOutlet = nil
-                btnCloseBroadOutlet = nil
-                btnViewDistributionOutlet = nil
-                lblDistributionAmount = nil
-                btnViewRewardOutlet = nil
-                viewLiveMessages = nil
-                tblViewLiveMessages = nil
-              
-                collectionView = nil
-                btnViewAudienceOutlet = nil
-                viewUserRoomStatus = nil
-                lblRoomUserName = nil
-                lblRoomUserStatus = nil
-                lblViewRewardRank = nil
-                btnViewRewardOutlet = nil
-                imgViewDistribution = nil
-                viewOneToOneCall = nil
-                viewLuckyGiftDetails = nil
-                viewLuckyGift = nil
-                imgViewGift = nil
-                imgViewUser = nil
-                viewUserImage = nil
-                viewGift = nil
-                lblSendGiftHostName = nil
-                lblNoOfGift = nil
         
         headerView.removeFromSuperview()
         print("PK video room table cell ka deinit call hua hai.")
@@ -681,49 +556,174 @@ viewBijlee.removeFromSuperview()
         backgroundView = nil
         viewBijlee.removeFromSuperview()
         // Invalidate timers
-             timer.invalidate()
-             pktimer.invalidate()
-             
-             // Clearing other instance variables
-             liveMessages = []
-             groupUsers = []
-             lottieAnimationViews = []
-             userInfoList = nil
-             zegoMicUsersList = []
-             zegoOpponentMicUsersList = []
-             
-             // Clearing other lazy variables
-             dailyEarningBeans = ""
-             weeklyEarningBeans = ""
-             profileID = 0
-             userID = 0
-             giftFrom = ""
-             giftFirstUserID = 0
-             giftFirstUserName = ""
-             giftFirstUserImage = ""
-             giftSecondUserID = 0
-             giftSecondUserName = ""
-             giftSecondUserImage = ""
-             giftThirdUserID = 0
-             giftThirdUserName = ""
-             giftThirdUserImage = ""
-             giftOpponentFirstUserID = 0
-             giftOpponentFirstUsername = ""
-             giftOpponentFirstUserImage = ""
-             giftOpponentSecondUserID = 0
-             giftOpponentSecondUsername = ""
-             giftOpponentSecondUserImage = ""
-             giftOpponentThirdUserID = 0
-             giftOpponentThirdUsername = ""
-             giftOpponentThirdUserImage = ""
-             myGiftCoins = 0
-             opponentGiftCoins = 0
-             totalTime = 0
-//            viewPK.removeFromSuperview()
-//            viewGift.removeFromSuperview()
-//            viewMain.removeFromSuperview()
-//            viewBottom.removeFromSuperview()
-//        viewMessage.removeFromSuperview()
+        timer.invalidate()
+        pktimer.invalidate()
+        
+        // Clearing other instance variables
+        liveMessages = []
+        groupUsers = []
+        lottieAnimationViews = []
+        userInfoList = nil
+        zegoMicUsersList = []
+        zegoOpponentMicUsersList = []
+        
+        // Clearing other lazy variables
+        dailyEarningBeans = ""
+        weeklyEarningBeans = ""
+        //  profileID = 0
+        //  userID = 0
+        giftFrom = ""
+        //  giftFirstUserID = 0
+        giftFirstUserName = ""
+        giftFirstUserImage = ""
+        //  giftSecondUserID = 0
+        giftSecondUserName = ""
+        giftSecondUserImage = ""
+        //   giftThirdUserID = 0
+        giftThirdUserName = ""
+        giftThirdUserImage = ""
+        // giftOpponentFirstUserID = 0
+        giftOpponentFirstUsername = ""
+        giftOpponentFirstUserImage = ""
+        //  giftOpponentSecondUserID = 0
+        giftOpponentSecondUsername = ""
+        giftOpponentSecondUserImage = ""
+        //  giftOpponentThirdUserID = 0
+        giftOpponentThirdUsername = ""
+        giftOpponentThirdUserImage = ""
+        //  myGiftCoins = 0
+        // opponentGiftCoins = 0
+        // totalTime = 0
+        //                    viewPK.removeFromSuperview()
+        //                    viewGift.removeFromSuperview()
+        //                    viewMain.removeFromSuperview()
+        //                    viewBottom.removeFromSuperview()
+        //                viewMessage.removeFromSuperview()
+        
+    }
+    
+    deinit {
+        
+        print("PK table view cell main deinit call hua hai.")
+        removeLottieAnimationViews()
+        groupUsers.removeAll()
+        liveMessages.removeAll()
+        if var userInfoList = userInfoList {
+            userInfoList.removeAll()
+        }
+        //  userInfoList?.removeAll()
+        //   tblViewLiveMessages.dataSource = nil
+        //  tblViewLiveMessages.delegate = nil
+        //   collectionView.dataSource = nil
+        //  collectionView.delegate = nil
+        //  collectionView.removeFromSuperview()
+        totalMsgData = liveMessageModel()
+        
+        viewMain = nil
+        imgViewUserImage = nil
+        lblUserName = nil
+        viewBottom = nil
+        btnSendMessageOutlet = nil
+        viewGift = nil
+        btnGameOutlet = nil
+        btnGiftOutlet = nil
+        viewGift = nil
+        
+        delegate = nil
+        viewMessage = nil
+        btnSendMessageOutlet = nil
+        viewTextField = nil
+        txtFldMessage = nil
+        viewMessageBottomConstraints = nil
+        viewUserDetailOutlet = nil
+        imgViewDistribution = nil
+        lblRoomUserName = nil
+        lblBroadViewCount = nil
+        btnFollowUserOutlet = nil
+        btnCloseBroadOutlet = nil
+        btnViewDistributionOutlet = nil
+        lblDistributionAmount = nil
+        btnViewRewardOutlet = nil
+        viewLiveMessages = nil
+        tblViewLiveMessages = nil
+        
+        collectionView = nil
+        btnViewAudienceOutlet = nil
+        viewUserRoomStatus = nil
+        lblRoomUserName = nil
+        lblRoomUserStatus = nil
+        lblViewRewardRank = nil
+        btnViewRewardOutlet = nil
+        imgViewDistribution = nil
+        viewOneToOneCall = nil
+        viewLuckyGiftDetails = nil
+        viewLuckyGift = nil
+        imgViewGift = nil
+        imgViewUser = nil
+        viewUserImage = nil
+        viewGift = nil
+        lblSendGiftHostName = nil
+        lblNoOfGift = nil
+        
+        headerView.removeFromSuperview()
+        print("PK video room table cell ka deinit call hua hai.")
+        timer.invalidate()
+        KingfisherManager.shared.cache.clearDiskCache()
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearCache() {
+            print("Saare cache clear hue hai")
+        }
+        
+        lblBroadViewCount = nil
+        NotificationCenter.default.removeObserver(self)
+        headerView.removeFromSuperview()
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        backgroundView = nil
+        viewBijlee.removeFromSuperview()
+        // Invalidate timers
+        timer.invalidate()
+        pktimer.invalidate()
+        
+        // Clearing other instance variables
+        liveMessages = []
+        groupUsers = []
+        lottieAnimationViews = []
+        userInfoList = nil
+        zegoMicUsersList = []
+        zegoOpponentMicUsersList = []
+        
+        // Clearing other lazy variables
+        dailyEarningBeans = ""
+        weeklyEarningBeans = ""
+        profileID = 0
+        userID = 0
+        giftFrom = ""
+        giftFirstUserID = 0
+        giftFirstUserName = ""
+        giftFirstUserImage = ""
+        giftSecondUserID = 0
+        giftSecondUserName = ""
+        giftSecondUserImage = ""
+        giftThirdUserID = 0
+        giftThirdUserName = ""
+        giftThirdUserImage = ""
+        giftOpponentFirstUserID = 0
+        giftOpponentFirstUsername = ""
+        giftOpponentFirstUserImage = ""
+        giftOpponentSecondUserID = 0
+        giftOpponentSecondUsername = ""
+        giftOpponentSecondUserImage = ""
+        giftOpponentThirdUserID = 0
+        giftOpponentThirdUsername = ""
+        giftOpponentThirdUserImage = ""
+        myGiftCoins = 0
+        opponentGiftCoins = 0
+        totalTime = 0
+        //            viewPK.removeFromSuperview()
+        //            viewGift.removeFromSuperview()
+        //            viewMain.removeFromSuperview()
+        //            viewBottom.removeFromSuperview()
+        //        viewMessage.removeFromSuperview()
         
     }
     

@@ -35,21 +35,21 @@ class NewProfileDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var viewTabPagerBar: TYTabPagerBar!
     @IBOutlet weak var viewShowData: UIView!
     @IBOutlet weak var viewShowDataBottomConstraints: NSLayoutConstraint!
+    @IBOutlet weak var copyBtn: UIButton!
     
     lazy var datas: [String] = []
     var pagerController : TYPagerController?
-   lazy var userID: String = ""
+    lazy var userID: String = ""
     lazy var richLevel: Int = 0
     lazy var charmLevel: Int = 0
     lazy var hostFollowed: Int = 0
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-      
         configureUI()
         loadData()
         setupTabPagerBar()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -86,7 +86,6 @@ class NewProfileDetailTableViewCell: UITableViewCell {
 extension NewProfileDetailTableViewCell {
     
     func configureUI() {
-    
         viewShowDataBottomConstraints.constant = 0
         viewMain.backgroundColor = GlobalClass.sharedInstance.setGapColour()
         imgViewUserProfilePhoto.layer.cornerRadius = imgViewUserProfilePhoto.frame.height / 2
@@ -95,9 +94,7 @@ extension NewProfileDetailTableViewCell {
         viewUserCountry.layer.cornerRadius = viewUserCountry.frame.height / 2
         viewUserDetails.layer.cornerRadius = 10
         viewUserDetails.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
     }
-    
 }
 
 extension NewProfileDetailTableViewCell: TYTabPagerBarDataSource, TYTabPagerBarDelegate, TYPagerControllerDataSource, TYPagerControllerDelegate {

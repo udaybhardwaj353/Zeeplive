@@ -7,38 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E3AD5761-E4C0-4892-A5D8-B3933709C039"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeepLive/BroadSwipeUpDownViewController/PKViewTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "btnCloseBroadPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7A03A5EE-B4E5-4441-BE29-0F220D220715"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeepLive/BroadSwipeUpDownViewController/PKViewTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "btnCloseBroadPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E6870B7B-40B8-4A9E-9D1F-7A401C567E5E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -103,48 +71,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DA9D2DD0-998D-4878-AB4E-28A64110E61C"
+            uuid = "0A6AF83F-AE19-4618-87DA-965B967517FB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeepLive/BroadSwipeUpDownViewController/LiveRoomCellTableViewCell.swift"
+            filePath = "ZeepLive/BroadSwipeUpDownViewController/JoinedAudienceDetailsViewController/JoinedAudienceDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "974"
-            endingLineNumber = "974"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "viewImagePressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "68102E10-694B-4844-99EE-566B074590EF"
+            uuid = "13C168CC-C2DA-4A5A-BC8E-2A55E0C52851"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeepLive/BroadSwipeUpDownViewController/LiveRoomCellTableViewCell.swift"
+            filePath = "ZeepLive/Publish Stream View Controller/PKPublishViewController/PKPublishViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "965"
-            endingLineNumber = "965"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "636"
+            endingLineNumber = "636"
+            landmarkName = "btnCloseBroadPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AE9A6F62-B5E0-46F7-AB8C-BC2C114D0AFF"
+            uuid = "5F783605-15E4-4A6B-B2C5-B3169F7DF4C8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeepLive/BroadSwipeUpDownViewController/LiveRoomCellTableViewCell.swift"
+            filePath = "ZeepLive/Publish Stream View Controller/NewPublishStreamViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "950"
-            endingLineNumber = "950"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "1806"
+            endingLineNumber = "1806"
+            landmarkName = "closeBroad(isPressed:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B27EBA4-9626-425B-AB6D-30C80199A2E5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZeepLive/Publish Stream View Controller/PublishStreamViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "660"
+            endingLineNumber = "660"
+            landmarkName = "btnCloseBroadPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F049FFBB-720B-408A-80F1-BBD29E7BF88D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZeepLive/BroadSwipeUpDownViewController/JoinedAudienceDetailsViewController/JoinedAudienceDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "viewImagePressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -3350,14 +3350,13 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
     }
     
     func closeBroad(isPressed: Bool) {
-        
         print("Close broad button pressed")
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
-        nextViewController.headingText = "Are you sure you want to close?"
-        nextViewController.buttonName = "Close"
+        nextViewController.headingText = "Do you want to exit broad?"
+        nextViewController.buttonName = "Yes"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
@@ -3447,10 +3446,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         let options = SheetOptions(
             pullBarHeight: 0, useInlineMode: true
         )
-        
-        
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
-
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
         sheetController.allowGestureThroughOverlay = false
@@ -3458,7 +3454,6 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         sheetController.dismissOnOverlayTap = true
         sheetController.minimumSpaceAbovePullBar = 0
         sheetController.treatPullBarAsClear = true
-        
         sheetController.animateIn(to: view, in: self)
         
     }
@@ -3482,7 +3477,7 @@ extension SwipeUpDownTestingViewController: delegateLiveRoomCellTableViewCell, d
         )
         
 //        vcAudiencePresent = true
-        sheetController = SheetViewController(controller: vc, sizes: [.fixed(500), .fixed(500)], options: options)
+        sheetController = SheetViewController(controller: vc, sizes: [.fixed(600), .fixed(600)], options: options)
 
         sheetController.cornerRadius = 30
         sheetController?.allowPullingPastMaxHeight = false
@@ -4000,7 +3995,7 @@ extension SwipeUpDownTestingViewController: delegatePKViewTableViewCell {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close?"
-        nextViewController.buttonName = "Close"
+        nextViewController.buttonName = "Yes"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)

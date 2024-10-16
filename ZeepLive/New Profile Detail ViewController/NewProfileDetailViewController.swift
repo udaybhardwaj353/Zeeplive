@@ -595,14 +595,14 @@ extension NewProfileDetailViewController {
 extension NewProfileDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         return userDetails.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NewProfileDetailTableViewCell", for: indexPath) as! NewProfileDetailTableViewCell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewProfileDetailTableViewCell", for: indexPath) as! NewProfileDetailTableViewCell
         
         if let firstUserDetails = userDetails.first {
             
@@ -618,7 +618,10 @@ extension NewProfileDetailViewController: UITableViewDelegate, UITableViewDataSo
             cell.lblFollowingCount.text = "\(firstUserDetails.followingCount ?? 0)"
             cell.lblFollowersCount.text = "\(firstUserDetails.followerCount ?? 0)"
             cell.lblUserCountry.text = firstUserDetails.city ?? "N/A"
-
+            
+            cell.copyBtn.addTarget(self, action: #selector(btnCopy), for: .touchUpInside)
+            cell.copyBtn.tag = indexPath.row
+            
             if firstUserDetails.isOnline == 0 {
                 cell.lblUserStatus.text = "Offline"
                 cell.viewUserStatus.backgroundColor = GlobalClass.sharedInstance.setWalletDetailsBackgroundPaymentStatusRedColour()
@@ -626,14 +629,14 @@ extension NewProfileDetailViewController: UITableViewDelegate, UITableViewDataSo
                 cell.lblUserStatus.text = "Online"
                 cell.viewUserStatus.backgroundColor = .systemGreen
             }
-
+            
             if let dob = firstUserDetails.dob, let yearDifference = calculateYearDifference(from: dob) {
                 cell.lblUserAge.text = "\(yearDifference)"
             } else {
                 cell.lblUserAge.text = "0"
                 print("Invalid date format")
             }
-
+            
             if let firstFemaleImage = firstUserDetails.femaleImages?.first {
                 loadImage(from: firstFemaleImage.imageName ?? "", into: cell.imgViewUserPhoto)
                 loadImage(from: firstFemaleImage.imageName ?? "", into: cell.imgViewUserProfilePhoto)
@@ -641,7 +644,7 @@ extension NewProfileDetailViewController: UITableViewDelegate, UITableViewDataSo
                 // Handle the case where there are no female images available
                 // For example, you can set default images or hide the image views
             }
-
+            
             if firstUserDetails.gender == "male" {
                 cell.imgViewUserGender.image = UIImage(named: "MaleBackgroundImage")
             } else {
@@ -651,21 +654,56 @@ extension NewProfileDetailViewController: UITableViewDelegate, UITableViewDataSo
             // Handle the case where userDetails is empty
             // For example, you can set default values for all labels and image views
         }
-
         
-            cell.selectionStyle = .none
-            return cell
         
-        }
+        cell.selectionStyle = .none
+        return cell
+        
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         
+        
         let height = self.view.frame.height / 2
         print("The height returnign is: \(self.view.frame.height + height)")
         return self.view.frame.height + height
         
     }
     
+    @objc func btnCopy(_ sender: UIButton){
+        let rowIndex = sender.tag
+        let indexPath = IndexPath(row: rowIndex, section: 0)
+        if let cell = tblView.cellForRow(at: indexPath) as? NewProfileDetailTableViewCell {
+            let copiedText = cell.lblUserID.text ?? ""
+            UIPasteboard.general.string = copiedText
+            print("Copied value: \(copiedText)")
+            showCopyPopup(message: "Copied: \(copiedText)")
+        }
+    }
+    
+    func showCopyPopup(message: String) {
+           let alertController = UIAlertController(title: "Copied!", message: message, preferredStyle: .alert)
+           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(okAction)
+           present(alertController, animated: true, completion: nil)
+       }
+    
+    @objc func pasteText() {
+        //           if let pastedString = UIPasteboard.general.string {
+        //               lblUserId.text = pastedString
+        //               print("Pasted value: \(pastedString)")
+        //           }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(btnCopy) || action == #selector(pasteText) {
+            return true
+        }
+        return false
+    }
 }
 
 // MARK: - EXTENSION FOR API CALLING AND GETTING DATA FROM SERVER

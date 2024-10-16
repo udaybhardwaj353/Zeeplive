@@ -9,6 +9,7 @@ import UIKit
 
 class MyProfileTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var copyView: UIView!
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var lblOptionName: UILabel!
     @IBOutlet weak var lblUserDetail: UILabel!
@@ -18,6 +19,9 @@ class MyProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var viewContent: UIView!
     @IBOutlet weak var imgViewUserPhotoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewLine: UIView!
+    @IBOutlet weak var copyBtn: UIButton!
+    @IBOutlet weak var copyW: NSLayoutConstraint!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -165,6 +165,10 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
                    let cell = tableView.dequeueReusableCell(withIdentifier: "AccountDetailsTableViewCell", for: indexPath) as! AccountDetailsTableViewCell
                    
+            
+            cell.btnCopy.addTarget(self, action: #selector(copyBtnProfileID), for: .touchUpInside)
+            cell.btnCopy.tag = indexPath.row
+            
             if (userCity == "") || (userCity == nil) {
                
                 print("User ki koi city nahi hai")
@@ -446,6 +450,42 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    @objc func copyBtnProfileID(_ sender:UIButton){
+        let cell = tblView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! AccountDetailsTableViewCell
+        cell.lblUserId.becomeFirstResponder()
+        let copiedText = cell.lblUserId.text ?? ""
+            UIPasteboard.general.string = copiedText
+            print("Copied value: \(copiedText)")
+            showCopyPopup(message: "Copied: \(copiedText)")
+        }
+
+    func showCopyPopup(message: String) {
+           let alertController = UIAlertController(title: "Copied!", message: message, preferredStyle: .alert)
+           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(okAction)
+           present(alertController, animated: true, completion: nil)
+       }
+    
+    
+    @objc func pasteText() {
+//           if let pastedString = UIPasteboard.general.string {
+//               lblUserId.text = pastedString
+//               print("Pasted value: \(pastedString)")
+//           }
+       }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+         if action == #selector(copyBtnProfileID) || action == #selector(pasteText) {
+             return true
+         }
+         return false
+     }
+    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         

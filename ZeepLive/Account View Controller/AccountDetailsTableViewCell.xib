@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -87,8 +87,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="uf8-Df-e4x"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxl-3V-BJ9">
@@ -96,7 +96,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="vQN-oc-Jb5"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -124,8 +124,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="Cac-Pk-d2l"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrF-Dl-pf3">
@@ -133,7 +133,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="aQL-sn-ug4"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -161,8 +161,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="e0z-Dc-Up2"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y3-lj-cvG">
@@ -170,7 +170,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="WuZ-Ax-JxE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -229,21 +229,32 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfS-rX-9Xi">
-                                <rect key="frame" x="125" y="169" width="74.333333333333314" height="16"/>
+                                <rect key="frame" x="125" y="169" width="117.33333333333331" height="25"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="769982624" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vs4-RR-mSu">
-                                        <rect key="frame" x="8.0000000000000036" y="4" width="58.333333333333343" height="8"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="769988524" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vs4-RR-mSu">
+                                        <rect key="frame" x="8" y="4" width="79.333333333333329" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-Eh-PWS">
+                                        <rect key="frame" x="95.333333333333343" y="6.6666666666666572" width="12" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="12" id="Hr6-c7-yVU"/>
+                                            <constraint firstAttribute="height" constant="12" id="Z3y-zq-IjD"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="copy2"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vs4-RR-mSu" secondAttribute="trailing" constant="8" id="2k5-NB-If9"/>
-                                    <constraint firstAttribute="height" constant="16" id="5TE-5A-tzZ"/>
+                                    <constraint firstAttribute="height" constant="25" id="5TE-5A-tzZ"/>
                                     <constraint firstAttribute="bottom" secondItem="vs4-RR-mSu" secondAttribute="bottom" constant="4" id="7JD-eQ-PO9"/>
+                                    <constraint firstItem="HmD-Eh-PWS" firstAttribute="centerY" secondItem="vs4-RR-mSu" secondAttribute="centerY" id="81o-zR-yzW"/>
                                     <constraint firstItem="vs4-RR-mSu" firstAttribute="top" secondItem="zfS-rX-9Xi" secondAttribute="top" constant="4" id="SK9-be-rj1"/>
+                                    <constraint firstAttribute="trailing" secondItem="HmD-Eh-PWS" secondAttribute="trailing" constant="10" id="Xas-mx-QB6"/>
+                                    <constraint firstItem="HmD-Eh-PWS" firstAttribute="leading" secondItem="vs4-RR-mSu" secondAttribute="trailing" constant="8" id="kSt-Mb-zjh"/>
                                     <constraint firstItem="vs4-RR-mSu" firstAttribute="leading" secondItem="zfS-rX-9Xi" secondAttribute="leading" constant="8" id="v8U-Vg-zeg"/>
                                 </constraints>
                             </view>
@@ -288,6 +299,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnCopy" destination="HmD-Eh-PWS" id="CZX-HQ-fAI"/>
                 <outlet property="btnUserProfileOutlet" destination="ycg-uC-HzU" id="7dy-dR-rKn"/>
                 <outlet property="imgViewBackground" destination="KLj-We-L7G" id="dLP-yg-ike"/>
                 <outlet property="imgViewLevel" destination="2Xl-sB-JRc" id="Far-Oo-J2C"/>
@@ -318,5 +330,6 @@
         <image name="LevelOneImage" width="153" height="56"/>
         <image name="NextPage" width="8.7180004119873047" height="15.935999870300293"/>
         <image name="UserPlaceHolderImageForCell" width="74" height="74"/>
+        <image name="copy2" width="10.666666984558105" height="12"/>
     </resources>
 </document>

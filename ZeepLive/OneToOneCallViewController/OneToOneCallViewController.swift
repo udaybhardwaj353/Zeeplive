@@ -204,7 +204,7 @@ class OneToOneCallViewController: UIViewController, ZegoEventHandler {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CommonPopUpViewController") as! CommonPopUpViewController
         nextViewController.delegate = self
         nextViewController.headingText = "Are you sure you want to close call?"
-        nextViewController.buttonName = "Close"
+        nextViewController.buttonName = "Yes"
         nextViewController.modalPresentationStyle = .overCurrentContext
         
         present(nextViewController, animated: true, completion: nil)
